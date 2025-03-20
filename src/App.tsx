@@ -52,8 +52,26 @@ export default App;
 function FountainBackground() {
   const particlesInit = async (engine: Engine) => {
     console.log("Particles Engine Loaded", engine);
-    await loadFountainPreset(engine); // Chỉ load preset Fountain
+    await loadFountainPreset(engine);
   };
 
-  return <Particles init={particlesInit} options={{ preset: "fountain" }} />;
+  return (
+    <Particles
+      init={particlesInit}
+      options={{
+        preset: "fountain",
+        motion: {
+          disable: false, // Giữ cho chuyển động hoạt động
+          reduce: {
+            factor: 4, // Giảm tốc độ tổng thể
+          },
+        },
+        particles: {
+          move: {
+            speed: 0.5, // Giảm tốc độ di chuyển (giá trị thấp hơn sẽ làm bóng chạy chậm hơn)
+          },
+        },
+      }}
+    />
+  );
 }

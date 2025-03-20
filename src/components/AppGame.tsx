@@ -7,7 +7,7 @@ import { db, doc, updateDoc } from "../lib/firebaseConfig";
 import GameTwo from "./GameTwo";
 import GiftCode from "./GiftCode";
 import GiftCode2 from "./GiftCode2";
-
+import styles from "./AppGame.module.scss";
 const AppGame = () => {
   const { user, setUser, setLoading } = useContext<IUserContext>(UserContext);
 
@@ -44,15 +44,15 @@ const AppGame = () => {
   }
   return (
     <div
+      className={styles.main}
       style={{
         position: "absolute",
-        top: "50%",
         left: "50%",
         transform: "translate(-50%, -50%)",
         textAlign: "center",
       }}
     >
-      <div style={{ maxWidth: 800, margin: "auto", padding: 20 }}>
+      <div className={styles.body}>
         <h2 style={{ color: "#ccc" }}>
           Welcome {user?.name} to My Game Cafe Cộng 🎮
         </h2>

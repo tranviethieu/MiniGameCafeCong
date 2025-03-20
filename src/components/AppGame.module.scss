@@ -1,0 +1,31 @@
+// ✅ Responsive cho mobile
+@media (max-width: 480px) {
+  .main {
+    top: 80%;
+  }
+  .body {
+    padding: 5px;
+  }
+}
+
+// ✅ Responsive cho tablet
+@media (max-width: 768px) {
+  .main {
+    top: 75%;
+  }
+  .body {
+    padding: 10px;
+  }
+}
+
+// ✅ Responsive cho PC lớn
+@media (min-width: 1024px) {
+  .main {
+    top: 50%;
+  }
+  .body {
+    padding: 20px;
+    max-width: 800px;
+    margin: auto;
+  }
+}

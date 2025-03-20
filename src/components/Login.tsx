@@ -9,22 +9,17 @@ function Login() {
   const { setUser, loading, setLoading } =
     useContext<IUserContext>(UserContext);
 
-  // Hàm chuẩn hóa số điện thoại
   const formatPhoneNumber = (phone: string) => {
     let formattedPhone = phone.trim();
-
     if (!formattedPhone.startsWith("+")) {
-      formattedPhone = "+84" + formattedPhone; // Thêm mã quốc gia nếu thiếu (Việt Nam)
+      formattedPhone = "+84" + formattedPhone;
     }
-
     return formattedPhone;
   };
 
   const handleLogin = async () => {
     if (!phone) return message.error("Vui lòng nhập số điện thoại!");
-
-    const formattedPhone = formatPhoneNumber(phone); // Chuẩn hóa số điện thoại
-
+    const formattedPhone = formatPhoneNumber(phone);
     setLoading(true);
 
     try {
@@ -32,7 +27,6 @@ function Login() {
       const userSnap = await getDoc(userRef);
 
       if (userSnap.exists()) {
-        // Người dùng đã tồn tại
         const userData = userSnap.data();
         setUser({
           phone: userData?.phone,
@@ -55,8 +49,6 @@ function Login() {
           setLoading(false);
           return;
         }
-
-        // Người dùng mới => Lưu vào Firestore
         await setDoc(userRef, {
           phone: formattedPhone,
           name,
@@ -86,34 +78,52 @@ function Login() {
     } catch (error: any) {
       message.error("Lỗi khi kiểm tra dữ liệu: " + error.message);
     }
-
     setLoading(false);
   };
 
   return (
-    <div style={{ maxWidth: 500, margin: "auto", padding: 10 }}>
-      <h2>Đăng nhập bằng số điện thoại</h2>
-      <Form layout="vertical">
-        <Form.Item label="Số điện thoại">
-          <Input
-            placeholder="Nhập số điện thoại"
-            value={phone}
-            onChange={(e) => setPhone(e.target.value)}
-          />
-        </Form.Item>
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        height: "100vh",
+      }}
+    >
+      <div
+        style={{
+          width: "100%",
+          minWidth: 320,
+          padding: 20,
+          borderRadius: 10,
+          background: "#fff",
+          boxShadow: "0 4px 10px rgba(0,0,0,0.1)",
+          textAlign: "center",
+        }}
+      >
+        <h2>Đăng nhập Cafe Cộng</h2>
+        <Form layout="vertical">
+          <Form.Item label="Số điện thoại">
+            <Input
+              placeholder="Nhập số điện thoại"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+            />
+          </Form.Item>
 
-        <Form.Item label="Tên (chỉ cần nhập nếu đăng ký mới)">
-          <Input
-            placeholder="Nhập tên của bạn"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
-        </Form.Item>
+          <Form.Item label="Tên (chỉ cần nhập nếu đăng ký mới)">
+            <Input
+              placeholder="Nhập tên của bạn"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+          </Form.Item>
 
-        <Button type="primary" onClick={handleLogin} loading={loading}>
-          Đăng nhập / Đăng ký
-        </Button>
-      </Form>
+          <Button type="primary" onClick={handleLogin} loading={loading} block>
+            Đăng nhập / Đăng ký
+          </Button>
+        </Form>
+      </div>
     </div>
   );
 }

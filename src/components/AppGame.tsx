@@ -71,7 +71,12 @@ const AppGame = () => {
                 textAlign: "center",
                 height: 140,
               }}
-              onClick={() => handleMissionClick(1)}
+              onClick={() => {
+                if (user.level > 1) {
+                  return;
+                }
+                handleMissionClick(1);
+              }}
             >
               <p>Nhiệm vụ 1</p>
               {user.linkb1 === "" && user.level === 1 ? (
@@ -103,6 +108,7 @@ const AppGame = () => {
               onClick={() => {
                 if (user.level < 2) {
                   message.warning(`Bạn phải hoàn thành nhiệm vụ 1`);
+                  return;
                 }
                 if (user.level === 2 && user.status === 1) {
                   handleMissionClick(2);

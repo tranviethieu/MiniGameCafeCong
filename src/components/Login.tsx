@@ -91,7 +91,7 @@ function Login() {
   };
 
   return (
-    <div style={{ maxWidth: 400, margin: "auto", padding: 20 }}>
+    <div style={{ maxWidth: 500, margin: "auto", padding: 10 }}>
       <h2>Đăng nhập bằng số điện thoại</h2>
       <Form layout="vertical">
         <Form.Item label="Số điện thoại">

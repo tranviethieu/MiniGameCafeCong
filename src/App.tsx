@@ -37,7 +37,7 @@ function MainApp() {
             position: "absolute",
             top: "50%",
             left: "50%",
-            transform: "translate(-50%, -50%)", // Căn giữa hoàn toàn
+            transform: "translate(-50%, -50%)", // Căn giữa hoàn toàn ///
             textAlign: "center",
           }}
         >

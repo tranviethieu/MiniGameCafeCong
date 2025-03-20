@@ -75,7 +75,13 @@ const AppGame = () => {
                 if (user.level > 1) {
                   return;
                 }
-                handleMissionClick(1);
+                if (
+                  user?.level === 1 &&
+                  user?.linkb1 === "" &&
+                  user.status === 1
+                ) {
+                  handleMissionClick(1);
+                }
               }}
             >
               <p>Nhiệm vụ 1</p>
@@ -110,7 +116,11 @@ const AppGame = () => {
                   message.warning(`Bạn phải hoàn thành nhiệm vụ 1`);
                   return;
                 }
-                if (user.level === 2 && user.status === 1) {
+                if (
+                  user.level === 2 &&
+                  user.status === 1 &&
+                  user?.linkb2 === ""
+                ) {
                   handleMissionClick(2);
                 }
               }}

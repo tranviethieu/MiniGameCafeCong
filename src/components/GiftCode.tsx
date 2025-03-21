@@ -38,8 +38,8 @@ const GiftCode = () => {
     >
       <div style={{ maxWidth: 800, margin: "auto", padding: 10 }}>
         <h4 style={{ color: "#000" }}>
-          Bạn sử dụng đồ uống nhóm cốt dừa tại CH Công, chia sẻ cảm nhận trên
-          Facebook và nhận mã giảm giá!
+          Bạn đã chia sẻ thành công Chụp ảnh check-in và chia sẻ cảm nhận về một
+          đồ vật (Khẩu hiệu, đèn, bức tranh, bàn, ghế, cốc... bất kỳ)
         </h4>
 
         <Form form={form} onFinish={handleSubmit} layout="vertical">
@@ -48,9 +48,12 @@ const GiftCode = () => {
           </Button>
         </Form>
         {user?.giftCode && (
-          <div style={{ marginTop: 20, color: "green", fontSize: 18 }}>
-            🎁 Mã giảm giá của bạn: <strong>{user.giftCode}</strong>
-          </div>
+          <>
+            <h4>Nhận khuyến mãi!</h4>
+            <div style={{ marginTop: 20, color: "green", fontSize: 18 }}>
+              🎁 Mã giảm giá của bạn: <strong>{user.giftCode}</strong>
+            </div>
+          </>
         )}
       </div>
     </div>

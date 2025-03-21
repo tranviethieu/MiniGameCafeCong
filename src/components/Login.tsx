@@ -2,7 +2,10 @@ import { useContext, useState } from "react";
 import { Button, Form, Input, message } from "antd";
 import { db, doc, getDoc, setDoc } from "../lib/firebaseConfig";
 import { IUserContext, UserContext } from "../context/UserProvider";
-
+const validateVietnamesePhoneNumber = (phone: string): boolean => {
+  const vietnamPhoneRegex = /^(?:\+84|0)(?:\d{9}|\d{8})$/;
+  return vietnamPhoneRegex.test(phone);
+};
 function Login() {
   const [phone, setPhone] = useState("");
   const [name, setName] = useState("");
@@ -19,6 +22,9 @@ function Login() {
 
   const handleLogin = async () => {
     if (!phone) return message.error("Vui lòng nhập số điện thoại!");
+    if (!validateVietnamesePhoneNumber(phone)) {
+      return message.error("Số điện thoại không hợp lệ! Vui lòng nhập số điện thoại Việt Nam.");
+    }
     const formattedPhone = formatPhoneNumber(phone);
     setLoading(true);
 
@@ -103,6 +109,13 @@ function Login() {
       >
         <h2>Đăng nhập Cafe Cộng</h2>
         <Form layout="vertical">
+        <Form.Item label="Tên (chỉ cần nhập nếu đăng ký mới)">
+            <Input
+              placeholder="Nhập tên của bạn"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+          </Form.Item>
           <Form.Item label="Số điện thoại">
             <Input
               placeholder="Nhập số điện thoại"
@@ -110,15 +123,6 @@ function Login() {
               onChange={(e) => setPhone(e.target.value)}
             />
           </Form.Item>
-
-          <Form.Item label="Tên (chỉ cần nhập nếu đăng ký mới)">
-            <Input
-              placeholder="Nhập tên của bạn"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-            />
-          </Form.Item>
-
           <Button type="primary" onClick={handleLogin} loading={loading} block>
             Đăng nhập / Đăng ký
           </Button>

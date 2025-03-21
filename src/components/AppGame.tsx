@@ -91,7 +91,7 @@ const AppGame = () => {
                 </p>
               ) : (
                 <p>
-                  Hoàn thành{" "}
+                  Hoàn thành
                   <CheckCircleTwoTone twoToneColor="rgb(38 65 255)" />
                 </p>
               )}

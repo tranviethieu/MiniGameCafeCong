@@ -29,7 +29,7 @@ const ExportToExcel = () => {
           linkb3: e?.linkb3,
           linkb4: e?.linkb4,
           linkb5: e?.linkb5,
-          giftCode: e?.giftCode,
+          giftCode: "",
           status:
             e?.status === 1
               ? "Có thể làm" + ` nhiệm vụ ${e?.level}`
@@ -109,7 +109,7 @@ const ExportToExcel = () => {
     { title: "Nhiệm vụ 3", dataIndex: "linkb3", key: "linkb3" },
     { title: "Nhiệm vụ 4", dataIndex: "linkb4", key: "linkb4" },
     { title: "Nhiệm vụ 5", dataIndex: "linkb5", key: "linkb5" },
-    { title: "Gift Code", dataIndex: "giftCode", key: "giftCode" },
+    // { title: "Gift Code", dataIndex: "giftCode", key: "giftCode" },
     { title: "Trạng thái", dataIndex: "status", key: "status" },
   ];
 

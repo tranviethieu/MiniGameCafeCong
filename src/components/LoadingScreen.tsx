@@ -12,13 +12,16 @@ function LoadingScreen({
         position: "relative",
         width: "100vw",
         height: "100vh",
-        background: "#000",
+        //background: "#000",
+        backgroundImage: `url("https://cong-news.appwifi.com/wp-content/uploads/2019/05/11copy.jpg")`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
       }}
     >
       <Particles
         init={particlesInit}
         options={{
-          background: { color: "#000" },
+          //background: { color: "#000" },
           particles: {
             number: { value: 100 },
             move: { enable: true, speed: 2 },

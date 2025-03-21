@@ -32,12 +32,12 @@ const ExportToExcel = () => {
           giftCode: e?.giftCode,
           status:
             e?.status === 1
-              ? "Có thể làm"
+              ? "Có thể làm" + ` nhiệm vụ ${e?.level}`
               : e?.status === 2
-              ? "Đang làm"
+              ? "Đang làm" + ` nhiệm vụ ${e?.level}`
               : e?.status === 3
-              ? "Hoàn thành"
-              : "---" + `NV${e?.level}`,
+              ? "Hoàn thành" + ` nhiệm vụ ${e?.level}`
+              : "---",
         }))
       );
       setLoading(false);

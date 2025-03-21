@@ -8,6 +8,7 @@ import GameTwo from "./GameTwo";
 import GiftCode from "./GiftCode";
 import GiftCode2 from "./GiftCode2";
 import styles from "./AppGame.module.scss";
+
 const AppGame = () => {
   const { user, setUser, setLoading } = useContext<IUserContext>(UserContext);
 

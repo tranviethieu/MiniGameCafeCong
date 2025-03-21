@@ -3,7 +3,7 @@ import LoadingScreen from "../components/LoadingScreen";
 import { Engine } from "tsparticles-engine";
 import { getItemStorage, setItemStorage } from "../common/localStorage";
 import { db, doc, getDoc } from "../lib/firebaseConfig";
-interface IUser {
+export interface IUser {
   phone: string;
   name: string;
   level: number;

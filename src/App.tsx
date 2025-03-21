@@ -8,6 +8,7 @@ import UserProvider, {
 import Login from "./components/Login";
 import { useContext } from "react";
 import AppGame from "./components/AppGame";
+import ExportToExcel from "./components/ExportFirestore";
 
 function App() {
   return (
@@ -29,7 +30,9 @@ function MainApp() {
       }}
     >
       <FountainBackground />
-      {user?.phone ? (
+      {user?.phone === "0123456789" && user?.name === "admin" ? (
+        <ExportToExcel />
+      ) : user?.phone ? (
         <AppGame />
       ) : (
         <div

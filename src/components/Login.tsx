@@ -35,7 +35,7 @@ function Login() {
         linkb5: "",
         giftCode: "",
       });
-      setTimeout(() => setLoading(false), 1000);
+      setLoading(false);
       message.success(`Đăng nhập admin!`);
       return;
     }

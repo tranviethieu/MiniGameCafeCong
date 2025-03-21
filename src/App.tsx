@@ -68,7 +68,7 @@ function FountainBackground() {
         },
         particles: {
           move: {
-            speed: 0.5, // Giảm tốc độ di chuyển (giá trị thấp hơn sẽ làm bóng chạy chậm hơn)
+            speed: 0.8, // Giảm tốc độ di chuyển (giá trị thấp hơn sẽ làm bóng chạy chậm hơn)
           },
         },
       }}

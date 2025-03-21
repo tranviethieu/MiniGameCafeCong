@@ -3,10 +3,6 @@ import { IUserContext, UserContext } from "../context/UserProvider";
 import { Form, Button, message } from "antd";
 import { db, doc, updateDoc } from "../lib/firebaseConfig";
 
-const generateDiscountCode = () => {
-  const randomPart = Math.random().toString(36).substring(2, 6).toUpperCase();
-  return `NWDC.AFF_35KOFF135K-${randomPart}`;
-};
 const GiftCode = () => {
   const { user, setUser, loading, setLoading } =
     useContext<IUserContext>(UserContext);
@@ -15,16 +11,14 @@ const GiftCode = () => {
   const handleSubmit = async () => {
     setLoading(true);
     try {
-      const discountCode = generateDiscountCode();
       const userRef = doc(db, "users", user.phone);
       await updateDoc(userRef, {
         status: 1,
         level: 2,
-        giftCode: discountCode,
       });
 
-      setUser({ ...user, status: 1, level: 2, giftCode: discountCode });
-      message.success(`Chúc mừng! Mã giảm giá của bạn là: ${discountCode}`);
+      setUser({ ...user, status: 1, level: 2 });
+      message.success(`Chúc mừng! Mã giảm giá của bạn là: ${user.giftCode}`);
     } catch (error) {
       console.error("Lỗi khi cập nhật dữ liệu:", error);
       message.error("Lỗi khi cập nhật dữ liệu!");
@@ -42,7 +36,7 @@ const GiftCode = () => {
         textAlign: "center",
       }}
     >
-      <div style={{ maxWidth: 800, margin: "auto", padding: 20 }}>
+      <div style={{ maxWidth: 800, margin: "auto", padding: 10 }}>
         <h4 style={{ color: "#000" }}>
           Bạn sử dụng đồ uống nhóm cốt dừa tại CH Công, chia sẻ cảm nhận trên
           Facebook và nhận mã giảm giá!

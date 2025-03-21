@@ -53,7 +53,7 @@ const AppGame = () => {
       }}
     >
       <div className={styles.body}>
-        <h2 style={{ color: "#ccc" }}>
+        <h2 style={{ color: "rgb(0 108 43)" }}>
           Welcome {user?.name} to My Game Cafe Cộng 🎮
         </h2>
         <h2 style={{ color: "#000" }}>Level {user?.level}</h2>
@@ -204,6 +204,7 @@ const AppGame = () => {
                   message.warning(`Bạn phải hoàn thành nhiệm vụ 5`);
                 }
               }}
+              style={{ cursor: "pointer" }}
             >
               <h2 style={{ color: "rgb(209 0 0)" }}>
                 ************************ Nhiệm vụ đặc biệt

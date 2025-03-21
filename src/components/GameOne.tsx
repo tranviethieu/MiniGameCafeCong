@@ -2,7 +2,10 @@ import { useContext } from "react";
 import { IUserContext, UserContext } from "../context/UserProvider";
 import { Form, Input, Button, message } from "antd";
 import { db, doc, updateDoc } from "../lib/firebaseConfig";
-
+const generateDiscountCode = () => {
+  const randomPart = Math.random().toString(36).substring(2, 6).toUpperCase();
+  return `NWDC.AFF_35KOFF135K-${randomPart}`;
+};
 const GameOne = () => {
   const { user, setUser, loading, setLoading } =
     useContext<IUserContext>(UserContext);
@@ -19,15 +22,17 @@ const GameOne = () => {
 
     setLoading(true);
     try {
+      const discountCode = generateDiscountCode();
       const userRef = doc(db, "users", user.phone);
       await updateDoc(userRef, {
         linkb1,
         status: 3,
         level: 2, // ✅ Cập nhật trạng thái hoàn thành nhiệm vụ 1
+        giftCode: discountCode,
       });
 
       // ✅ Cập nhật state của user
-      setUser({ ...user, linkb1, status: 3, level: 2 });
+      setUser({ ...user, linkb1, status: 3, level: 2, giftCode: discountCode });
 
       message.success("Nhiệm vụ đã hoàn thành! 🎉");
     } catch (error) {

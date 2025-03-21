@@ -42,7 +42,7 @@ const GiftCode2 = () => {
         textAlign: "center",
       }}
     >
-      <div style={{ maxWidth: 800, margin: "auto", padding: 20 }}>
+      <div style={{ maxWidth: 800, margin: "auto", padding: 10 }}>
         <h4 style={{ color: "#000" }}>
           Bạn sử dụng đồ uống nhóm cốt dừa tại CH Công, chia sẻ cảm nhận trên
           Facebook và nhận mã giảm giá!

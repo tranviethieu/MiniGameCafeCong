@@ -22,9 +22,7 @@ const ExportToExcel = () => {
         items?.map((e: any) => ({
           id: e?.id,
           name: e?.name,
-          phone: e.phone?.startsWith("+84")
-            ? "0" + e.phone.slice(3)
-            : e.phone || "",
+          phone: e.phone?.startsWith("+84") ? e.phone.slice(3) : e.phone || "",
           level: e?.level,
           linkb1: e?.linkb1,
           linkb2: e?.linkb2,
@@ -32,7 +30,14 @@ const ExportToExcel = () => {
           linkb4: e?.linkb4,
           linkb5: e?.linkb5,
           giftCode: e?.giftCode,
-          status: e?.status,
+          status:
+            e?.status === 1
+              ? "Có thể làm"
+              : e?.status === 2
+              ? "Đang làm"
+              : e?.status === 3
+              ? "Hoàn thành"
+              : "---" + `NV${e?.level}`,
         }))
       );
       setLoading(false);

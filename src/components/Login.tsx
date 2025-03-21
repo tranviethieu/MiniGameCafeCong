@@ -22,6 +22,7 @@ function Login() {
 
   const handleLogin = async () => {
     if (phone === "0123456789" && name === "admin") {
+      setLoading(true);
       setUser({
         phone: "0123456789",
         name: "admin",
@@ -34,6 +35,7 @@ function Login() {
         linkb5: "",
         giftCode: "",
       });
+      setTimeout(() => setLoading(false), 1000);
       message.success(`Đăng nhập admin!`);
       return;
     }

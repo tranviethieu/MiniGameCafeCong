@@ -7,7 +7,7 @@ export interface IUser {
   phone: string;
   name: string;
   level: number;
-  status: number;
+  status: number | string | null;
   linkb1: string;
   linkb2: string;
   linkb3: string;

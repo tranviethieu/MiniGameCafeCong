@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { IUserContext, UserContext } from "../context/UserProvider";
-import { Col, Row, Card, message } from "antd";
+import { Col, Row, Card, message, Button } from "antd";
 import { CheckCircleTwoTone, ClockCircleTwoTone } from "@ant-design/icons";
 import GameOne from "./GameOne";
 import { db, doc, updateDoc } from "../lib/firebaseConfig";
@@ -45,6 +45,21 @@ const AppGame = () => {
   if (user?.level === 3 && user?.linkb2 && user.status === 3) {
     return <GiftCode2 />;
   }
+  const handleLogout = () => {
+    setUser({
+      phone: "",
+      name: "",
+      level: 1,
+      status: 1,
+      linkb1: "",
+      linkb2: "",
+      linkb3: "",
+      linkb4: "",
+      linkb5: "",
+      giftCode: "",
+    });
+  };
+
   return (
     <div
       className={styles.main}
@@ -224,6 +239,14 @@ const AppGame = () => {
           )}
           <Crossword />
           <PdfGenerator name={user.name} />
+          <Button
+            type="default"
+            danger
+            onClick={handleLogout}
+            style={{ marginLeft: 10 }}
+          >
+            Đăng xuất
+          </Button>
         </div>
       </div>
     </div>

@@ -1,31 +1,54 @@
-// ✅ Responsive cho mobile
-@media (max-width: 480px) {
-  .main {
-    top: 100%;
-  }
+.main {
+  width: 100% !important;
+  height: 100% !important;
+  position: fixed !important;
+  z-index: 1 !important;
+  top: 0px !important;
+  left: 0px !important;
+  //background-color: rgb(13, 71, 161);
   .body {
-    padding: 5px;
+    overflow-y: auto;
+    height: 100% !important;
+    width: 100% !important;
+    .controller {
+      margin-top: 64px !important;
+      max-width: 800px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      padding: 10px;
+    }
   }
 }
+
+// ✅ Responsive cho mobile
+// @media (max-width: 480px) {
+//   .main {
+//     top: 100%;
+//   }
+//   .body {
+//     padding: 5px;
+//   }
+// }
 
 // ✅ Responsive cho tablet
-@media (max-width: 768px) {
-  .main {
-    top: 100%;
-  }
-  .body {
-    padding: 10px;
-  }
-}
+// @media (max-width: 768px) {
+//   .main {
+//     top: 100%;
+//   }
+//   .body {
+//     padding: 10px;
+//   }
+// }
 
 // ✅ Responsive cho PC lớn
-@media (min-width: 1024px) {
-  .main {
-    top: 50%;
-  }
-  .body {
-    padding: 20px;
-    max-width: 800px;
-    margin: auto;
-  }
-}
+// @media (min-width: 1024px) {
+//   .main {
+//     top: 50%;
+//   }
+//   .body {
+//     padding: 20px;
+//     max-width: 800px;
+//     margin: auto;
+//   }
+// }

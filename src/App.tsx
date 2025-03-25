@@ -1,6 +1,3 @@
-import Particles from "react-tsparticles";
-import type { Engine } from "tsparticles-engine";
-import { loadFountainPreset } from "tsparticles-preset-fountain";
 import UserProvider, {
   IUserContext,
   UserContext,
@@ -9,6 +6,8 @@ import Login from "./components/Login";
 import { useContext } from "react";
 import AppGame from "./components/AppGame";
 import ExportToExcel from "./components/ExportFirestore";
+import ParticlesBackground from "./components/ParticlesBackground";
+import Header from "./layouts/Header";
 
 function App() {
   return (
@@ -25,11 +24,12 @@ function MainApp() {
       style={{
         position: "relative",
         width: "100vw",
-        height: "100vh",
+        //height: "100vh",
         background: "#000",
       }}
     >
-      <FountainBackground />
+      <Header />
+      <ParticlesBackground />
       {user?.phone === "0123456789" && user?.name === "admin" ? (
         <ExportToExcel />
       ) : user?.phone ? (
@@ -52,29 +52,3 @@ function MainApp() {
 }
 
 export default App;
-function FountainBackground() {
-  const particlesInit = async (engine: Engine) => {
-    console.log("Particles Engine Loaded", engine);
-    await loadFountainPreset(engine);
-  };
-
-  return (
-    <Particles
-      init={particlesInit}
-      options={{
-        preset: "fountain",
-        motion: {
-          disable: false, // Giữ cho chuyển động hoạt động
-          reduce: {
-            factor: 4, // Giảm tốc độ tổng thể
-          },
-        },
-        particles: {
-          move: {
-            speed: 0.8, // Giảm tốc độ di chuyển (giá trị thấp hơn sẽ làm bóng chạy chậm hơn)
-          },
-        },
-      }}
-    />
-  );
-}

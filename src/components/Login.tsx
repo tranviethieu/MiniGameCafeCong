@@ -1,12 +1,17 @@
 import { useContext, useState } from "react";
-import { Button, Form, Input, message } from "antd";
+import { message } from "antd";
 import { db, doc, getDoc, setDoc } from "../lib/firebaseConfig";
 import { IUserContext, UserContext } from "../context/UserProvider";
+import { motion } from "framer-motion";
 const validateVietnamesePhoneNumber = (phone: string): boolean => {
   const vietnamPhoneRegex = /^(?:\+84|0)(?:\d{9}|\d{8})$/;
   return vietnamPhoneRegex.test(phone);
 };
-function Login() {
+interface LoginProps {
+  setShowLogin: (show: boolean) => void;
+}
+
+const Login: React.FC<LoginProps> = () => {
   const [phone, setPhone] = useState("");
   const [name, setName] = useState("");
   const { setUser, loading, setLoading } =
@@ -108,48 +113,54 @@ function Login() {
   };
 
   return (
-    <div
+    <motion.div
+      initial={{ opacity: 0, x: -100 }}
+      animate={{ opacity: 1, x: 0 }}
+      exit={{ opacity: 0, x: 100 }}
+      transition={{ duration: 0.5 }}
+      className="flex items-center justify-center min-h-screen bg-gray-200"
       style={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        height: "100vh",
+        backgroundImage: `url("https://cong-news.appwifi.com/wp-content/uploads/2019/05/11copy.jpg")`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
       }}
     >
-      <div
-        style={{
-          width: "100%",
-          minWidth: 320,
-          padding: 20,
-          borderRadius: 10,
-          background: "#fff",
-          boxShadow: "0 4px 10px rgba(0,0,0,0.1)",
-          textAlign: "center",
-        }}
-      >
-        <h2>Đăng nhập Cafe Cộng</h2>
-        <Form layout="vertical">
-          <Form.Item label="Tên (chỉ cần nhập nếu đăng ký mới)">
-            <Input
-              placeholder="Nhập tên của bạn"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-            />
-          </Form.Item>
-          <Form.Item label="Số điện thoại">
-            <Input
-              placeholder="Nhập số điện thoại"
-              value={phone}
-              onChange={(e) => setPhone(e.target.value)}
-            />
-          </Form.Item>
-          <Button type="primary" onClick={handleLogin} loading={loading} block>
-            Đăng nhập / Đăng ký
-          </Button>
-        </Form>
+      <div className="w-full max-w-md p-6 bg-gray-700 rounded-lg shadow-xl border border-gray-700 ">
+        <h2 className="text-white text-2xl font-bold text-center mb-4 animate-pulse">
+          Login Mini Game
+        </h2>
+        <div className="mb-4">
+          <label className="block text-gray-300 mb-1">
+            Tên (chỉ nhập nếu đăng ký mới)
+          </label>
+          <input
+            type="text"
+            className="w-full p-2 border border-gray-600 rounded bg-gray-700 text-white focus:ring-2 focus:ring-blue-400 transition-all duration-300"
+            placeholder="Nhập tên của bạn"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+        </div>
+        <div className="mb-4">
+          <label className="block text-gray-300 mb-1">Số điện thoại</label>
+          <input
+            type="text"
+            className="w-full p-2 border border-gray-600 rounded bg-gray-700 text-white focus:ring-2 focus:ring-blue-400 transition-all duration-300"
+            placeholder="Nhập số điện thoại"
+            value={phone}
+            onChange={(e) => setPhone(e.target.value)}
+          />
+        </div>
+        <button
+          className="w-full p-3 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded transition-all duration-300 transform hover:scale-105"
+          onClick={handleLogin}
+          disabled={loading}
+        >
+          {loading ? "Đang xử lý..." : "🎮 Đăng nhập / Đăng ký"}
+        </button>
       </div>
-    </div>
+    </motion.div>
   );
-}
+};
 
 export default Login;

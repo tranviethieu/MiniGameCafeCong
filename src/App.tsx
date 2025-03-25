@@ -2,12 +2,13 @@ import UserProvider, {
   IUserContext,
   UserContext,
 } from "./context/UserProvider";
-import Login from "./components/Login";
+
 import { useContext } from "react";
 import AppGame from "./components/AppGame";
 import ExportToExcel from "./components/ExportFirestore";
 import ParticlesBackground from "./components/ParticlesBackground";
 import Header from "./layouts/Header";
+import StartGame from "./components/StartGame";
 
 function App() {
   return (
@@ -19,7 +20,9 @@ function App() {
 
 function MainApp() {
   const { user } = useContext<IUserContext>(UserContext);
-  return (
+  return user?.phone === "0123456789" && user?.name === "admin" ? (
+    <ExportToExcel />
+  ) : user?.phone ? (
     <div
       style={{
         position: "relative",
@@ -30,24 +33,10 @@ function MainApp() {
     >
       <Header />
       <ParticlesBackground />
-      {user?.phone === "0123456789" && user?.name === "admin" ? (
-        <ExportToExcel />
-      ) : user?.phone ? (
-        <AppGame />
-      ) : (
-        <div
-          style={{
-            position: "absolute",
-            top: "50%",
-            left: "50%",
-            transform: "translate(-50%, -50%)", // Căn giữa hoàn toàn ///
-            textAlign: "center",
-          }}
-        >
-          <Login />
-        </div>
-      )}
+      <AppGame />
     </div>
+  ) : (
+    <StartGame />
   );
 }
 

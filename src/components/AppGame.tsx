@@ -10,6 +10,7 @@ import GiftCode2 from "./GiftCode2";
 import styles from "./AppGame.module.scss";
 import Crossword from "./Crossword";
 import PdfGenerator from "./PdfGenerator";
+import CrosswordGame from "./CrosswordGame";
 
 const AppGame = () => {
   const { user, setUser, setLoading } = useContext<IUserContext>(UserContext);
@@ -238,6 +239,7 @@ const AppGame = () => {
             </div>
           )}
           <Crossword />
+          <CrosswordGame />
           <PdfGenerator name={user.name} />
           <Button
             type="default"

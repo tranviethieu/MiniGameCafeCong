@@ -8,7 +8,7 @@ const StartGame: React.FC = () => {
   const [showLogin, setShowLogin] = useState(false); // State để đổi component
 
   if (showLogin) {
-    return <Login setShowLogin={setShowLogin} />; // Khi nhấn nút sẽ hiển thị Login
+    return <Login />; // Khi nhấn nút sẽ hiển thị Login
   }
 
   return (

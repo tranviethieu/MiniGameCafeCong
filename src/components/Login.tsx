@@ -110,7 +110,7 @@ const Login: React.FC<LoginProps> = () => {
       message.error("Lỗi khi kiểm tra dữ liệu: " + error.message);
     }
     setLoading(false);
-  };
+  }; ///update
 
   return (
     <motion.div
@@ -125,7 +125,7 @@ const Login: React.FC<LoginProps> = () => {
         backgroundPosition: "center",
       }}
     >
-      <div className="w-full max-w-md p-6 bg-gray-700 rounded-lg shadow-xl border border-gray-700 ">
+      <div className="w-full  max-w-md p-6 bg-gray-700 rounded-lg shadow-xl border border-gray-700 ">
         <h2 className="text-white text-2xl font-bold text-center mb-4 animate-pulse">
           Login Mini Game
         </h2>

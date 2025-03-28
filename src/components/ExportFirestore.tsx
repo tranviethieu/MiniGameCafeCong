@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import * as XLSX from "xlsx";
 import { saveAs } from "file-saver";
-import { db } from "../lib/firebaseConfig"; // Cấu hình Firebase
+import { db } from "../lib/firebaseConfig"; // Cấu hình Firebase///
 import { collection, getDocs } from "firebase/firestore";
 import { Table, Button } from "antd";
 import { IUser, IUserContext, UserContext } from "../context/UserProvider";

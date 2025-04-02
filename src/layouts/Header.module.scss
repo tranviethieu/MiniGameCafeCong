@@ -1,15 +1,29 @@
-.header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 65px;
-  background-color: #fff;
-  z-index: 1000;
-  display: flex;
-  box-shadow: 0 0 2px rgba(235, 231, 200, 0.9);
+/* Header.module.scss */
 
-  .img {
-    margin: auto;
+.marquee-container {
+  width: 100%;
+  background-color: transparent;
+  color: white;
+  padding: 0.5rem;
+  padding-top: 0;
+  position: fixed;
+  top: 36px; /* Adjust this value to fit under the header */
+  z-index: 10;
+  overflow: hidden;
+  font-size: 14px;
+}
+
+.marquee-text {
+  display: inline-block;
+  white-space: nowrap;
+  animation: marquee 15s linear infinite;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
   }
 }

@@ -9,11 +9,14 @@ import ExportToExcel from "./components/ExportFirestore";
 import ParticlesBackground from "./components/ParticlesBackground";
 import Header from "./layouts/Header";
 import StartGame from "./components/StartGame";
+import GameLayout from "./layouts/GameLayout";
 
 function App() {
   return (
     <UserProvider>
-      <MainApp />
+      <GameLayout>
+        <MainApp />
+      </GameLayout>
     </UserProvider>
   );
 }

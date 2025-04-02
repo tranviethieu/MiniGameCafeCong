@@ -116,14 +116,14 @@ const Login: React.FC = () => {
         animate={{ opacity: 1, x: 0 }}
         exit={{ opacity: 0, x: 100 }}
         transition={{ duration: 0.5 }}
-        className="flex items-center justify-center min-h-screen bg-gray-200"
+        className="flex items-center justify-center"
         style={{
-          backgroundImage: `url("https://cong-news.appwifi.com/wp-content/uploads/2019/05/11copy.jpg")`,
+          //backgroundImage: `url("https://cong-news.appwifi.com/wp-content/uploads/2019/05/11copy.jpg")`,
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}
       >
-        <div className="w-full max-w-md p-6 bg-gray-700 rounded-lg shadow-xl border border-gray-700">
+        <div className="max-w-md p-4 rounded-lg ">
           <h2 className="text-white text-2xl font-bold text-center mb-4 animate-pulse">
             Login Mini Game
           </h2>

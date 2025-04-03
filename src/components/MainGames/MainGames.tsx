@@ -4,9 +4,11 @@ import { motion } from "framer-motion";
 import { Button, Modal } from "antd";
 import { useState } from "react";
 import QuizCard from "../QuizCard/QuizCard";
+import { taskGame } from "../../constants/config/data";
+import dayjs from "dayjs";
 const MainGames = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-
+  const now = dayjs(); // Lấy thời gian hiện tại
   const showModal = () => {
     setIsModalOpen(true);
   };
@@ -36,30 +38,44 @@ const MainGames = () => {
       >
         {/* Missions */}
         <div className="flex overflow-x-auto space-x-4 p-2">
-          {[...Array(5)].map((_, i) => (
-            <div
-              key={i}
-              className="w-32 flex-shrink-0 h-40 bg-gray-800 rounded-lg flex flex-col items-center justify-center text-white text-center shadow-lg p-4"
-            >
-              {i === 0 ? (
-                <motion.div
-                  animate={{ rotate: [-5, 5, -5] }}
-                  transition={{ repeat: Infinity, duration: 0.5 }}
-                >
-                  <FaGift className="text-yellow-300 text-4xl" />
-                </motion.div>
-              ) : (
-                <FaGift className="text-yellow-300 text-4xl" />
-              )}
-              <span className="mt-2 text-sm">Nhiệm vụ {i + 1}</span>
-              <Button
-                className="mt-6 bg-purple-500 text-white px-3 py-1 rounded text-sm font-bold shadow-md hover:bg-purple-600 transition duration-200"
-                onClick={showModal}
+          {taskGame.map((e, i) => {
+            const startDate = dayjs(e.timeStart, "DD/MM/YYYY HH:mm:ss");
+            const endDate = dayjs(e.timeEnd, "DD/MM/YYYY HH:mm:ss");
+            const isOngoing = now.isAfter(startDate) && now.isBefore(endDate);
+
+            return (
+              <div
+                key={i}
+                className="w-32 flex-shrink-0 h-40 bg-gray-800 rounded-lg flex flex-col items-center justify-center text-white text-center shadow-lg p-4"
               >
-                Tham gia
-              </Button>
-            </div>
-          ))}
+                {i === 0 ? (
+                  <motion.div
+                    animate={{ rotate: [-5, 5, -5] }}
+                    transition={{ repeat: Infinity, duration: 0.5 }}
+                  >
+                    <FaGift className="text-yellow-300 text-4xl" />
+                  </motion.div>
+                ) : (
+                  <FaGift className="text-yellow-300 text-4xl" />
+                )}
+                <span className="mt-2 text-sm">{e.name}</span>
+
+                {isOngoing ? (
+                  <Button
+                    className="mt-6 bg-purple-500 text-white px-3 py-1 rounded text-sm font-bold shadow-md hover:bg-purple-600 transition duration-200"
+                    onClick={showModal}
+                  >
+                    Tham gia
+                  </Button>
+                ) : now < startDate ? (
+                  <div className="mt-6 text-xs text-gray-300 flex flex-col">
+                    Bắt đầu từ
+                    <strong>{startDate.format("hh:mm DD/MM/YYYY")}</strong>
+                  </div>
+                ) : null}
+              </div>
+            );
+          })}
         </div>
         <div className="inset-0 flex flex-col items-center justify-center rounded-lg mt-auto md:mb-(200px) lg:mb-0">
           {/* <button

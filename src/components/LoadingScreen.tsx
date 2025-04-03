@@ -1,48 +1,18 @@
-import Particles from "react-tsparticles";
-import type { Engine } from "tsparticles-engine";
+import { motion } from "framer-motion";
 
-function LoadingScreen({
-  particlesInit,
-}: {
-  particlesInit: (engine: Engine) => Promise<void>;
-}) {
+function LoadingScreen() {
   return (
-    <div
-      style={{
-        position: "relative",
-        width: "100vw",
-        height: "100vh",
-        //background: "#000",
-        backgroundImage: `url("https://cong-news.appwifi.com/wp-content/uploads/2019/05/11copy.jpg")`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-      }}
-    >
-      <Particles
-        init={particlesInit}
-        options={{
-          //background: { color: "#000" },
-          particles: {
-            number: { value: 100 },
-            move: { enable: true, speed: 2 },
-            color: { value: "#ffffff" },
-            shape: { type: "circle" },
-            opacity: { value: 0.5 },
-            size: { value: 3 },
-          },
-        }}
-      />
-      <h1
-        style={{
-          position: "absolute",
-          top: "50%",
-          left: "50%",
-          transform: "translate(-50%, -50%)",
-          color: "#fff",
-        }}
+    <div className="min-h-screen bg-gradient-to-b from-black to-gray-900 text-white p-4 flex flex-col items-center">
+      <motion.div
+        key="loading"
+        className="flex justify-center items-center h-screen"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.5 }}
       >
-        Loading...
-      </h1>
+        <div className="text-white text-2xl">⏳ Đang tải...</div>
+      </motion.div>
     </div>
   );
 }

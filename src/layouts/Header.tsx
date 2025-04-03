@@ -1,10 +1,11 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { FaRocket } from "react-icons/fa";
 import { IoTicket } from "react-icons/io5";
 import styles from "./Header.module.scss"; // Import the SCSS module
+import { IUserContext, UserContext } from "../context/UserProvider";
 const Header = () => {
   const [headerOpacity, setHeaderOpacity] = useState(1);
-
+  const { user } = useContext<IUserContext>(UserContext);
   useEffect(() => {
     const handleScroll = () => {
       setHeaderOpacity(window.scrollY > 0 ? 0.6 : 1);
@@ -16,7 +17,7 @@ const Header = () => {
   return (
     <>
       <header
-        className="w-full flex justify-between items-center p-2 bg-black/60 fixed top-0"
+        className="w-full max-w-xl lg:max-w-3xl mx-auto flex justify-between items-center p-2 bg-black/60 fixed top-0"
         style={{ opacity: headerOpacity }}
       >
         <FaRocket className="text-yellow-400" size={24} />
@@ -27,7 +28,8 @@ const Header = () => {
         </div>
         <div className={styles["marquee-container"]}>
           <div className={styles["marquee-text"]}>
-            Chào mừng bạn đến với trò chơi! Vui lòng nhấn tham gia để chơi!
+            Chào mừng bạn {user.name} đến với trò chơi! Vui lòng chọn tham gia
+            để chơi!
           </div>
         </div>
       </header>

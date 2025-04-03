@@ -1,6 +1,6 @@
 import React, { createContext, useEffect, useState } from "react";
 import LoadingScreen from "../components/LoadingScreen";
-import { Engine } from "tsparticles-engine";
+import { AnimatePresence } from "framer-motion";
 import { getItemStorage, setItemStorage } from "../common/localStorage";
 import { db, doc, getDoc } from "../lib/firebaseConfig";
 export interface IUser {
@@ -78,7 +78,7 @@ function UserProvider({ children }: { children: React.ReactNode }) {
         }
       }
       //setItemStorage("KEY_STORE", { user: state });
-      setTimeout(() => setLoading(false), 2000);
+      setTimeout(() => setLoading(false), 3000);
     })();
   }, []);
   useEffect(() => {
@@ -88,13 +88,12 @@ function UserProvider({ children }: { children: React.ReactNode }) {
       });
     }
   }, [loading, user]);
-  const particlesInit = async (engine: Engine) => {
-    console.log("Particles Engine Loaded", engine);
-    await engine.addPreset("firefly", {}); // Nếu bạn muốn thêm preset tùy chỉnh
-  };
+
   return (
     <UserContext.Provider value={{ loading, setLoading, user, setUser }}>
-      {loading ? <LoadingScreen particlesInit={particlesInit} /> : children}
+      <AnimatePresence mode="wait">
+        {loading ? <LoadingScreen /> : children}
+      </AnimatePresence>
     </UserContext.Provider>
   );
 }

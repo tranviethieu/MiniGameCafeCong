@@ -123,7 +123,7 @@ const Login: React.FC = () => {
           backgroundPosition: "center",
         }}
       >
-        <div className="max-w-md p-4 rounded-lg ">
+        <div className="max-w-xl p-4 rounded-lg ">
           <h2 className="text-white text-2xl font-bold text-center mb-4 animate-pulse">
             Login Mini Game
           </h2>
@@ -131,7 +131,7 @@ const Login: React.FC = () => {
             <Form.Item
               label="Tên (chỉ nhập nếu đăng ký mới)"
               name="name"
-              style={{ fontWeight: 600 }}
+              style={{ fontWeight: 600, width: 360 }}
             >
               <Input placeholder="Nhập tên của bạn" />
             </Form.Item>
@@ -141,7 +141,7 @@ const Login: React.FC = () => {
               rules={[
                 { required: true, message: "Vui lòng nhập số điện thoại!" },
               ]}
-              style={{ fontWeight: 600 }}
+              style={{ fontWeight: 600, width: 360 }}
             >
               <Input placeholder="Nhập số điện thoại" />
             </Form.Item>

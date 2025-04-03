@@ -1,7 +1,19 @@
 import { FaGift } from "react-icons/fa";
 import Header from "../../layouts/Header";
 import { motion } from "framer-motion";
+import { Button, Modal } from "antd";
+import { useState } from "react";
+import QuizCard from "../QuizCard/QuizCard";
 const MainGames = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const showModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
   // Share Link function for Facebook Messenger
   // const shareOnMessenger = () => {
   //   const gameLink = "https://mini-game-cafe-cong.vercel.app/"; // Replace this with your actual game link
@@ -40,9 +52,12 @@ const MainGames = () => {
                 <FaGift className="text-yellow-300 text-4xl" />
               )}
               <span className="mt-2 text-sm">Nhiệm vụ {i + 1}</span>
-              <button className="mt-6 bg-purple-500 text-white px-3 py-1 rounded text-sm font-bold shadow-md hover:bg-purple-600 transition duration-200">
+              <Button
+                className="mt-6 bg-purple-500 text-white px-3 py-1 rounded text-sm font-bold shadow-md hover:bg-purple-600 transition duration-200"
+                onClick={showModal}
+              >
                 Tham gia
-              </button>
+              </Button>
             </div>
           ))}
         </div>
@@ -55,6 +70,26 @@ const MainGames = () => {
           </button> */}
         </div>
       </motion.div>
+      <Modal
+        centered
+        title=""
+        open={isModalOpen}
+        onCancel={handleCancel}
+        footer={null}
+      >
+        <QuizCard isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
+      </Modal>
+      {/* <Drawer
+        //title="Basic Drawer"
+        placement="left"
+        closable={false}
+        onClose={handleCancel}
+        open={isModalOpen}
+        key="left"
+        //width={300}
+      >
+        <QuizCard />
+      </Drawer> */}
     </>
   );
 };

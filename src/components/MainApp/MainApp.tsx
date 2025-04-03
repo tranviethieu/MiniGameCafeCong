@@ -10,6 +10,7 @@ const MainApp = () => {
   if (user?.phone === "0123456789" && user?.name === "admin") {
     return <ExportToExcel />;
   }
+
   // Login
   if (!!!user?.phone) {
     return (
@@ -26,6 +27,7 @@ const MainApp = () => {
       </main>
     );
   }
+  //return <QuizCard />;
   return <MainGames />;
 };
 export default MainApp;

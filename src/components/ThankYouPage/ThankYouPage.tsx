@@ -56,13 +56,13 @@ const ThankYouPage: React.FC = () => {
       <img
         src={icons.logoCong}
         alt="Logo"
-        className="w-32 h-32 mb-auto rounded-full shadow-lg bg-white p-2"
+        className="w-32 h-32 mb-auto rounded-full shadow-lg bg-white p-2 mx-auto"
       />
       {/* Tiêu đề */}
-      <h1 className="xl:text-5xl text-2xl mb-4 drop-shadow-md">
+      <h1 className="xl:text-5xl text-2xl mb-4 drop-shadow-md mx-auto">
         🎉 Cảm ơn bạn 🎉
       </h1>
-      <h2 className="text-1xl mb-auto drop-shadow-md">
+      <h2 className="text-1xl mb-auto drop-shadow-md mx-auto">
         Bạn đã hoàn thành trò chơi này!
       </h2>
       {/* Mô tả */}

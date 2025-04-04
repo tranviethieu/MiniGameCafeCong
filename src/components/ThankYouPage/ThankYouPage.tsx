@@ -12,17 +12,26 @@ const ThankYouPage: React.FC = () => {
 
     const downloadButton = document.getElementById("download-btn");
     if (downloadButton) {
-      downloadButton.style.display = "none"; // Ẩn nút tải xuống
+      downloadButton.style.display = "none"; // Ẩn nút tải
     }
 
     try {
       const dataUrl = await toPng(pageRef.current);
 
-      // Mở ảnh trong tab mới để tải xuống trên iPhone
-      const newWindow = window.open();
-      if (newWindow) {
-        newWindow.document.write(`<img src="${dataUrl}" style="width:100%"/>`);
-      }
+      // Chuyển base64 thành Blob
+      const blob = await fetch(dataUrl).then((res) => res.blob());
+      const blobUrl = URL.createObjectURL(blob);
+
+      // Tạo thẻ <a> tạm thời để tải file
+      const link = document.createElement("a");
+      link.href = blobUrl;
+      link.download = "thank-you.png";
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+
+      // Giải phóng bộ nhớ
+      URL.revokeObjectURL(blobUrl);
     } catch (error) {
       console.error("Error generating image:", error);
     }
@@ -70,7 +79,7 @@ const ThankYouPage: React.FC = () => {
       >
         <ArrowDown size="24" color="#fff" />
       </button>
-      v2
+      v3
     </div>
   );
 };

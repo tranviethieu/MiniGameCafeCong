@@ -12,9 +12,11 @@
   "dependencies": {
     "antd": "^5.24.4",
     "axios": "^1.8.4",
+    "downloadjs": "^1.4.7",
     "file-saver": "^2.0.5",
     "firebase": "^11.5.0",
     "framer-motion": "^12.6.0",
+    "html-to-image": "^1.11.13",
     "iconsax-react": "^0.0.8",
     "jspdf": "^3.0.1",
     "jspdf-autotable": "^5.0.2",
@@ -31,6 +33,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.21.0",
+    "@types/downloadjs": "^1.4.6",
     "@types/file-saver": "^2.0.7",
     "@types/jspdf": "^2.0.0",
     "@types/react": "^19.0.10",

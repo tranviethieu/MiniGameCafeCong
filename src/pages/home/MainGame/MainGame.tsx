@@ -1,6 +1,9 @@
-import MainGames from "../MainGames";
-const MainApp = () => {
-  // const { user } = useContext<IUserContext>(UserContext);
+import { useAuth } from "~/context/AuthProvider";
+import Home from "./components/Home";
+import Game1 from "./components/Game1";
+
+const MainGame = () => {
+  const { user } = useAuth();
   // //Admin
   // if (user?.phone === "0123456789" && user?.name === "admin") {
   //   return <ExportToExcel />;
@@ -23,6 +26,9 @@ const MainApp = () => {
   //   );
   // }
   //return <QuizCard />;
-  return <MainGames />;
+  if (user?.location === 1) {
+    return <Game1 />;
+  }
+  return <Home />;
 };
-export default MainApp;
+export default MainGame;

@@ -1,12 +1,11 @@
 import React, { useRef } from "react";
 import { toPng } from "html-to-image";
-//import download from "downloadjs";
 import icons from "../../constants/images/icons";
 import { ArrowDown } from "iconsax-react";
-
+import { useAuth } from "../../context/AuthProvider";
 const ThankYouPage: React.FC = () => {
   const pageRef = useRef<HTMLDivElement>(null);
-
+  const { user } = useAuth();
   const handleDownload = async () => {
     if (!pageRef.current) return;
 
@@ -60,7 +59,7 @@ const ThankYouPage: React.FC = () => {
       />
       {/* Tiêu đề */}
       <h1 className="xl:text-5xl text-2xl mb-4 drop-shadow-md mx-auto">
-        🎉 Cảm ơn bạn 🎉
+        🎉 Cảm ơn bạn {user?.name} 🎉
       </h1>
       <h2 className="text-1xl mb-auto drop-shadow-md mx-auto">
         Bạn đã hoàn thành trò chơi này!

@@ -1,28 +1,51 @@
 // import GameLayout from "./layouts/GameLayout";
 // import MainApp from "./components/MainApp";
-import UserProvider from "./context/UserProvider";
-import { ConfigProvider } from "antd";
 import ThankYouPage from "./components/ThankYouPage/ThankYouPage";
+import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
+import ProtectedRoute from "./routes/ProtectedRoute";
+import StartGame from "./pages/auth/StartGame/StartGame";
+import ExportToExcel from "./components/ExportFirestore";
+import MainGame from "./pages/home/MainGame";
 
 function App() {
   return (
-    <ConfigProvider
-      theme={{
-        components: {
-          Modal: {
-            contentBg: "rgb(17 24 39 / var(--tw-bg-opacity, 1))",
-          },
-        },
-      }}
-    >
-      <UserProvider>
-        {/* <GameLayout>
-          <MainApp />
-         
-        </GameLayout> */}
-        <ThankYouPage />
-      </UserProvider>
-    </ConfigProvider>
+    <Router>
+      <Routes>
+        <Route
+          path="/login"
+          element={
+            <ProtectedRoute>
+              <StartGame />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/admin"
+          element={
+            <ProtectedRoute>
+              <ExportToExcel />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/"
+          element={
+            <ProtectedRoute>
+              <MainGame />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/thank-you"
+          element={
+            <ProtectedRoute>
+              <ThankYouPage />
+            </ProtectedRoute>
+          }
+        />
+      </Routes>
+    </Router>
   );
 }
 

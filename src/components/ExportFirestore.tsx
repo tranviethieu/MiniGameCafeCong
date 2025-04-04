@@ -1,15 +1,15 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import * as XLSX from "xlsx";
 import { saveAs } from "file-saver";
 import { db } from "../lib/firebaseConfig"; // Cấu hình Firebase///
 import { collection, getDocs } from "firebase/firestore";
 import { Table, Button } from "antd";
-import { IUser, IUserContext, UserContext } from "../context/UserProvider";
+import { useAuth } from "../context/AuthProvider";
 
 const ExportToExcel = () => {
-  const [data, setData] = useState<IUser[]>([]);
+  const [data, setData] = useState<any[]>([]);
   const [loading, setLoading] = useState(false);
-  const { setUser } = useContext<IUserContext>(UserContext);
+  const { logout } = useAuth();
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
@@ -84,18 +84,7 @@ const ExportToExcel = () => {
   };
 
   const handleLogout = () => {
-    setUser({
-      phone: "",
-      name: "",
-      level: 1,
-      status: 1,
-      linkb1: "",
-      linkb2: "",
-      linkb3: "",
-      linkb4: "",
-      linkb5: "",
-      giftCode: "",
-    });
+    logout();
   };
 
   // Cột bảng Ant Design

@@ -1,7 +1,10 @@
 /* @import "tailwindcss"; */
+html,
 body {
+  height: 100%;
   font-family: "Be Vietnam Pro", sans-serif !important;
 }
+
 h1 {
   font-family: "Be Vietnam Pro", sans-serif !important;
   font-weight: 700 !important;
@@ -33,4 +36,17 @@ p {
 a {
   font-family: "Be Vietnam Pro", sans-serif !important;
   font-weight: 400 !important;
+}
+.bg-login {
+  background-image: url("https://cong-news.appwifi.com/wp-content/uploads/2023/05/MicrosoftTeams-image-8.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+}
+
+@media (max-width: 768px) {
+  .bg-login {
+    background-position: 5% center;
+  }
 }

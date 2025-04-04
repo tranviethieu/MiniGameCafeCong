@@ -10,10 +10,11 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@ant-design/icons": "^5.6.1",
     "antd": "^5.24.4",
     "axios": "^1.8.4",
-    "downloadjs": "^1.4.7",
     "dayjs": "^1.11.13",
+    "downloadjs": "^1.4.7",
     "file-saver": "^2.0.5",
     "firebase": "^11.5.0",
     "framer-motion": "^12.6.0",
@@ -25,6 +26,7 @@
     "react-dom": "^18.3.1",
     "react-icons": "^5.5.0",
     "react-image": "^4.1.0",
+    "react-router-dom": "^6.30.0",
     "react-tsparticles": "^2.12.2",
     "tsparticles": "^3.8.1",
     "tsparticles-engine": "^2.12.0",

@@ -1,20 +1,41 @@
-import Header from "../../layouts/Header/Header";
 import { motion } from "framer-motion";
-import { Button, Modal } from "antd";
+import { Button, message, Modal } from "antd";
 import { useState } from "react";
-import QuizCard from "../QuizCard/QuizCard";
-import { taskGameDefault } from "../../constants/config/data";
 import dayjs from "dayjs";
 import { FaGift } from "react-icons/fa";
-const MainGames = () => {
+import Header from "~/layouts/Header/Header";
+import { useAuth } from "~/context/AuthProvider";
+import QuizCard from "~/components/QuizCard/QuizCard";
+import { doc, updateDoc } from "firebase/firestore";
+import { db } from "~/lib/firebaseConfig";
+
+const Home = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const { user, login } = useAuth();
   const now = dayjs(); // Lấy thời gian hiện tại
-  const showModal = () => {
-    setIsModalOpen(true);
-  };
+
   const handleCancel = () => {
     setIsModalOpen(false);
   };
+  const handlePlay = async (phone: string, location: number) => {
+    if (!user) return;
+    try {
+      const userRef = doc(db, "users", phone as string);
+      const updateUser = {
+        location,
+        updatedAt: dayjs().format("DD/MM/YYYY HH:mm:ss"),
+      };
+      await updateDoc(userRef, updateUser);
+      login({
+        ...user,
+        location,
+        updatedAt: dayjs().format("DD/MM/YYYY HH:mm:ss"),
+      });
+    } catch (e) {
+      message.error("Lỗi khi cập nhật dữ liệu!");
+    }
+  };
+
   return (
     <div
       style={{ backgroundColor: "rgb(107, 123, 80)" }}
@@ -31,7 +52,7 @@ const MainGames = () => {
       >
         {/* Missions */}
         <div className="flex overflow-x-auto space-x-4 p-2">
-          {taskGameDefault.map((e, i) => {
+          {user?.task?.map((e, i) => {
             const startDate = dayjs(e.timeStart, "DD/MM/YYYY HH:mm:ss");
             const endDate = dayjs(e.timeEnd, "DD/MM/YYYY HH:mm:ss");
             const isOngoing = now.isAfter(startDate) && now.isBefore(endDate);
@@ -56,7 +77,7 @@ const MainGames = () => {
                 {isOngoing ? (
                   <Button
                     className="mt-6 bg-purple-500 text-white px-3 py-1 rounded text-sm font-bold shadow-md hover:bg-purple-600 transition duration-200"
-                    onClick={showModal}
+                    onClick={() => handlePlay(user.phone, e.id)}
                     style={{
                       background:
                         "linear-gradient(30deg, rgb(34, 193, 195), rgb(253, 187, 45))", // Gradient màu xanh lục
@@ -107,4 +128,4 @@ const MainGames = () => {
     </div>
   );
 };
-export default MainGames;
+export default Home;

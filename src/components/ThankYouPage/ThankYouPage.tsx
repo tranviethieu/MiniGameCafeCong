@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import { toPng } from "html-to-image";
-import download from "downloadjs";
+//import download from "downloadjs";
 import icons from "../../constants/images/icons";
 import { ArrowDown } from "iconsax-react";
 
@@ -10,21 +10,25 @@ const ThankYouPage: React.FC = () => {
   const handleDownload = async () => {
     if (!pageRef.current) return;
 
-    // Tìm nút tải xuống
     const downloadButton = document.getElementById("download-btn");
     if (downloadButton) {
-      downloadButton.style.display = "none"; // Ẩn nút
+      downloadButton.style.display = "none"; // Ẩn nút tải xuống
     }
 
     try {
       const dataUrl = await toPng(pageRef.current);
-      download(dataUrl, "thank-you.png");
+
+      // Mở ảnh trong tab mới để tải xuống trên iPhone
+      const newWindow = window.open();
+      if (newWindow) {
+        newWindow.document.write(`<img src="${dataUrl}" style="width:100%"/>`);
+      }
     } catch (error) {
       console.error("Error generating image:", error);
     }
 
     if (downloadButton) {
-      downloadButton.style.display = "block"; // Hiện lại nút sau khi tải xong
+      downloadButton.style.display = "block"; // Hiện lại nút
     }
   };
 

@@ -49,7 +49,6 @@ const ThankYouPage: React.FC = () => {
         alt="Logo"
         className="w-32 h-32 mb-auto rounded-full shadow-lg bg-white p-2"
       />
-
       {/* Tiêu đề */}
       <h1 className="xl:text-5xl text-2xl mb-4 drop-shadow-md">
         🎉 Cảm ơn bạn 🎉
@@ -62,9 +61,7 @@ const ThankYouPage: React.FC = () => {
         Chúng tôi hy vọng bạn đã có những phút giây thư giãn và thú vị. Hẹn gặp
         lại trong các trò chơi tiếp theo!
       </p>
-
       {/* Hình minh họa */}
-
       {/* Nút tải ảnh */}
       <button
         id="download-btn"
@@ -73,6 +70,7 @@ const ThankYouPage: React.FC = () => {
       >
         <ArrowDown size="24" color="#fff" />
       </button>
+      v2
     </div>
   );
 };

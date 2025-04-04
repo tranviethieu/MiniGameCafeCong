@@ -13,6 +13,7 @@
     "antd": "^5.24.4",
     "axios": "^1.8.4",
     "downloadjs": "^1.4.7",
+    "dayjs": "^1.11.13",
     "file-saver": "^2.0.5",
     "firebase": "^11.5.0",
     "framer-motion": "^12.6.0",

@@ -8,6 +8,7 @@ import { useState } from "react";
 import { InfoCircleOutlined } from "@ant-design/icons";
 import { taskGameDefault } from "../../../constants/config/data";
 import { useNavigate } from "react-router-dom";
+import icons from "~/constants/images/icons";
 
 const validateVietnamesePhoneNumber = (phone: string): boolean => {
   const vietnamPhoneRegex = /^(?:\+84|0)(?:\d{9}|\d{8})$/;
@@ -71,7 +72,10 @@ const Login: React.FC = () => {
   };
 
   return (
-    <div className="bg-login relative h-screen w-full flex flex-col items-center justify-center bg-gradient-to-b from-black to-gray-900 text-white px-5">
+    <div
+      style={{ backgroundImage: `url(${icons.bgCong})` }}
+      className="bg-login  relative h-screen w-full flex flex-col items-center justify-center bg-gradient-to-b from-black to-gray-900 text-white px-5"
+    >
       <motion.div
         key="login"
         initial={{ opacity: 0, y: -20 }}

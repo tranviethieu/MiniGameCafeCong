@@ -3,6 +3,7 @@ import { Button } from "antd";
 import { ArrowRightOutlined } from "@ant-design/icons";
 import { motion } from "framer-motion";
 import Login from "../Login/Login";
+import icons from "~/constants/images/icons";
 
 const StartGame: React.FC = () => {
   const [showLogin, setShowLogin] = useState(false);
@@ -15,6 +16,7 @@ const StartGame: React.FC = () => {
       exit={{ opacity: 0, y: 20 }}
       transition={{ duration: 0.6, ease: "easeInOut" }}
       className="bg-login relative h-screen w-full flex flex-col items-center justify-center bg-gradient-to-b from-black to-gray-900 text-white px-4 sm:px-6"
+      style={{ backgroundImage: `url(${icons.bgCong})` }}
     >
       {/* Tiêu đề */}
       <motion.h1

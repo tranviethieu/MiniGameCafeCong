@@ -6,13 +6,16 @@ import { doc, updateDoc } from "firebase/firestore";
 import { db } from "~/lib/firebaseConfig";
 import { motion } from "framer-motion";
 import dayjs from "dayjs";
-
+import { UploadFile } from "antd/es/upload/interface";
+import { uploadToCloudinary } from "~/common/uploadToCloudinary";
 const Game1 = () => {
   const { user, login } = useAuth();
+  const [fileList, setFileList] = useState<UploadFile[]>([]);
   const [form] = Form.useForm();
   const [loading, setLoading] = useState(false);
   const handleSubmit = async (values: { linkb1: string }) => {
     const { linkb1 } = values;
+    let imageUrl: any = "";
     // 🔍 Kiểm tra link phải chứa "facebook.com"
     if (!linkb1.includes("facebook.com")) {
       message.warning("Vui lòng nhập link Facebook hợp lệ!");
@@ -22,6 +25,15 @@ const Game1 = () => {
       message.warning("Tài khoản không hợp lệ!");
       return;
     }
+    if (fileList.length !== 0) {
+      imageUrl = await uploadToCloudinary(fileList[0].originFileObj as File);
+      if (!imageUrl) {
+        message.error("Lỗi khi upload ảnh lên Cloudinary!");
+        setLoading(false);
+        return;
+      }
+    }
+
     setLoading(true);
     try {
       const userRef = doc(db, "users", user.phone as string);
@@ -34,6 +46,7 @@ const Game1 = () => {
               ...task,
               status: 2, // ✅ Cập nhật trạng thái hoàn thành nhiệm vụ 1
               link: linkb1,
+              image: imageUrl as string,
             };
           }
           return task;
@@ -70,8 +83,10 @@ const Game1 = () => {
 
   return (
     <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
+      key="Game1"
+      initial={{ opacity: 0, y: -20 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: 20 }}
       transition={{ duration: 0.6, ease: "easeInOut" }}
       style={{ backgroundColor: "rgba(107, 123, 80, 0.9)" }} // Màu từ ảnh
       className="h-screen w-full bg-gradient-to-b from-black flex flex-col items-center justify-center px-4 bg-cover bg-center"
@@ -114,14 +129,22 @@ const Game1 = () => {
             }
             valuePropName="fileList"
           >
-            <Upload listType="picture-card">
-              <button
-                className="border border-white text-white p-2 rounded-lg bg-transparent"
-                type="button"
-              >
-                <PlusOutlined />
-                <div className="mt-2">Tải ảnh</div>
-              </button>
+            <Upload
+              listType="picture-card"
+              fileList={fileList}
+              onChange={({ fileList }) => setFileList(fileList)}
+              beforeUpload={() => false} // không upload tự động
+              maxCount={1} // chỉ 1 ảnh
+            >
+              {fileList.length >= 1 ? null : (
+                <button
+                  className="border border-white text-white p-2 rounded-lg bg-transparent"
+                  type="button"
+                >
+                  <PlusOutlined />
+                  <div className="mt-2">Tải ảnh</div>
+                </button>
+              )}
             </Upload>
           </Form.Item>
 

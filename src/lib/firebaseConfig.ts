@@ -1,5 +1,5 @@
 // firebaseConfig.ts
-import { initializeApp } from "firebase/app";
+import { getApp, getApps, initializeApp } from "firebase/app";
 import {
   getAuth,
   RecaptchaVerifier,
@@ -12,7 +12,26 @@ import {
   setDoc,
   updateDoc,
 } from "firebase/firestore";
+// Config 1 - App chính
+const firebaseConfig1 = {
+  apiKey: "...",
+  authDomain: "...",
+  projectId: "...",
+  storageBucket: "...",
+  messagingSenderId: "...",
+  appId: "...",
+};
 
+// Config 2 - App phụ
+const firebaseConfig2 = {
+  apiKey: "AIzaSyBTjPH-Bt4Bgtdy0PRIhuRXmEgtMSOb4JY",
+  authDomain: "congcafedb.firebaseapp.com",
+  projectId: "congcafedb",
+  storageBucket: "congcafedb.firebasestorage.app",
+  messagingSenderId: "1066166529717",
+  appId: "1:1066166529717:web:7c2e0c69346b43ce0a58fc",
+  measurementId: "G-RKSRC165BP",
+};
 const firebaseConfig = {
   apiKey: "AIzaSyCTjbxg2FKvTe6Rz2ZHl6TIWhqkJMM9-3o",
   authDomain: "cafecong-94135.firebaseapp.com",
@@ -22,6 +41,14 @@ const firebaseConfig = {
   appId: "1:364620004943:web:12f8a17c22ad1ea469f43a",
   measurementId: "G-DETYVBQBL0",
 };
+//
+// Khởi tạo 2 app Firebase khác nhau
+export const app1 = initializeApp(firebaseConfig1, "app1");
+export const app2 = initializeApp(firebaseConfig2, "app2");
+
+// Tạo Firestore và Storage riêng biệt
+export const db1 = getFirestore(app1);
+export const db2 = getFirestore(app2);
 
 // Khởi tạo Firebase
 const app = initializeApp(firebaseConfig);

@@ -38,7 +38,7 @@ a {
   font-weight: 400 !important;
 }
 .bg-login {
-  background-image: url("https://cong-news.appwifi.com/wp-content/uploads/2023/05/MicrosoftTeams-image-8.png");
+  /* //background-image: url("https://cong-news.appwifi.com/wp-content/uploads/2023/05/MicrosoftTeams-image-8.png"); */
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;

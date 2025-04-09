@@ -1,5 +1,5 @@
 // firebaseConfig.ts
-import { getApp, getApps, initializeApp } from "firebase/app";
+import { initializeApp } from "firebase/app";
 import {
   getAuth,
   RecaptchaVerifier,
@@ -12,15 +12,7 @@ import {
   setDoc,
   updateDoc,
 } from "firebase/firestore";
-// Config 1 - App chính
-const firebaseConfig1 = {
-  apiKey: "...",
-  authDomain: "...",
-  projectId: "...",
-  storageBucket: "...",
-  messagingSenderId: "...",
-  appId: "...",
-};
+import { getStorage } from "firebase/storage";
 
 // Config 2 - App phụ
 const firebaseConfig2 = {
@@ -43,7 +35,7 @@ const firebaseConfig = {
 };
 //
 // Khởi tạo 2 app Firebase khác nhau
-export const app1 = initializeApp(firebaseConfig1, "app1");
+export const app1 = initializeApp(firebaseConfig, "app1");
 export const app2 = initializeApp(firebaseConfig2, "app2");
 
 // Tạo Firestore và Storage riêng biệt
@@ -54,7 +46,7 @@ export const db2 = getFirestore(app2);
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
-
+const storage = getStorage(app);
 export {
   auth,
   db,
@@ -64,4 +56,5 @@ export {
   getDoc,
   setDoc,
   updateDoc,
+  storage,
 };

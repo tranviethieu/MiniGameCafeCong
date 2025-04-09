@@ -15,6 +15,14 @@ createRoot(document.getElementById("root")!).render(
           Form: {
             labelColor: "#fff",
           },
+          Input: {
+            activeBorderColor: "rgb(107, 123, 100)",
+            hoverBorderColor: "rgb(107, 123, 100)",
+          },
+          Button: {
+            defaultActiveColor: "rgb(107, 123, 100)",
+            defaultHoverColor: "rgb(107, 123, 100)",
+          },
         },
       }}
     >

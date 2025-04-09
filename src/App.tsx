@@ -3,9 +3,10 @@
 import ThankYouPage from "./components/ThankYouPage/ThankYouPage";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import ProtectedRoute from "./routes/ProtectedRoute";
-import StartGame from "./pages/auth/StartGame/StartGame";
+//import StartGame from "./pages/auth/StartGame/StartGame";
 import ExportToExcel from "./components/ExportFirestore";
-import MainGame from "./pages/home/MainGame";
+import StartGameCong from "./pages/auth/StartGameCong";
+import MainGameCong from "./pages/home/MainGameCong";
 
 function App() {
   return (
@@ -15,7 +16,8 @@ function App() {
           path="/login"
           element={
             <ProtectedRoute>
-              <StartGame />
+              {/* <StartGame /> */}
+              <StartGameCong />
             </ProtectedRoute>
           }
         />
@@ -32,7 +34,7 @@ function App() {
           path="/"
           element={
             <ProtectedRoute>
-              <MainGame />
+              <MainGameCong />
             </ProtectedRoute>
           }
         />

@@ -43,7 +43,7 @@ export const db1 = getFirestore(app1);
 export const db2 = getFirestore(app2);
 
 // Khởi tạo Firebase
-const app = initializeApp(firebaseConfig);
+const app = initializeApp(firebaseConfig2);
 const auth = getAuth(app);
 const db = getFirestore(app);
 const storage = getStorage(app);

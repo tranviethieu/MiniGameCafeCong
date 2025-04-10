@@ -4,7 +4,7 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        beVietnam: ['"Be Vietnam Pro"', "sans-serif"],
+        beVietnam: ["sans-serif", "Cousine", "BeauLuloClean"],
         pacifico: ['"Pacifico"', "cursive"],
       },
     },

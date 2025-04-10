@@ -24,7 +24,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   useEffect(() => {
     (async () => {
       setLoading(true);
-      const state = await getItemStorage("KEY_STORE");
+      const state = await getItemStorage("KEY_STORE_1");
       if (state?.user) {
         setUser(state?.user);
       } else {
@@ -36,7 +36,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   }, []);
   useEffect(() => {
     if (!loading) {
-      setItemStorage("KEY_STORE", {
+      setItemStorage("KEY_STORE_1", {
         user: user,
       });
     }

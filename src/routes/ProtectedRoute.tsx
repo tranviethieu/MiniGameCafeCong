@@ -15,6 +15,8 @@ const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
       navigate("/login");
     } else if (user && ["admin"].includes(user.role)) {
       navigate("/admin");
+    } else {
+      navigate("/");
     }
   }, [user, navigate]);
 

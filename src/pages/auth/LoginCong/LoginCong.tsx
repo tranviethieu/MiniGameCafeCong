@@ -82,11 +82,11 @@ const LoginCong = () => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 1.5, delay: 0.5 }}
-      className="z-[2] text-white rounded-xl w-full flex flex-col items-center"
+      className="z-[2] text-white rounded-xl w-full flex flex-col items-center mt-20 font-[Cousine]"
     >
       {/* ✅ Gọi handleLogin khi submit */}
       <form
-        className="flex flex-col gap-3 w-full"
+        className="flex flex-col gap-3 lg:min-w-[400px] min-w-[360px] "
         onSubmit={(e) => {
           e.preventDefault();
           handleLogin(form);
@@ -94,37 +94,36 @@ const LoginCong = () => {
       >
         {/* Tên */}
         <div className="flex flex-col">
-          <label className="text-sm font-medium mb-1 text-left text-[#3c4d2f] font-bold">
-            <span className="text-red-500">*</span> Tên (chỉ nhập nếu đăng ký
-            mới):
+          <label className="text-[14px] mb-1 text-left text-[#3c4d2f] font-weight-500">
+            <span className="text-red-500">*</span> Tên công dân:
           </label>
           <input
             type="text"
             value={form.name}
             onChange={(e) => setForm({ ...form, name: e.target.value })}
             placeholder="Nhập tên của bạn"
-            className="rounded-md px-4 py-1 text-[#3c4d2f] bg-white placeholder-[#b4b8a4] placeholder:text-sm outline-none"
+            className="rounded-md px-4 py-[6px] text-[#3c4d2f] bg-white placeholder-[#b4b8a4] placeholder:text-sm outline-none placeholder:[font-weight:400]"
           />
         </div>
 
         {/* Số điện thoại */}
         <div className="flex flex-col">
-          <label className="text-sm font-medium mb-1 text-left text-[#3c4d2f] font-bold">
-            <span className="text-red-500">*</span> Số điện thoại:
+          <label className="text-[14px] mb-1 text-left text-[#3c4d2f] font-weight-500">
+            <span className="text-red-500">*</span> Thông tin liên lạc:
           </label>
           <input
             type="tel"
             value={form.phone}
             onChange={(e) => setForm({ ...form, phone: e.target.value })}
             placeholder="Nhập số điện thoại"
-            className="rounded-md px-4 py-1 text-[#3c4d2f] bg-white placeholder-[#b4b8a4] placeholder:text-sm outline-none"
+            className="rounded-md px-4 py-[6px] text-[#3c4d2f] bg-white placeholder-[#b4b8a4] placeholder:text-sm outline-none placeholder:[font-weight:400]"
           />
         </div>
 
         <button
           type="submit"
           disabled={loading}
-          className="bg-[#4d5b28] text-white font-semibold py-2 mt-4 rounded-full text-md hover:opacity-90 transition disabled:opacity-60"
+          className="bg-[#4d5b28] text-white font-[BeauLuloClean] py-2 mt-2 rounded-full text-[13px] hover:opacity-90 transition disabled:opacity-60"
         >
           {loading ? "Đang xử lý..." : "Đăng nhập / Đăng ký"}
         </button>

@@ -7,6 +7,7 @@ import ProtectedRoute from "./routes/ProtectedRoute";
 import ExportToExcel from "./components/ExportFirestore";
 import StartGameCong from "./pages/auth/StartGameCong";
 import MainGameCong from "./pages/home/MainGameCong";
+import LayoutGame from "./layouts/LayoutGame";
 
 function App() {
   return (
@@ -17,7 +18,10 @@ function App() {
           element={
             <ProtectedRoute>
               {/* <StartGame /> */}
-              <StartGameCong />
+              {/* <StartGameCong /> */}
+              <LayoutGame>
+                <StartGameCong />
+              </LayoutGame>
             </ProtectedRoute>
           }
         />

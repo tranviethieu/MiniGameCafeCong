@@ -1,3 +1,27 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@font-face {
+  font-family: "Cousine";
+  src: url("/static/fonts/Cousine-Bold.ttf") format("truetype");
+  font-weight: bold;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Cousine";
+  src: url("/static/fonts/Cousine-Italic.ttf") format("truetype");
+  font-weight: 600;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Cousine";
+  src: url("/static/fonts/Cousine-Regular.ttf") format("truetype");
+  font-weight: 600;
+  font-style: normal;
+}
+@font-face {
+  font-family: "BeauLuloClean";
+  src: url("/static/fonts/BeauLuloClean-OneBold.otf") format("truetype");
+  font-weight: 600;
+  font-style: normal;
+}

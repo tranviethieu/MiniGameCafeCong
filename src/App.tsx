@@ -16,13 +16,9 @@ function App() {
         <Route
           path="/login"
           element={
-            <ProtectedRoute>
-              {/* <StartGame /> */}
-              {/* <StartGameCong /> */}
-              <LayoutGame>
-                <StartGameCong />
-              </LayoutGame>
-            </ProtectedRoute>
+            <LayoutGame>
+              <StartGameCong />
+            </LayoutGame>
           }
         />
 

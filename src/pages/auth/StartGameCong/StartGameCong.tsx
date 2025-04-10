@@ -10,11 +10,6 @@ const StartGameCong = () => {
       animate={{ opacity: 1 }}
       transition={{ duration: 1.5, delay: 5 }} // 👈 chậm hơn
       className="mb-12"
-      //className="relative z-[2] bg-[#4d5b28] text-white rounded-xl p-5 mt-4 w-full max-w-xs flex flex-col items-center"
-      // style={{
-      //   boxShadow: "6px 6px 0 #d5c7a2",
-      // }}
-      //hover:bg-[#e7e5db] hover:text-[#4d5b28]
     >
       <button
         onClick={() => setShowLogin(true)}

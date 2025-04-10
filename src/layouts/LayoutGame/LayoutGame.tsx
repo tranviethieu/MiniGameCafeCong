@@ -14,7 +14,7 @@ const LayoutGame = ({ children }: LayoutGameProps) => {
         autoPlay
         muted
         playsInline
-        className="fixed inset-0  object-cover z-0 lg:w-[24%] h-[90%]  left-1/2 -translate-x-1/2 "
+        className="fixed inset-0  object-cover z-0 lg:w-[24%] h-[92%] lg:h-full left-1/2 -translate-x-1/2 "
       >
         <source src={icons.bgVideo} type="video/mp4" />
         Trình duyệt của bạn không hỗ trợ video.

@@ -1,5 +1,5 @@
 // routes/ProtectedRoute.tsx
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthProvider";
 import { useEffect } from "react";
 
@@ -10,15 +10,14 @@ interface ProtectedRouteProps {
 const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
   const { user } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
   useEffect(() => {
-    if (!user) {
+    if (!user && location.pathname !== "/login") {
       navigate("/login");
     } else if (user && ["admin"].includes(user.role)) {
       navigate("/admin");
-    } else {
-      navigate("/");
     }
-  }, [user, navigate]);
+  }, [user, location.pathname]);
 
   return <>{children}</>;
 };

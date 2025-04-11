@@ -1,53 +1,13 @@
-// import GameLayout from "./layouts/GameLayout";
-// import MainApp from "./components/MainApp";
-import ThankYouPage from "./components/ThankYouPage/ThankYouPage";
-import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
-import ProtectedRoute from "./routes/ProtectedRoute";
-//import StartGame from "./pages/auth/StartGame/StartGame";
-import ExportToExcel from "./components/ExportFirestore";
-import StartGameCong from "./pages/auth/StartGameCong";
-import MainGameCong from "./pages/home/MainGameCong";
-import LayoutGame from "./layouts/LayoutGame";
+import { RouterProvider } from "react-router-dom";
+import router from "./routes/router";
+import SplashScreen from "./components/protected/SplashScreen/SplashScreen";
 
 function App() {
   return (
-    <Router>
-      <Routes>
-        <Route
-          path="/login"
-          element={
-            <LayoutGame>
-              <StartGameCong />
-            </LayoutGame>
-          }
-        />
-
-        <Route
-          path="/admin"
-          element={
-            <ProtectedRoute>
-              <ExportToExcel />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/"
-          element={
-            <ProtectedRoute>
-              <MainGameCong />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/thank-you"
-          element={
-            <ProtectedRoute>
-              <ThankYouPage />
-            </ProtectedRoute>
-          }
-        />
-      </Routes>
-    </Router>
+    <>
+      <SplashScreen />
+      <RouterProvider router={router} />
+    </>
   );
 }
 

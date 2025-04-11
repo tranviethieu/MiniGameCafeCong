@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { taskGameDefault } from "~/constants/config/data";
+import icons from "~/constants/images/icons";
 import { useAuth } from "~/context/AuthProvider";
 import { db } from "~/lib/firebaseConfig";
 import { IUser } from "~/types/user";
@@ -78,57 +79,100 @@ const LoginCong = () => {
   };
 
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 1.5, delay: 0.5 }}
-      className="z-[2] text-white rounded-xl w-full flex flex-col items-center mt-20 font-[Cousine]"
+    <div
+      className="w-full min-h-screen relative font-sans text-[17px] bg-cover bg-center bg-no-repeat overflow-hidden"
+      style={{
+        backgroundImage: `url(${icons.anhNen})`,
+      }}
     >
-      {/* ✅ Gọi handleLogin khi submit */}
-      <form
-        className="flex flex-col gap-3 lg:min-w-[400px] min-w-[360px] "
-        onSubmit={(e) => {
-          e.preventDefault();
-          handleLogin(form);
-        }}
+      {/* Ảnh dưới cùng */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 1.5, delay: 2 }}
+        className="absolute bottom-0 left-0 right-0 z-0 flex justify-center"
       >
-        {/* Tên */}
-        <div className="flex flex-col">
-          <label className="text-[14px] mb-1 text-left text-[#3c4d2f] font-weight-500">
-            <span className="text-red-500">*</span> Tên công dân:
-          </label>
-          <input
-            type="text"
-            value={form.name}
-            onChange={(e) => setForm({ ...form, name: e.target.value })}
-            placeholder="Nhập tên của bạn"
-            className="rounded-md px-4 py-[6px] text-[#3c4d2f] bg-white placeholder-[#b4b8a4] placeholder:text-sm outline-none placeholder:[font-weight:400]"
+        <img
+          src={icons.anhCho}
+          alt="ảnh nền"
+          className="w-full max-w-[600px] object-contain pointer-events-none"
+        />
+      </motion.div>
+      <div className="relative z-10 flex flex-col items-center">
+        <div className="flex justify-center mt-4">
+          <img
+            src={icons.logoCong} // ảnh nền bạn muốn ở dưới
+            alt="ảnh nền"
+            className="w-full max-w-[60px] object-contain"
           />
         </div>
-
-        {/* Số điện thoại */}
-        <div className="flex flex-col">
-          <label className="text-[14px] mb-1 text-left text-[#3c4d2f] font-weight-500">
-            <span className="text-red-500">*</span> Thông tin liên lạc:
-          </label>
-          <input
-            type="tel"
-            value={form.phone}
-            onChange={(e) => setForm({ ...form, phone: e.target.value })}
-            placeholder="Nhập số điện thoại"
-            className="rounded-md px-4 py-[6px] text-[#3c4d2f] bg-white placeholder-[#b4b8a4] placeholder:text-sm outline-none placeholder:[font-weight:400]"
-          />
-        </div>
-
-        <button
-          type="submit"
-          disabled={loading}
-          className="bg-[#4d5b28] text-white font-[BeauLuloClean] py-2 mt-2 rounded-full text-[13px] hover:opacity-90 transition disabled:opacity-60"
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1.5, delay: 0.5 }}
+          className="flex justify-center"
         >
-          {loading ? "Đang xử lý..." : "Đăng nhập / Đăng ký"}
-        </button>
-      </form>
-    </motion.div>
+          <img
+            src={icons.vietnamtrongcong} // ảnh nền bạn muốn ở dưới
+            alt="ảnh nền"
+            className="w-full max-w-[600px] object-contain"
+          />
+        </motion.div>
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1.5, delay: 0.5 }}
+          className="text-white rounded-xl w-full flex flex-col items-center  font-[Cousine]"
+        >
+          {/* ✅ Gọi handleLogin khi submit */}
+          <form
+            className="flex flex-col gap-3 lg:min-w-[400px] min-w-[340px] "
+            onSubmit={(e) => {
+              e.preventDefault();
+              handleLogin(form);
+            }}
+          >
+            {/* Tên */}
+            <div className="flex flex-col">
+              <label className="text-[16px] font-semibold mb-1 text-left text-[#3c4d2f]">
+                <span className="text-red-500">*</span> Tên công dân:
+              </label>
+
+              <input
+                type="text"
+                value={form.name}
+                onChange={(e) => setForm({ ...form, name: e.target.value })}
+                placeholder="Nhập tên của bạn"
+                className="rounded-md px-4 py-[6px] text-[#3c4d2f] bg-white placeholder-[#b4b8a4] placeholder:text-sm outline-none placeholder:[font-weight:400]"
+              />
+            </div>
+
+            {/* Số điện thoại */}
+            <div className="flex flex-col">
+              <label className="text-[16px] font-semibold mb-1 text-left text-[#3c4d2f]">
+                <span className="text-red-500">*</span> Thông tin liên lạc:
+              </label>
+
+              <input
+                type="tel"
+                value={form.phone}
+                onChange={(e) => setForm({ ...form, phone: e.target.value })}
+                placeholder="Nhập số điện thoại"
+                className="rounded-md px-4 py-[6px] text-[#3c4d2f] bg-white placeholder-[#b4b8a4] placeholder:text-sm outline-none placeholder:[font-weight:400]"
+              />
+            </div>
+
+            <button
+              type="submit"
+              disabled={loading}
+              className="bg-[#4d5b28] text-white mx-6 font-[BeauLuloClean] py-3 mt-2 rounded-full text-[11px] hover:opacity-90 transition disabled:opacity-60"
+            >
+              {loading ? "Đang xử lý..." : "Đăng nhập / Đăng ký"}
+            </button>
+          </form>
+        </motion.div>
+      </div>
+    </div>
   );
 };
 

@@ -1,38 +1,65 @@
-import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
+import icons from "~/constants/images/icons";
 
-function LoadingScreen() {
+const LoadingScreen = () => {
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
-    const interval = setInterval(() => {
+    const timer = setInterval(() => {
       setProgress((prev) => {
         if (prev >= 100) {
-          clearInterval(interval);
+          clearInterval(timer);
           return 100;
         }
-        return prev + 1; // Tăng 1% mỗi 20ms
+        return prev + 1;
       });
-    }, 20); // tốc độ loading có thể chỉnh tùy ý
+    }, 30); // tăng mỗi 30ms
 
-    return () => clearInterval(interval);
+    return () => clearInterval(timer);
   }, []);
+
   return (
-    <div
-      style={{ backgroundColor: "rgb(107, 123, 80)" }}
-      className="min-h-screen bg-gradient-to-b   text-white p-4 flex flex-col items-center"
-    >
+    <div className="w-full h-screen bg-[#e8e4db] flex flex-col justify-center items-center text-[#40501e] font-[BeauLuloClean] text-center relative overflow-hidden">
+      {/* Logo */}
+      <div className="flex justify-center mt-4">
+        <img
+          src={icons.logoCong} // ảnh nền bạn muốn ở dưới
+          alt="ảnh nền"
+          className="w-full max-w-[60px] object-contain"
+        />
+      </div>
+
+      {/* Tiêu đề */}
+      <div className="mb-auto">
+        <img
+          src={icons.vietnamtrongcong} // ảnh nền bạn muốn ở dưới
+          alt="ảnh nền"
+          className="w-full max-w-[600px] object-contain"
+        />
+      </div>
+
+      {/* Hình ảnh */}
+      <motion.img
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.1, duration: 0.1 }}
+        src={icons.xemay}
+        alt="loading"
+        className="max-w-[300px] w-[80%] my-6"
+      />
+
+      {/* Loading text */}
       <motion.div
-        key="loading"
-        className="flex justify-center items-center m-auto"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        transition={{ duration: 0.5 }}
+        transition={{ delay: 0.5 }}
+        className="lg:text-[18px] text-[14px] font-bold mb-auto"
       >
-        <div className="text-white text-2xl">⏳ Đang tải... {progress}%</div>
+        CHỜ CỘNG XIU NHA...{progress}%
       </motion.div>
     </div>
   );
-}
+};
+
 export default LoadingScreen;

@@ -9,6 +9,7 @@ const activityLevels = [
   { level: 3, joinable: true },
   { level: 4, joinable: false, time: "10:00", date: "05/05/2025" },
   { level: 5, joinable: false, time: "12:00", date: "05/05/2025" },
+  { level: 6, joinable: false, time: "12:00", date: "05/05/2025" },
 ];
 
 export default function ActivityLevels() {
@@ -36,33 +37,63 @@ export default function ActivityLevels() {
 
       {/* Grid */}
       <div className="grid grid-cols-2 md:grid-cols-3 gap-4 max-w-md mx-auto">
-        {activityLevels.map((item) => (
-          <div
-            key={item.level}
-            className={`bg-[#3f5722] text-white rounded-2xl p-4 flex flex-col items-center justify-center shadow-[6px_6px_0_#d5c7a2] ${
-              item.level === 5 ? "col-span-2" : ""
-            }`}
-          >
-            <Star1 className="text-[#f5eec4] w-6 h-6 mb-2" fill="#f5eec4" />
-            <div className="text-center font-bold text-lg leading-tight mb-2">
-              SINH HOẠT
-              <br />
-              MỨC {item.level}
-            </div>
-
-            {item.joinable ? (
-              <button className="bg-white text-[#3f5722] text-sm px-4 py-1 mt-4 rounded-full font-semibold shadow">
-                Tham gia ngay
-              </button>
-            ) : (
-              <div className="text-center text-[10px] text-[#f5eec4] font-medium">
-                <div>Bắt đầu từ</div>
-                <div className="font-bold">{item.time}</div>
-                <div>{item.date}</div>
+        {activityLevels.map((item) =>
+          item.level < 6 ? (
+            <div
+              key={item.level}
+              className={`bg-[#3f5722] text-white rounded-2xl p-4 flex flex-col items-center justify-center shadow-[6px_6px_0_#d5c7a2]`}
+            >
+              <Star1 className="text-[#f5eec4] w-6 h-6 mb-2" fill="#f5eec4" />
+              <div className="text-center font-bold text-lg leading-tight mb-2">
+                SINH HOẠT
+                <br />
+                MỨC {item.level}
               </div>
-            )}
-          </div>
-        ))}
+
+              {item.joinable ? (
+                <button className="bg-white text-[#3f5722] text-sm px-4 py-1 mt-4 rounded-full font-semibold shadow">
+                  Tham gia ngay
+                </button>
+              ) : (
+                <div className="text-center text-[10px] text-[#f5eec4] font-medium">
+                  <div>Bắt đầu từ</div>
+                  <div className="font-bold">{item.time}</div>
+                  <div>{item.date}</div>
+                </div>
+              )}
+            </div>
+          ) : (
+            <div className="bg-[#3f5722] rounded-2xl flex flex-col items-center justify-center shadow-[6px_6px_0_#d5c7a2] relative text-white">
+              {/* Cờ Việt Nam */}
+              <div className="absolute top-4">
+                <img
+                  src={icons.vietnam} // thay bằng ảnh cờ đỏ sao vàng
+                  alt="flag"
+                  className="w-18 h-10 rounded-sm"
+                />
+              </div>
+
+              {/* Nội dung */}
+              <div className="text-center mt-10 leading-tight">
+                <div className="text-sm font-bold uppercase tracking-wide">
+                  Chứng nhận
+                  <br />
+                  công dân
+                </div>
+                <div className="text-[18px] italic text-[#f5eec4] font-semibold mt-1">
+                  xuất sắc
+                </div>
+              </div>
+
+              {/* (Tuỳ chọn) Con dấu nền */}
+              <img
+                src="/path-to/seal.png"
+                alt="seal"
+                className="absolute bottom-4 right-4 w-16 opacity-10"
+              />
+            </div>
+          )
+        )}
       </div>
     </div>
   );

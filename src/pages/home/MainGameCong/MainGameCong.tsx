@@ -1,4 +1,3 @@
-import TitleBlock from "~/components/TitleBlock";
 import icons from "~/constants/images/icons";
 import ActivityLevels from "./components/ActivityLevels";
 import { motion } from "framer-motion";

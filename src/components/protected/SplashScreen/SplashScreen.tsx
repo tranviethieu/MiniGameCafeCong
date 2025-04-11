@@ -3,7 +3,6 @@ import { getItemStorage, setItemStorage } from "~/common/localStorage";
 import { useAuth } from "~/context/AuthProvider";
 import styles from "./SplashScreen.module.scss";
 import clsx from "clsx";
-import { Spin } from "antd";
 import LoadingScreen from "~/components/LoadingScreen";
 const SplashScreen: React.FC = () => {
   const { setLoading, login, loading, user, logout } = useAuth();

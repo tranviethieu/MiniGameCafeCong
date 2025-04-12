@@ -99,11 +99,11 @@ const LoginCong = () => {
         />
       </motion.div>
       <div className="relative z-10 flex flex-col items-center">
-        <div className="flex justify-center mt-4">
+        <div className="flex justify-center mt-2">
           <img
             src={icons.logoCong} // ảnh nền bạn muốn ở dưới
             alt="ảnh nền"
-            className="w-full max-w-[60px] object-contain"
+            className="w-full max-w-[50px] object-contain"
           />
         </div>
         <motion.div
@@ -114,8 +114,8 @@ const LoginCong = () => {
         >
           <img
             src={icons.vietnamtrongcong} // ảnh nền bạn muốn ở dưới
-            alt="ảnh nền"
-            className="w-full max-w-[600px] object-contain"
+            alt="ảnss"
+            className="w-full max-w-[200px] object-contain"
           />
         </motion.div>
         <motion.div
@@ -126,7 +126,7 @@ const LoginCong = () => {
         >
           {/* ✅ Gọi handleLogin khi submit */}
           <form
-            className="flex flex-col gap-3 lg:min-w-[400px] min-w-[340px] "
+            className="flex flex-col gap-2 lg:min-w-[400px] min-w-[320px] "
             onSubmit={(e) => {
               e.preventDefault();
               handleLogin(form);
@@ -134,7 +134,7 @@ const LoginCong = () => {
           >
             {/* Tên */}
             <div className="flex flex-col">
-              <label className="text-[16px] font-semibold mb-1 text-left text-[#3c4d2f]">
+              <label className="text-[12px] font-semibold mb-1 text-left text-[#3c4d2f]">
                 <span className="text-red-500">*</span> Tên công dân:
               </label>
 
@@ -143,13 +143,13 @@ const LoginCong = () => {
                 value={form.name}
                 onChange={(e) => setForm({ ...form, name: e.target.value })}
                 placeholder="Nhập tên của bạn"
-                className="rounded-md px-4 py-[6px] text-[#3c4d2f] bg-white placeholder-[#b4b8a4] placeholder:text-sm outline-none placeholder:[font-weight:400]"
+                className="rounded-md px-4 py-[2px] text-[#3c4d2f] bg-white placeholder-[#b4b8a4] placeholder:text-sm outline-none placeholder:[font-weight:400]"
               />
             </div>
 
             {/* Số điện thoại */}
             <div className="flex flex-col">
-              <label className="text-[16px] font-semibold mb-1 text-left text-[#3c4d2f]">
+              <label className="text-[12px] font-semibold mb-1 text-left text-[#3c4d2f]">
                 <span className="text-red-500">*</span> Thông tin liên lạc:
               </label>
 
@@ -158,14 +158,14 @@ const LoginCong = () => {
                 value={form.phone}
                 onChange={(e) => setForm({ ...form, phone: e.target.value })}
                 placeholder="Nhập số điện thoại"
-                className="rounded-md px-4 py-[6px] text-[#3c4d2f] bg-white placeholder-[#b4b8a4] placeholder:text-sm outline-none placeholder:[font-weight:400]"
+                className="rounded-md px-4 py-[2px] text-[#3c4d2f] bg-white placeholder-[#b4b8a4] placeholder:text-sm outline-none placeholder:[font-weight:400]"
               />
             </div>
 
             <button
               type="submit"
               disabled={loading}
-              className="bg-[#4d5b28] text-white mx-6 font-[BeauLuloClean] py-3 mt-2 rounded-full text-[11px] hover:opacity-90 transition disabled:opacity-60"
+              className="bg-[#4d5b28] w-[170px] text-white mx-auto font-[BeauLuloClean] py-3 mt-1 rounded-full text-[9px] hover:opacity-90 transition disabled:opacity-60"
             >
               {loading ? "Đang xử lý..." : "Đăng nhập / Đăng ký"}
             </button>

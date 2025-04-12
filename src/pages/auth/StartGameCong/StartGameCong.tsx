@@ -12,7 +12,7 @@ const StartGameCong = () => {
           <img
             src={icons.logoCong} // ảnh nền bạn muốn ở dưới
             alt="ảnh nền"
-            className="w-full max-w-[60px] object-contain"
+            className="w-full max-w-[50px] object-contain"
           />
         </div>
         <motion.div

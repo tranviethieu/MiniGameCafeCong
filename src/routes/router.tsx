@@ -5,29 +5,37 @@ import ExportToExcel from "~/components/ExportFirestore";
 import RequiredLogout from "~/components/protected/RequiredLogout";
 import RequiredAuth from "~/components/protected/RequiredAuth";
 
-const router = createBrowserRouter([
+const router = createBrowserRouter(
+  [
+    {
+      element: <RequiredLogout />,
+      children: [
+        {
+          path: "/login",
+          element: <StartGameCong />,
+        },
+      ],
+    },
+    {
+      element: <RequiredAuth />,
+      children: [
+        {
+          path: "/",
+          element: <MainGameCong />,
+        },
+        {
+          path: "/admin",
+          element: <ExportToExcel />,
+        },
+      ],
+    },
+  ],
   {
-    element: <RequiredLogout />,
-    children: [
-      {
-        path: "/login",
-        element: <StartGameCong />,
-      },
-    ],
-  },
-  {
-    element: <RequiredAuth />,
-    children: [
-      {
-        path: "/",
-        element: <MainGameCong />,
-      },
-      {
-        path: "/admin",
-        element: <ExportToExcel />,
-      },
-    ],
-  },
-]);
+    future: {
+      // 👇 ép kiểu tránh lỗi TypeScript cho v7 flag
+      v7_startTransition: true,
+    } as any,
+  }
+);
 
 export default router;

@@ -6,14 +6,9 @@ import icons from "~/constants/images/icons";
 const StartGameCong = () => {
   const [showLogin, setShowLogin] = useState(false);
   return !showLogin ? (
-    <div
-      className="w-full min-h-screen font-sans text-[17px] bg-cover bg-center bg-no-repeat flex flex-col"
-      style={{
-        backgroundImage: `url(${icons.anhNen})`, // ảnh nền chính
-      }}
-    >
+    <div className="w-full min-h-screen font-[Cousine] text-[17px] bg-[#e4e3d9] flex flex-col">
       <div className="flex flex-col flex-1">
-        <div className="flex justify-center mt-4">
+        <div className="flex justify-center mt-2">
           <img
             src={icons.logoCong} // ảnh nền bạn muốn ở dưới
             alt="ảnh nền"
@@ -29,14 +24,14 @@ const StartGameCong = () => {
           <img
             src={icons.vietnamtrongcong} // ảnh nền bạn muốn ở dưới
             alt="ảnh nền"
-            className="w-full max-w-[600px] object-contain"
+            className="w-full max-w-[200px] object-contain"
           />
         </motion.div>
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1.5, delay: 2 }}
-          className="mb-4 flex justify-center"
+          className="mb-2 flex justify-center"
         >
           <button
             onClick={() => setShowLogin(true)}
@@ -54,10 +49,13 @@ const StartGameCong = () => {
           transition={{ duration: 1.5, delay: 0.5 }}
           className="mt-auto flex justify-center"
         >
-          <img
-            src={icons.anhCho} // ảnh nền bạn muốn ở dưới
-            alt="ảnh nền"
+          <video
+            src={icons.videocong} // Đường dẫn video bạn muốn thay
             className="w-full max-w-[600px] object-contain"
+            autoPlay
+            //loop
+            muted
+            playsInline
           />
         </motion.div>
       </div>

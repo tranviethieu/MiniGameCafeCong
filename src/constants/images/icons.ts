@@ -10,6 +10,7 @@ import vietnamtrongcong from "/static/imgs/vietnamtrongcong.webp";
 import anhNen from "/static/imgs/anhNen.webp";
 import xemay from "/static/imgs/xemay.png";
 import vietnam from "/static/imgs/vietnam.gif";
+import videocong from "/static/video/videocong.mp4";
 
 export default {
   logoCong,
@@ -24,4 +25,5 @@ export default {
   anhNen,
   xemay,
   vietnam,
+  videocong,
 };

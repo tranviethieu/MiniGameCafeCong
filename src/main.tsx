@@ -8,6 +8,10 @@ createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <ConfigProvider
       theme={{
+        token: {
+          colorPrimaryActive: "#4c5b29",
+          colorPrimaryHover: "#4c5b29",
+        },
         components: {
           Modal: {
             contentBg: "rgb(17 24 39 / var(--tw-bg-opacity, 1))",
@@ -22,6 +26,7 @@ createRoot(document.getElementById("root")!).render(
           Button: {
             defaultActiveColor: "rgb(107, 123, 100)",
             defaultHoverColor: "rgb(107, 123, 100)",
+            defaultActiveBorderColor: "rgb(107, 123, 100)",
           },
         },
       }}

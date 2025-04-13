@@ -22,11 +22,11 @@ const LoadingScreen = () => {
   return (
     <div className="w-full h-screen bg-[#e8e4db] flex flex-col justify-center items-center text-[#40501e] font-[BeauLuloClean] text-center relative overflow-hidden">
       {/* Logo */}
-      <div className="flex justify-center mt-4">
+      <div className="flex justify-center mt-2">
         <img
           src={icons.logoCong} // ảnh nền bạn muốn ở dưới
           alt="ảnh nền"
-          className="w-full max-w-[60px] object-contain"
+          className="w-full max-w-[50px] object-contain"
         />
       </div>
 
@@ -35,18 +35,18 @@ const LoadingScreen = () => {
         <img
           src={icons.vietnamtrongcong} // ảnh nền bạn muốn ở dưới
           alt="ảnh nền"
-          className="w-full max-w-[600px] object-contain"
+          className="w-full max-w-[200px] object-contain"
         />
       </div>
 
       {/* Hình ảnh */}
       <motion.img
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.1, duration: 0.1 }}
+        initial={{ opacity: 0, x: -100 }} // chạy từ trái sang
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ delay: 0.1, duration: 1, ease: "easeOut" }}
         src={icons.xemay}
         alt="loading"
-        className="max-w-[300px] w-[80%] my-6"
+        className="max-w-[200px] w-[80%] my-6"
       />
 
       {/* Loading text */}

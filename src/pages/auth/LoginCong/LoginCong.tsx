@@ -58,7 +58,7 @@ const LoginCong = () => {
         const userData: IUser = {
           phone,
           name,
-          level: 1,
+          level: 0,
           location: 0,
           task: taskGameDefault,
           role: "user",
@@ -89,7 +89,7 @@ const LoginCong = () => {
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ duration: 1.5, delay: 2 }}
+        transition={{ duration: 1.5, delay: 0.1 }}
         className="absolute bottom-0 left-0 right-0 z-0 flex justify-center"
       >
         <img
@@ -165,7 +165,7 @@ const LoginCong = () => {
             <button
               type="submit"
               disabled={loading}
-              className="bg-[#4d5b28] w-[170px] text-white mx-auto font-[BeauLuloClean] py-3 mt-1 rounded-full text-[9px] hover:opacity-90 transition disabled:opacity-60"
+              className="bg-[#4d5b28] w-[210px] text-white mx-auto font-[BeauLuloClean] py-3 mt-1 rounded-full text-[10px] hover:opacity-90 transition disabled:opacity-60"
             >
               {loading ? "Đang xử lý..." : "Đăng nhập / Đăng ký"}
             </button>

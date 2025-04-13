@@ -4,3 +4,10 @@ body {
   height: 100%;
   font-family: "Be Vietnam Pro", sans-serif !important;
 }
+.ant-upload .ant-upload-select,
+.ant-upload .ant-upload-select .ant-upload {
+  width: 100% !important;
+}
+.ant-form-item {
+  margin-bottom: 0px !important;
+}

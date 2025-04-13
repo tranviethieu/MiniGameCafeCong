@@ -5,7 +5,7 @@ import hgc from "/static/anh1.png";
 import miniGame from "/static/miniGame.png";
 import muiten from "/static/muiten.png";
 import bgVideo from "/static/video/0410.mov";
-import anhCho from "/static/imgs/anhcho.webp";
+import anhCho from "/static/imgs/anhcong.jpg";
 import vietnamtrongcong from "/static/imgs/vietnamtrongcong.webp";
 import anhNen from "/static/imgs/anhNen.webp";
 import xemay from "/static/imgs/xemay.png";

@@ -4,6 +4,8 @@ import MainGameCong from "~/pages/home/MainGameCong";
 import ExportToExcel from "~/components/ExportFirestore";
 import RequiredLogout from "~/components/protected/RequiredLogout";
 import RequiredAuth from "~/components/protected/RequiredAuth";
+import Game1 from "~/pages/home/Game1";
+import CongratulationPage from "~/pages/home/CongratulationPage/CongratulationPage";
 
 const router = createBrowserRouter(
   [
@@ -22,6 +24,14 @@ const router = createBrowserRouter(
         {
           path: "/",
           element: <MainGameCong />,
+        },
+        {
+          path: "/cong-1",
+          element: <Game1 />,
+        },
+        {
+          path: "/hoan-thanh-sinh-hoat-1",
+          element: <CongratulationPage />,
         },
         {
           path: "/admin",

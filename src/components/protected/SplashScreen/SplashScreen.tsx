@@ -11,25 +11,32 @@ const SplashScreen: React.FC = () => {
   useEffect(() => {
     (async () => {
       setLoading(true);
-      const state = await getItemStorage("KEY_STORE_1");
-      const uid = state?.user?.id;
-      if (uid) {
-        // 🔍 Kiểm tra user có tồn tại trong Firestore không
-        const docRef = doc(db, "users", uid); // giả sử phone là ID
-        const docSnap = await getDoc(docRef);
+      try {
+        const state = await getItemStorage("KEY_STORE_1");
+        const uid = state?.user?.id;
 
-        if (docSnap.exists()) {
-          login(state.user);
+        if (uid) {
+          const docRef = doc(db, "users", uid);
+          const docSnap = await getDoc(docRef);
+
+          if (docSnap.exists()) {
+            login(state.user);
+          } else {
+            logout();
+          }
         } else {
-          logout(); // Không tìm thấy user → xoá login
+          logout();
         }
-      } else {
-        logout();
+      } catch (error) {
+        console.error("Lỗi khi xử lý đăng nhập:", error);
+        logout(); // fallback
+      } finally {
+        // ✅ Đảm bảo luôn tắt loading
+        setTimeout(() => setLoading(false), 1500);
       }
-
-      setTimeout(() => setLoading(false), 2000);
     })();
   }, []);
+
   useEffect(() => {
     if (!loading) {
       setItemStorage("KEY_STORE_1", {

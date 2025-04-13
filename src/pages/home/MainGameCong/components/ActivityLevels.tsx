@@ -60,7 +60,7 @@ export default function ActivityLevels() {
             key={index}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: index * 0.5 }}
+            transition={{ delay: index * 0.03 }}
           >
             {char}
           </motion.span>

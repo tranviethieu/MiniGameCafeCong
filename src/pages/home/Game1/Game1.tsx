@@ -231,13 +231,6 @@ const Game1 = () => {
                   className="w-full mt-2 px-3 py-2 rounded border text-black text-sm font-[Cousine]"
                 />
               </Form.Item>
-              {/* <input
-              type="text"
-              placeholder="Dán link facebook bài viết..."
-              value={link}
-              onChange={(e) => setLink(e.target.value)}
-              className="w-full mt-2 px-3 py-2 rounded border text-black text-sm"
-            /> */}
             </div>
 
             {/* Tải ảnh */}

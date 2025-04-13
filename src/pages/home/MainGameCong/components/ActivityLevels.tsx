@@ -2,7 +2,6 @@ import icons from "~/constants/images/icons";
 import { motion } from "framer-motion";
 import man1 from "~/constants/images/man1";
 import { useMemo } from "react";
-import dayjs from "dayjs";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "~/context/AuthProvider";
 const text = "CHƠI HẾT MÚC - THI ĐUA HẾT SỨC:";
@@ -19,17 +18,32 @@ export default function ActivityLevels() {
   const navigate = useNavigate();
   const { user } = useAuth();
   const updatedLevels = useMemo(() => {
-    const today = dayjs();
+    const today = new Date();
+
+    const parseDate = (str: string) => {
+      const [day, month, year] = str.split("/").map(Number);
+      return new Date(year, month - 1, day); // JavaScript month bắt đầu từ 0
+    };
+
     return activityLevels.map((level, index) => {
-      const levelDate = dayjs(level.date, "DD/MM/YYYY");
+      const levelDate = parseDate(level.date);
       const complete = user?.task[index]?.status;
+      const joinable =
+        today >=
+        new Date(
+          levelDate.getFullYear(),
+          levelDate.getMonth(),
+          levelDate.getDate()
+        );
+
       return {
         ...level,
         complete,
-        joinable: today.isAfter(levelDate) || today.isSame(levelDate, "day"),
+        joinable,
       };
     });
   }, [user?.task]);
+
   const handleJoin = (level: number, complete: number) => {
     console.log("Joining level:", level);
     if (level === 1 && complete === 1) {

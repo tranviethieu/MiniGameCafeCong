@@ -42,12 +42,13 @@ const LoadingScreen = () => {
 
         {/* Hình ảnh */}
         <motion.img
-          initial={{ opacity: 0, x: -100 }} // chạy từ trái sang
+          initial={{ opacity: 0, x: -200 }} // chạy từ trái sang
           animate={{ opacity: 1, x: 0 }}
-          transition={{ delay: 0.1, duration: 1, ease: "easeOut" }}
+          transition={{ delay: 0.1, duration: 2, ease: "easeOut" }}
           src={icons.xemay}
           alt="loading"
-          className="max-w-[200px] w-[80%] my-6 mx-auto"
+          className="max-w-[200px] w-[80%] my-6 "
+          style={{ marginLeft: "auto" }}
         />
 
         {/* Loading text */}

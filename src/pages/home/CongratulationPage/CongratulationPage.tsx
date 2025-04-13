@@ -1,51 +1,110 @@
 import { useNavigate } from "react-router-dom";
+import icons from "~/constants/images/icons";
+import man3 from "~/constants/images/man3";
 import { useAuth } from "~/context/AuthProvider";
-
+import { motion } from "framer-motion";
+import { IoMdArrowDroprightCircle } from "react-icons/io";
 const CongratulationPage = () => {
   const navigate = useNavigate();
   const { user } = useAuth();
-
   return (
-    <div className="min-h-screen bg-[#f3f0e7] flex flex-col items-center justify-center px-4 text-center">
-      {/* Logo */}
-      <div className="text-[#a60000] font-bold text-lg uppercase mb-2 tracking-widest">
-        CỘNG
-      </div>
+    <div className="relative h-screen w-screen overflow-hidden bg-[#e5e5db] font-[Cousine]">
+      <div className="flex flex-col items-center text-center h-full w-full max-w-screen-sm mx-auto">
+        {/* Logo */}
+        <div className="text-[#3c4d2f] font-bold text-xl mt-1">
+          <img src={icons.logoCong} style={{ width: 50 }} alt="Logo Cộng" />
+        </div>
+        <div className="my-auto">
+          {/* Tiêu đề */}
+          <motion.img
+            src={man3.hoanho}
+            className="w-[60%] mt-2 mx-auto"
+            alt="#hoanho"
+            animate={{ opacity: [1, 0.8, 1] }}
+            transition={{
+              duration: 2,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+          />
+          <motion.img
+            animate={{ opacity: [1, 0.8, 1] }}
+            transition={{
+              duration: 2,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+            src={man3.bacham}
+            className="w-[100px] mt-2 mx-auto"
+            alt="bacham"
+          />
 
-      {/* Tiêu đề */}
-      <h1 className="text-2xl font-extrabold text-green-800 mb-1">HOAN HÔ!!</h1>
-      <div className="text-green-800 text-xl mb-4">...</div>
+          {/* Ảnh */}
+          <motion.img
+            src={man3.ghe}
+            alt="Ghế"
+            initial={{ x: "-100%" }}
+            animate={{ x: 0 }}
+            transition={{ duration: 1.5, ease: "easeOut" }}
+            className="w-[200px] mx-auto my-4"
+          />
 
-      {/* Ảnh */}
-      <div className="relative my-4">
-        <img
-          src="/chair.png" // thay bằng đường dẫn ảnh bạn đã upload
-          alt="Ghế"
-          className="w-[200px] mx-auto"
-        />
-        <div className="absolute top-[-20px] left-[30px] rotate-[-10deg] bg-white px-3 py-2 shadow-lg text-sm font-semibold text-green-900 border border-gray-300">
-          BẠN LÀ GHẾ <br /> VÌ BẠN <br /> KHÔNG PHẢI BẠN!
+          {/* Thông báo hoàn thành */}
+          <div className="w-full flex">
+            <motion.div
+              className="text-[#898e66] mx-auto text-[32px] mb-2 font-[iCielBCHuskey] flex"
+              initial="hidden"
+              animate="visible"
+              variants={{
+                visible: {
+                  transition: {
+                    staggerChildren: 0.05, // thời gian giữa mỗi ký tự
+                  },
+                },
+              }}
+            >
+              {`Bạn ${user?.name} đã`.split("").map((char, index) => (
+                <motion.span
+                  key={index}
+                  variants={{
+                    hidden: { x: -20, opacity: 0 },
+                    visible: { x: 0, opacity: 1 },
+                  }}
+                  transition={{ duration: 0.3 }}
+                >
+                  {char === " " ? "\u00A0" : char}
+                </motion.span>
+              ))}
+            </motion.div>
+          </div>
+
+          <motion.img
+            src={man3.hoanthanh}
+            alt="hoanthanh"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 1, duration: 0.8, ease: "easeOut" }}
+            className="w-[260px] mx-auto"
+          />
+
+          {/* Nút tiếp tục */}
+          <motion.button
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 1, duration: 0.8, ease: "easeOut" }}
+            onClick={() => {
+              //setLoading(true);
+              navigate("/");
+            }}
+            className="bg-[#4d5b28] mx-auto mt-8 mb-2 flex items-center gap-2 text-[#e7e5db] px-8 py-2 rounded-full text-md bold shadow-md hover:bg-green-800 transition"
+          >
+            TIẾP TỤC
+            <IoMdArrowDroprightCircle
+              style={{ fontSize: 20, marginBottom: 2 }}
+            />
+          </motion.button>
         </div>
       </div>
-
-      {/* Thông báo hoàn thành */}
-      <div className="text-gray-700 italic text-lg mb-2">
-        Bạn {user?.name} đã
-      </div>
-      <div className="text-green-900 font-extrabold text-2xl mb-6">
-        HOÀN THÀNH
-        <br /> XUẤT SẮC MỨC 1
-      </div>
-
-      {/* Nút tiếp tục */}
-      <button
-        onClick={() => {
-          navigate("/");
-        }}
-        className="bg-green-900 text-white px-6 py-2 rounded-full text-sm font-semibold shadow-md hover:bg-green-800 transition"
-      >
-        TIẾP TỤC ▶
-      </button>
     </div>
   );
 };

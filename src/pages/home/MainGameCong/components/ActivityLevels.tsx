@@ -52,7 +52,7 @@ export default function ActivityLevels() {
     // Handle join logic here
   };
   return (
-    <div>
+    <>
       {/* Header */}
       <div className="whitespace-pre-line text-center font-[BeauLuloClean] text-red-500 text-[12px] leading-snug  mb-3">
         {text.split("").map((char, index) => (
@@ -60,7 +60,7 @@ export default function ActivityLevels() {
             key={index}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: index * 0.03 }}
+            transition={{ delay: index * 0.5 }}
           >
             {char}
           </motion.span>
@@ -74,13 +74,16 @@ export default function ActivityLevels() {
       </div>
 
       {/* Grid */}
-      <div style={{ overflowY: "auto", height: "calc(100vh - 200px)" }}>
-        <div className="grid grid-cols-2 gap-4 max-w-md mx-auto ">
+      <div
+        className="w-full"
+        style={{ overflowY: "auto", height: "calc(100vh - 200px)" }}
+      >
+        <div className="grid grid-cols-2 gap-4 max-w-[364px] mx-auto px-4">
           {updatedLevels.map((item) =>
             item.level < 6 ? (
               <motion.div
                 key={item.level}
-                className="bg-[#3f5722] h-[160px] relative text-white rounded-2xl p-1 flex flex-col items-center justify-center shadow-[6px_6px_0_#d5c7a2]"
+                className="bg-[#3f5722] h-[160px] relative px-0 text-white rounded-2xl p-1 flex flex-col items-center justify-center shadow-[6px_6px_0_#d5c7a2]"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ duration: 1.5, delay: item.level * 0.2 }}
@@ -109,9 +112,9 @@ export default function ActivityLevels() {
                         item.level === 1
                           ? man1.muc1
                           : item.level === 2
-                          ? man1.muc2
-                          : item.level === 3
                           ? man1.muc3
+                          : item.level === 3
+                          ? man1.muc2
                           : item.level === 4
                           ? man1.muc4
                           : item.level === 5
@@ -133,7 +136,7 @@ export default function ActivityLevels() {
                       transition={{ duration: 1.5, delay: 0.2 }}
                       src={man1.congHoanthanh}
                       alt="congHoanthanh"
-                      className="max-w-[200px] w-[60%] object-contain absolute bottom-[0px] right-[0px] pointer-events-none"
+                      className="max-w-[200px] w-[60%] object-contain absolute bottom-0 left-1/2 transform -translate-x-1/2 pointer-events-none"
                     />
                   </>
                 ) : item.joinable ? (
@@ -141,11 +144,6 @@ export default function ActivityLevels() {
                     whileHover={{ scale: 1.05 }}
                     animate={{
                       scale: [1, 1.05, 1],
-                      boxShadow: [
-                        "0 0 0px #fff",
-                        "0 0 12px #fff",
-                        "0 0 0px #fff",
-                      ],
                     }}
                     transition={{
                       repeat: Infinity,
@@ -170,7 +168,8 @@ export default function ActivityLevels() {
                 )}
               </motion.div>
             ) : (
-              <div
+              <motion.div
+                transition={{ duration: 1.5, delay: item.level * 0.2 }}
                 key={item.level}
                 className="bg-[#3f5722] h-[160px] relative rounded-2xl flex flex-col items-center justify-center shadow-[6px_6px_0_#d5c7a2] text-white"
               >
@@ -212,11 +211,11 @@ export default function ActivityLevels() {
                     className="w-full max-w-[140px] object-contain"
                   />
                 </motion.div>
-              </div>
+              </motion.div>
             )
           )}
         </div>
       </div>
-    </div>
+    </>
   );
 }

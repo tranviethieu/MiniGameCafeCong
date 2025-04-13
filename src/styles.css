@@ -22,6 +22,31 @@
 @font-face {
   font-family: "BeauLuloClean";
   src: url("/static/fonts/BeauLuloClean-OneBold.otf") format("truetype");
-  font-weight: 600;
+  font-weight: 800;
   font-style: normal;
+}
+@font-face {
+  font-family: "iCielBCHuskey";
+  src: url("/static/fonts/iCielBCHuskey-Roman.otf") format("truetype");
+  font-weight: 800;
+  font-style: normal;
+}
+@font-face {
+  font-family: "MYRIADPRO";
+  src: url("/static/fonts/MYRIADPRO-REGULAR.OTF") format("truetype");
+  font-weight: 800;
+  font-style: normal;
+}
+.ant-upload .ant-upload-select {
+  width: 100% !important;
+  .ant-upload {
+    width: 100% !important;
+  }
+}
+.ant-form-item {
+  margin-bottom: 0px !important;
+}
+:where(.css-dev-only-do-not-override-9oa5q9).ant-upload-wrapper
+  .ant-upload-select {
+  width: 100%;
 }

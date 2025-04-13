@@ -8,7 +8,7 @@ import { doc, updateDoc } from "firebase/firestore";
 import { db } from "~/lib/firebaseConfig";
 import { uploadToCloudinary } from "~/common/uploadToCloudinary";
 import { useNavigate } from "react-router-dom";
-
+import { motion } from "framer-motion";
 const Game1 = () => {
   const { user, login } = useAuth();
   const navigate = useNavigate();
@@ -87,21 +87,34 @@ const Game1 = () => {
   return (
     <div className="bg-[#e7e5db] min-h-screen text-[#4c5b29] font-[Cousine] text-sm">
       {/* Header */}
-      <div className="text-center text-white  bg-[#4c5b29] fixed top-0 left-0 right-0 z-[1000]">
+      <div className="text-center text-white h-[105px] w-full bg-[#4c5b29] fixed top-0 left-0 right-0 z-[1000]">
         <div className="relative max-w-[400px] mx-auto">
-          <div className="flex justify-center items-center">
-            <img
-              src={icons.logoCong}
-              alt="Cộng Logo"
-              className="mx-auto w-12 p-1 mt-1"
-              style={{ backgroundColor: "#fff" }}
-            />
-          </div>
+          <img
+            src={icons.logoCong}
+            alt="Cộng Logo"
+            className="mx-auto w-12 p-1 mt-1"
+            style={{ backgroundColor: "#fff" }}
+          />
           {/* Tiêu đề hình ảnh */}
-          <img src={man2.title} className="w-[80%] mx-auto" />
+          <motion.img
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0, duration: 0.8, ease: "easeOut" }}
+            src={man2.title}
+            className="w-[80%] mx-auto"
+          />
           {/* Đưa dòng chữ ra giữa đáy header */}
-          <div className="absolute bottom-0 left-0 right-0 text-center">
-            <p className="italic">Của {user?.name} bắt đầu nào!</p>
+          <div className="absolute bottom-0 left-0 right-0 text-center italic">
+            {`Của ${user?.name} bắt đầu nào!`.split("").map((char, index) => (
+              <motion.span
+                key={index}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: index * 0.03 }}
+              >
+                {char}
+              </motion.span>
+            ))}
           </div>
         </div>
       </div>
@@ -116,7 +129,12 @@ const Game1 = () => {
         />
         <div className="flex w-full gap-4">
           {/* Bước 1 - Trái */}
-          <div className="w-1/2 relative z-10">
+          <motion.div
+            initial={{ x: "-100%", opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            transition={{ duration: 1, delay: 1, ease: "easeOut" }}
+            className="w-1/2 relative z-10"
+          >
             <div className="flex items-center gap-2">
               <img src={man2.flagVN} className="w-10 mb-1" />
               <p className="font-bold">Bước 1: Đến Cộng gần bạn nhất</p>
@@ -127,23 +145,43 @@ const Game1 = () => {
               className="w-full max-w-[160px] rounded"
               alt="Cộng Quán"
             />
-          </div>
+          </motion.div>
 
           {/* Bước 2 - Phải */}
-          <div className="w-1/2 relative z-10">
-            <div className="flex justify-end">
+          <motion.div className="w-1/2 relative z-10">
+            <motion.div
+              initial={{ x: "100%", opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              transition={{ duration: 1, delay: 0, ease: "easeOut" }}
+              className="flex justify-end"
+            >
               <img src={man2.xeMay} className="w-[80%] rounded" alt="Xe máy" />
-            </div>
-            <div className="flex items-center gap-2">
+            </motion.div>
+            <motion.div
+              initial={{ x: "100%", opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              transition={{ duration: 1, delay: 2, ease: "easeOut" }}
+              className="flex items-center gap-2"
+            >
               <img src={man2.flagVN} className="w-10 mb-1" />
               <p className="font-bold">
                 Bước 2: Chụp ảnh check-in với một đồ vật
               </p>
-            </div>
-            <p className="text-xs italic">
+            </motion.div>
+            <motion.p
+              initial={{ x: "100%", opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              transition={{ duration: 1, delay: 2, ease: "easeOut" }}
+              className="text-xs italic"
+            >
               (khẩu hiệu, đèn, bức tranh, cốc...)
-            </p>
-            <div className="flex justify-end mt-2">
+            </motion.p>
+            <motion.div
+              initial={{ x: "100%", opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              transition={{ duration: 1, delay: 2, ease: "easeOut" }}
+              className="flex justify-end mt-2"
+            >
               <img
                 src={man2.caphecup}
                 className="w-[50%] max-w-[160px] rounded"
@@ -154,11 +192,16 @@ const Game1 = () => {
                 className="w-[50%] max-w-[160px] rounded"
                 alt="Cộng"
               />
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
         </div>
         {/* Bước 3 */}
-        <div className="relative  z-10 max-w-[250px] mx-auto ">
+        <motion.div
+          initial={{ x: "-100%", opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          transition={{ duration: 1, delay: 3, ease: "easeOut" }}
+          className="relative  z-10 max-w-[250px] mx-auto "
+        >
           <div className="flex items-center gap-2">
             <img src={man2.flagVN} className="w-10" />
             <p className="font-bold">
@@ -169,89 +212,97 @@ const Game1 = () => {
             <img src={man2.facebookIcon} className="w-24" />
             <img src={man2.shareIcon} className="w-24" />
           </div>
-        </div>
+        </motion.div>
         {/* Bước 4 */}
-        <Form form={form} onFinish={handleSubmit} layout="vertical">
-          <div className="relative mt-2 z-10">
-            <div className="flex items-center gap-2">
-              <img src={man2.flagVN} className="w-10 mb-1" />
-              <p className="font-bold">Bước 4: Gắn link bài viết</p>
-            </div>
-            <Form.Item name="linkb1">
-              <Input
-                placeholder="Dán link Facebook bài viết..."
-                className="w-full mt-2 px-3 py-2 rounded border text-black text-sm font-[Cousine]"
-              />
-            </Form.Item>
-            {/* <input
+        <motion.div
+          initial={{ x: "-100%", opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          transition={{ duration: 1, delay: 4, ease: "easeOut" }}
+        >
+          <Form form={form} onFinish={handleSubmit} layout="vertical">
+            <div className="relative mt-2 z-10">
+              <div className="flex items-center gap-2">
+                <img src={man2.flagVN} className="w-10 mb-1" />
+                <p className="font-bold">Bước 4: Gắn link bài viết</p>
+              </div>
+              <Form.Item name="linkb1">
+                <Input
+                  placeholder="Dán link Facebook bài viết..."
+                  className="w-full mt-2 px-3 py-2 rounded border text-black text-sm font-[Cousine]"
+                />
+              </Form.Item>
+              {/* <input
               type="text"
               placeholder="Dán link facebook bài viết..."
               value={link}
               onChange={(e) => setLink(e.target.value)}
               className="w-full mt-2 px-3 py-2 rounded border text-black text-sm"
             /> */}
-          </div>
+            </div>
 
-          {/* Tải ảnh */}
-          <div className="mt-2">
-            <label className="block font-bold text-red-500 mb-2">
-              *Tải ảnh dưới đây
-            </label>
+            {/* Tải ảnh */}
+            <div className="mt-2">
+              <label className="block font-bold text-red-500 mb-2">
+                *Tải ảnh dưới đây
+              </label>
 
-            <Form.Item valuePropName="fileList" className="w-full">
-              <Upload
-                listType="picture"
-                fileList={fileList}
-                onChange={({ fileList }) => setFileList(fileList)}
-                beforeUpload={() => false}
-                maxCount={1}
-                showUploadList={false}
-                className="w-full"
-              >
-                {fileList.length >= 1 ? (
-                  <div className="relative w-full text-center">
-                    <img
-                      src={URL.createObjectURL(
-                        fileList[0].originFileObj as File
-                      )}
-                      alt="Preview"
-                      className="w-[180px] h-[140px] object-cover rounded shadow mb-2 mx-auto"
-                    />
-                    <Button
-                      htmlType="button"
-                      onClick={(e) => {
-                        e.preventDefault();
-                        setFileList([]);
-                      }}
-                      className="absolute top-2 right-2 bg-red-500 text-white px-2 py-1 text-xs rounded"
-                    >
-                      Xóa
-                    </Button>
-                    <div className="text-[#4c5b29] text-sm">
-                      {fileList[0].name}
+              <Form.Item valuePropName="fileList" className="w-full">
+                <Upload
+                  listType="picture"
+                  fileList={fileList}
+                  onChange={({ fileList }) => setFileList(fileList)}
+                  beforeUpload={() => false}
+                  maxCount={1}
+                  showUploadList={false}
+                  className="w-full"
+                >
+                  {fileList.length >= 1 ? (
+                    <div className="relative w-full text-center">
+                      <img
+                        src={URL.createObjectURL(
+                          fileList[0].originFileObj as File
+                        )}
+                        alt="Preview"
+                        className="w-full object-cover rounded shadow mb-2 mx-auto"
+                      />
+                      <Button
+                        htmlType="button"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          setFileList([]);
+                        }}
+                        className="absolute top-2 right-2 bg-red-500 text-white px-2 py-1 text-xs rounded"
+                      >
+                        Xóa
+                      </Button>
+                      <div className="text-[#4c5b29] text-sm">
+                        {fileList[0].name}
+                      </div>
                     </div>
-                  </div>
-                ) : (
-                  <div className="w-full border border-dashed border-[#4c5b29] bg-[#f5f5f0] rounded p-4 text-center cursor-pointer text-[#4c5b29]">
-                    <span className="text-md font-[Cousine]">+ Tải ảnh</span>
-                  </div>
-                )}
-              </Upload>
-            </Form.Item>
-          </div>
+                  ) : (
+                    <div
+                      className="w-full border border-dashed border-[#4c5b29] bg-[#f5f5f0] rounded p-4 text-center cursor-pointer text-[#4c5b29]"
+                      style={{ width: "100% !important" }}
+                    >
+                      <span className="text-md font-[Cousine]">+ Tải ảnh</span>
+                    </div>
+                  )}
+                </Upload>
+              </Form.Item>
+            </div>
 
-          {/* Nút hoàn thành */}
-          <div className="mt-4">
-            <Button
-              type="primary"
-              htmlType="submit"
-              disabled={loading}
-              className="w-full font-[Cousine] bg-[#4c5b29] text-white font-bold py-4 rounded-full shadow"
-            >
-              {!loading ? "Hoàn thành" : "🚀 Gửi Link & Hoàn Thành"}
-            </Button>
-          </div>
-        </Form>
+            {/* Nút hoàn thành */}
+            <div className="mt-4 flex">
+              <button
+                type="submit"
+                disabled={loading}
+                className="w-[300px] font-[Cousine] bg-[#4c5b29] text-white font-bold py-2 rounded-full shadow mx-auto"
+              >
+                {!loading ? "Hoàn thành" : "🚀 Gửi Link & Hoàn Thành"}
+              </button>
+            </div>
+          </Form>
+        </motion.div>
       </div>
     </div>
   );

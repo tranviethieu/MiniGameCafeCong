@@ -46,7 +46,7 @@ const LoginCong = () => {
         });
         setLoading(false);
         navigate("/");
-        message.success(`Chào mừng lại, ${userData.name}!`);
+        message.success(`Chào mừng bạn trở lại, ${userData.name}!`);
       } else {
         if (!name) {
           message.error(
@@ -70,7 +70,7 @@ const LoginCong = () => {
         login(userData);
         setLoading(false);
         navigate("/");
-        message.success("Tài khoản mới đã được tạo!");
+        message.success(`Chào mừng bạn ${name} đến với Cộng!`);
       }
     } catch (error: any) {
       setLoading(false);
@@ -165,7 +165,7 @@ const LoginCong = () => {
             <button
               type="submit"
               disabled={loading}
-              className="bg-[#4d5b28] w-[210px] text-white mx-auto font-[BeauLuloClean] py-3 mt-1 rounded-full text-[10px] hover:opacity-90 transition disabled:opacity-60"
+              className="bg-[#4d5b28] w-[210px] text-[#e7e5db] mx-auto font-[BeauLuloClean] py-3 mt-1 rounded-full text-[10px] hover:opacity-90 transition disabled:opacity-60 whitespace-pre-line leading-snug text-center"
             >
               {loading ? "Đang xử lý..." : "Đăng nhập / Đăng ký"}
             </button>

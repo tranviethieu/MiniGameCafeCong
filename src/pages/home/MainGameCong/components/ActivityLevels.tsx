@@ -54,7 +54,7 @@ export default function ActivityLevels() {
   return (
     <>
       {/* Header */}
-      <div className="whitespace-pre-line text-center font-[BeauLuloClean] text-red-500 text-[12px] leading-snug  mb-3">
+      <div className="whitespace-pre-line text-center font-[BeauLuloClean] text-[#b62924] text-[12px] leading-snug  mb-3">
         {text.split("").map((char, index) => (
           <motion.span
             key={index}

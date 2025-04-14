@@ -2,7 +2,7 @@ import { useState } from "react";
 import man2 from "~/constants/images/man2";
 import icons from "~/constants/images/icons";
 import { useAuth } from "~/context/AuthProvider";
-import { Button, Form, Input, message, Upload, UploadFile } from "antd";
+import { Button, Form, Input, message, Spin, Upload, UploadFile } from "antd";
 import dayjs from "dayjs";
 import { doc, updateDoc } from "firebase/firestore";
 import { db } from "~/lib/firebaseConfig";
@@ -16,6 +16,11 @@ const Game1 = () => {
   const [form] = Form.useForm();
   const [loading, setLoading] = useState(false);
   const handleSubmit = async (values: { linkb1: string }) => {
+    if (user?.task[0].status === 2) {
+      message.warning("Bạn đã hoàn thành rồi!");
+      navigate("/");
+      return;
+    }
     const { linkb1 } = values;
     let imageUrl: any = "";
     // 🔍 Kiểm tra link phải chứa "facebook.com"
@@ -86,6 +91,7 @@ const Game1 = () => {
 
   return (
     <div className="bg-[#e7e5db] min-h-screen text-[#4c5b29] font-[Cousine] text-sm">
+      <Spin size="small" fullscreen spinning={loading} />
       {/* Header */}
       <div className="text-center text-white h-[105px] w-full bg-[#4c5b29] fixed top-0 left-0 right-0 z-[1000]">
         <div className="relative max-w-[400px] mx-auto">

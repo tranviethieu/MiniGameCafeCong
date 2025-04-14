@@ -4,9 +4,34 @@ import man3 from "~/constants/images/man3";
 import { useAuth } from "~/context/AuthProvider";
 import { motion } from "framer-motion";
 import { IoMdArrowDroprightCircle } from "react-icons/io";
+import { useEffect } from "react";
+import confetti from "canvas-confetti";
 const CongratulationPage = () => {
   const navigate = useNavigate();
   const { user } = useAuth();
+  // 🎉 Trigger confetti on load
+  useEffect(() => {
+    const duration = 20 * 1000;
+    const animationEnd = Date.now() + duration;
+    const defaults = { origin: { y: 0.6 } };
+
+    const interval: NodeJS.Timeout = setInterval(() => {
+      const timeLeft = animationEnd - Date.now();
+
+      if (timeLeft <= 0) {
+        clearInterval(interval);
+        return;
+      }
+
+      confetti({
+        ...defaults,
+        particleCount: 50,
+        spread: 70,
+        startVelocity: 30,
+        ticks: 60,
+      });
+    }, 250);
+  }, []);
   return (
     <div className="relative h-screen w-screen overflow-hidden bg-[#e5e5db] font-[Cousine]">
       <div className="flex flex-col items-center text-center h-full w-full max-w-screen-sm mx-auto">

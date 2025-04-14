@@ -9,7 +9,7 @@ import { db } from "~/lib/firebaseConfig";
 import { uploadToCloudinary } from "~/common/uploadToCloudinary";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-const Game1 = () => {
+const GameClone = () => {
   const { user, login } = useAuth();
   const navigate = useNavigate();
   const [fileList, setFileList] = useState<UploadFile[]>([]);
@@ -90,12 +90,7 @@ const Game1 = () => {
   };
 
   return (
-    <div
-      className="bg-[#e7e5db] min-h-screen text-[#4c5b29] font-[Cousine] text-sm bg-cover bg-center bg-no-repeat"
-      style={{
-        backgroundImage: `url(${icons.anhNen})`,
-      }}
-    >
+    <div className="bg-[#e7e5db] min-h-screen text-[#4c5b29] font-[Cousine] text-sm">
       <Spin size="small" fullscreen spinning={loading} />
       {/* Header */}
       <div className="text-center text-white h-[105px] w-full bg-[#4c5b29] fixed top-0 left-0 right-0 z-[1000]">
@@ -110,7 +105,7 @@ const Game1 = () => {
           <motion.img
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.1, duration: 0.8, ease: "easeOut" }}
+            transition={{ delay: 0, duration: 0.8, ease: "easeOut" }}
             src={man2.title}
             className="w-[80%] mx-auto"
           />
@@ -133,24 +128,109 @@ const Game1 = () => {
       {/* Nội dung */}
       <div className="relative bg-[#e7e5db] max-w-[400px] mx-auto p-2 pt-[110px]">
         {/* Nét đứt di chuyển */}
-        <motion.img
+        <img
+          src={man2.dashedLine}
+          alt="đường đi"
+          className="absolute left-0 top-[160px] w-full max-w-[400px] pointer-events-none"
+        />
+        <div className="flex w-full gap-4">
+          {/* Bước 1 - Trái */}
+          <motion.div
+            initial={{ x: "-100%", opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            transition={{ duration: 1, delay: 1, ease: "easeOut" }}
+            className="w-1/2 relative z-10"
+          >
+            <div className="flex items-center gap-2">
+              <img src={man2.flagVN} className="w-10 mb-1" />
+              <p className="font-bold">Bước 1: Đến Cộng gần bạn nhất</p>
+            </div>
+
+            <img
+              src={man2.congQuan}
+              className="w-full max-w-[180px] me-2"
+              alt="congQuan"
+            />
+          </motion.div>
+
+          {/* Bước 2 - Phải */}
+          <motion.div className="w-1/2 relative z-10">
+            <motion.div
+              initial={{ x: "100%", opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              transition={{ duration: 1, delay: 0, ease: "easeOut" }}
+              className="flex justify-end"
+            >
+              <img src={man2.xeMay} className="w-[80%] rounded" alt="Xe máy" />
+            </motion.div>
+            <motion.div
+              initial={{ x: "100%", opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              transition={{ duration: 1, delay: 2, ease: "easeOut" }}
+              className="flex items-center gap-2"
+            >
+              <img src={man2.flagVN} className="w-10 mb-1" />
+              <p className="font-bold">
+                Bước 2: Chụp ảnh check-in với một đồ vật
+              </p>
+            </motion.div>
+            <motion.p
+              initial={{ x: "100%", opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              transition={{ duration: 1, delay: 2, ease: "easeOut" }}
+              className="text-xs italic"
+            >
+              (khẩu hiệu, đèn, bức tranh, cốc...)
+            </motion.p>
+            <motion.div
+              initial={{ x: "100%", opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              transition={{ duration: 1, delay: 2, ease: "easeOut" }}
+              className="flex justify-end mt-0"
+            >
+              <img
+                src={man2.caphecup}
+                className="w-[50%] h-[50%]"
+                alt="caphecup"
+              />
+              <img
+                src={man2.coffeeThings}
+                className="w-[50%] h-[50%]"
+                alt="coffeeThings"
+              />
+            </motion.div>
+          </motion.div>
+        </div>
+        {/* Bước 3 */}
+        <motion.div
           initial={{ x: "-100%", opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
-          transition={{ duration: 1, delay: 0.5, ease: "easeOut" }}
-          src={man2.bgMan2}
-          alt="đường đi"
-          className="w-full max-w-[400px] pointer-events-none"
-        />
-
+          transition={{ duration: 1, delay: 3, ease: "easeOut" }}
+          className="relative z-10 max-w-[250px] mx-auto "
+        >
+          <div className="flex items-center gap-2">
+            <img src={man2.flagVN} className="w-10" />
+            <p className="font-bold">
+              Bước 3: Đăng & Share trên facebook cá nhân
+            </p>
+          </div>
+          <div className="flex gap-3">
+            <img src={man2.facebookIcon} className="w-24" />
+            <img src={man2.shareIcon} className="w-24" />
+          </div>
+        </motion.div>
         {/* Bước 4 */}
         <motion.div
           initial={{ x: "-100%", opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
-          transition={{ duration: 1, delay: 0.5, ease: "easeOut" }}
-          className="px-4"
+          transition={{ duration: 1, delay: 4, ease: "easeOut" }}
         >
           <Form form={form} onFinish={handleSubmit} layout="vertical">
-            <div className="relative z-10">
+            <div className="relative mt-2 z-10">
+              <div className="flex items-center gap-2">
+                <img src={man2.flagVN} className="w-10 mb-1" />
+                <p className="font-bold">Bước 4: Gắn link bài viết</p>
+              </div>
               <Form.Item name="linkb1">
                 <Input
                   placeholder="Dán link Facebook bài viết..."
@@ -227,4 +307,4 @@ const Game1 = () => {
   );
 };
 
-export default Game1;
+export default GameClone;

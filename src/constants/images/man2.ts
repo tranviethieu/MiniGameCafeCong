@@ -7,6 +7,7 @@ import facebookIcon from "/static/man2/landingpage-16.png";
 import shareIcon from "/static/man2/landingpage-15.png";
 import caphecup from "/static/man2/landingpage-17.png";
 import title from "/static/man2/landingpage-18.png";
+import bgMan2 from "/static/man2/bgMan2.png";
 
 export default {
   dashedLine,
@@ -18,4 +19,5 @@ export default {
   facebookIcon,
   caphecup,
   title,
+  bgMan2,
 };

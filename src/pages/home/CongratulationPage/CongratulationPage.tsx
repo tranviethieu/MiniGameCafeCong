@@ -11,7 +11,7 @@ const CongratulationPage = () => {
   const { user } = useAuth();
   // 🎉 Trigger confetti on load
   useEffect(() => {
-    const duration = 20 * 1000;
+    const duration = 5 * 1000;
     const animationEnd = Date.now() + duration;
     const defaults = { origin: { y: 0.6 } };
 
@@ -116,7 +116,7 @@ const CongratulationPage = () => {
           <motion.button
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 1, duration: 0.8, ease: "easeOut" }}
+            transition={{ delay: 5, duration: 0.8, ease: "easeOut" }}
             onClick={() => {
               //setLoading(true);
               navigate("/");

@@ -39,9 +39,11 @@ const StartGameCong = () => {
           animate={{ opacity: 1 }}
           transition={{ duration: 1.5, delay: 2 }}
           className="mb-2 flex justify-center"
+          onClick={() => setShowLogin(true)}
         >
           <button
-            onClick={() => setShowLogin(true)}
+            type="button"
+            //onClick={() => setShowLogin(true)}
             className="bg-[#4c5b29] font-[Cousine] px-6 py-[6px] text-[#e7e5db] rounded-full flex items-center justify-center gap-2 transition"
           >
             <span>THAM GIA NGAY</span>

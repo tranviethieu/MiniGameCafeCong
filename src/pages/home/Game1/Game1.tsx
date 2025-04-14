@@ -32,6 +32,7 @@ const Game1 = () => {
       message.warning("Tài khoản không hợp lệ!");
       return;
     }
+    setLoading(true);
     if (fileList.length !== 0) {
       imageUrl = await uploadToCloudinary(fileList[0].originFileObj as File);
       if (!imageUrl) {
@@ -41,7 +42,6 @@ const Game1 = () => {
       }
     }
 
-    setLoading(true);
     try {
       const userRef = doc(db, "users", user.phone as string);
       const updateUser = {
@@ -295,7 +295,7 @@ const Game1 = () => {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-[300px] font-[Cousine] bg-[#4c5b29] text-white font-bold py-2 rounded-full shadow mx-auto"
+                className="w-[300px] mb-2 font-[Cousine] bg-[#4c5b29] text-white font-bold py-3 rounded-full shadow mx-auto"
               >
                 {!loading ? "Hoàn thành" : "🚀 Gửi Link & Hoàn Thành"}
               </button>

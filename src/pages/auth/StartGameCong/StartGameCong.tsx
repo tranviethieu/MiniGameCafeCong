@@ -3,6 +3,7 @@ import { ArrowCircleRight2 } from "iconsax-react";
 import { useEffect, useState } from "react";
 import LoginCong from "../LoginCong";
 import icons from "~/constants/images/icons";
+import { Button } from "antd";
 
 const StartGameCong = () => {
   const [showLogin, setShowLogin] = useState(false);
@@ -48,14 +49,14 @@ const StartGameCong = () => {
           transition={{ duration: 1.5, delay: 2 }}
           className="mb-2 flex justify-center"
         >
-          <button
-            type="button"
+          <Button
+            htmlType="button"
             onClick={() => setShowLogin(true)}
             className="bg-[#4c5b29] font-[Cousine] px-6 py-[6px] text-[#e7e5db] rounded-full flex items-center justify-center gap-2 transition"
           >
             <span>THAM GIA NGAY</span>
             <ArrowCircleRight2 className="text-sm" />
-          </button>
+          </Button>
         </motion.div>
 
         {/* Ảnh nằm cuối cùng, không cần absolute */}

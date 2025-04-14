@@ -61,6 +61,7 @@ const Game1 = () => {
         updatedAt: dayjs().format("DD/MM/YYYY HH:mm:ss"),
       };
       await updateDoc(userRef, updateUser);
+      ///update
 
       // ✅ Cập nhật state của user
       login({

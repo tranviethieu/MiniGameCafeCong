@@ -1,12 +1,13 @@
 import { createBrowserRouter } from "react-router-dom";
 import StartGameCong from "~/pages/auth/StartGameCong";
 import MainGameCong from "~/pages/home/MainGameCong";
-import ExportToExcel from "~/components/ExportFirestore";
 import RequiredLogout from "~/components/protected/RequiredLogout";
 import RequiredAuth from "~/components/protected/RequiredAuth";
 import Game1 from "~/pages/home/Game1";
 import CongratulationPage from "~/pages/home/CongratulationPage/CongratulationPage";
+import { lazy, Suspense } from "react";
 
+const MainAdmin = lazy(() => import("~/pages/admin/MainAdmin"));
 const router = createBrowserRouter(
   [
     {
@@ -35,7 +36,11 @@ const router = createBrowserRouter(
         },
         {
           path: "/admin",
-          element: <ExportToExcel />,
+          element: (
+            <Suspense fallback={<div>Đang tải...</div>}>
+              <MainAdmin />
+            </Suspense>
+          ),
         },
       ],
     },

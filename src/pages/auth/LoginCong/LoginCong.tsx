@@ -45,7 +45,11 @@ const LoginCong = () => {
           id: userData?.phone as string,
         });
         setLoading(false);
-        navigate("/");
+        if (userData?.role === "admin") {
+          navigate("/admin");
+        } else {
+          navigate("/");
+        }
         message.success(`Chào mừng bạn trở lại, ${userData.name}!`);
       } else {
         if (!name) {

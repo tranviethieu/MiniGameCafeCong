@@ -8,7 +8,12 @@ const StartGameCong = () => {
   const [showLogin, setShowLogin] = useState(false);
 
   return !showLogin ? (
-    <div className="w-full min-h-screen font-[Cousine] text-[17px] bg-[#e4e3d9] flex flex-col">
+    <div
+      style={{
+        backgroundImage: `url(${icons.anhNen})`,
+      }}
+      className="w-full bg-cover bg-center bg-no-repeat min-h-screen font-[Cousine] text-[17px] bg-[#e4e3d9] flex flex-col"
+    >
       <div className="flex flex-col flex-1">
         <div className="flex justify-center mt-2">
           <img

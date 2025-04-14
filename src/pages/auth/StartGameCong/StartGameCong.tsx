@@ -49,7 +49,7 @@ const StartGameCong = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1.5, delay: 2 }}
-          className="mt-auto flex justify-center"
+          className="flex justify-center"
         >
           <video
             src={icons.videocong} // Đường dẫn video bạn muốn thay

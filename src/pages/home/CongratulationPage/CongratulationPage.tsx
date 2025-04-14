@@ -43,7 +43,7 @@ const CongratulationPage = () => {
           {/* Tiêu đề */}
           <motion.img
             src={man3.hoanho}
-            className="w-[60%] mt-2 mx-auto"
+            className="w-[75%] mt-4 mx-auto"
             alt="#hoanho"
             animate={{ opacity: [1, 0.8, 1] }}
             transition={{
@@ -52,18 +52,6 @@ const CongratulationPage = () => {
               ease: "easeInOut",
             }}
           />
-          <motion.img
-            animate={{ opacity: [1, 0.8, 1] }}
-            transition={{
-              duration: 2,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-            src={man3.bacham}
-            className="w-[100px] mt-2 mx-auto"
-            alt="bacham"
-          />
-
           {/* Ảnh */}
           <motion.img
             src={man3.ghe}
@@ -71,13 +59,13 @@ const CongratulationPage = () => {
             initial={{ x: "-100%" }}
             animate={{ x: 0 }}
             transition={{ duration: 1.5, ease: "easeOut" }}
-            className="w-[200px] mx-auto my-4"
+            className="w-[300px] mx-auto my-0"
           />
 
           {/* Thông báo hoàn thành */}
           <div className="w-full flex">
             <motion.div
-              className="text-[#898e66] mx-auto text-[32px] mb-2 font-[iCielBCHuskey] flex"
+              className="text-[#898e66] mx-auto text-[24px] mb-1 font-[Cousine] flex"
               initial="hidden"
               animate="visible"
               variants={{
@@ -109,7 +97,7 @@ const CongratulationPage = () => {
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 1, duration: 0.8, ease: "easeOut" }}
-            className="w-[260px] mx-auto"
+            className="w-[360px] mx-auto"
           />
 
           {/* Nút tiếp tục */}

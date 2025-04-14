@@ -4,7 +4,7 @@ import man1 from "~/constants/images/man1";
 import { useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "~/context/AuthProvider";
-const text = "CHƠI HẾT MÚC - THI ĐUA HẾT SỨC:";
+const text = "CHƠI HẾT MỨC - THI ĐUA HẾT SỨC:";
 const activityLevels = [
   { level: 1, joinable: false, complete: 1, date: "11/04/2025" },
   { level: 2, joinable: false, complete: 1, date: "20/04/2025" },

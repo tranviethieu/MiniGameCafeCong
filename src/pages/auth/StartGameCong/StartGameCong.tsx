@@ -1,19 +1,19 @@
 import { motion } from "framer-motion";
 import { ArrowCircleRight2 } from "iconsax-react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import LoginCong from "../LoginCong";
 import icons from "~/constants/images/icons";
 
 const StartGameCong = () => {
   const [showLogin, setShowLogin] = useState(false);
-  useEffect(() => {
-    const playVideo = () => {
-      const video = document.getElementById("videocong") as HTMLVideoElement;
-      if (video) video.play().catch(() => {});
-    };
-    window.addEventListener("touchstart", playVideo, { once: true });
-    return () => window.removeEventListener("touchstart", playVideo);
-  }, []);
+  // useEffect(() => {
+  //   const playVideo = () => {
+  //     const video = document.getElementById("videocong") as HTMLVideoElement;
+  //     if (video) video.play().catch(() => {});
+  //   };
+  //   window.addEventListener("touchstart", playVideo, { once: true });
+  //   return () => window.removeEventListener("touchstart", playVideo);
+  // }, []);
 
   return !showLogin ? (
     <div
@@ -71,7 +71,7 @@ const StartGameCong = () => {
             src={icons.videocong}
             className="w-full max-w-[600px] object-contain pointer-events-none"
             autoPlay
-            loop
+            //loop
             muted
             playsInline
             preload="auto"

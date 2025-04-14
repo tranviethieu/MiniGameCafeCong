@@ -14,7 +14,7 @@ const StartGameCong = () => {
           <img
             src={icons.logoCong} // ảnh nền bạn muốn ở dưới
             alt="ảnh nền"
-            className="w-full max-w-[50px] object-contain"
+            className="w-full max-w-[60px] object-contain"
           />
         </div>
         <motion.div
@@ -26,7 +26,7 @@ const StartGameCong = () => {
           <img
             src={icons.vietnamtrongcong} // ảnh nền bạn muốn ở dưới
             alt="ảnh nền"
-            className="w-full max-w-[200px] object-contain"
+            className="w-full max-w-[500px] object-contain"
           />
         </motion.div>
         <motion.div
@@ -49,7 +49,7 @@ const StartGameCong = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1.5, delay: 2 }}
-          className="flex justify-center"
+          className="flex justify-center my-auto"
         >
           <video
             src={icons.videocong} // Đường dẫn video bạn muốn thay

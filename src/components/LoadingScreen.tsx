@@ -4,7 +4,6 @@ import icons from "~/constants/images/icons";
 
 const LoadingScreen = () => {
   const [progress, setProgress] = useState(0);
-
   useEffect(() => {
     const timer = setInterval(() => {
       setProgress((prev) => {
@@ -18,7 +17,7 @@ const LoadingScreen = () => {
 
     return () => clearInterval(timer);
   }, []);
-
+  ///update
   return (
     <div className="w-full h-screen bg-[#e8e4db] flex flex-col justify-center items-center text-[#40501e] font-[BeauLuloClean] text-center relative overflow-hidden">
       {/* Logo */}

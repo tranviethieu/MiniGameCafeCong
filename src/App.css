@@ -1,1 +1,14 @@
 /* @import "tailwindcss"; */
+.ant-upload .ant-upload-select {
+  width: 100% !important;
+  .ant-upload {
+    width: 100% !important;
+  }
+}
+.ant-form-item {
+  margin-bottom: 0px !important;
+}
+:where(.css-dev-only-do-not-override-9oa5q9).ant-upload-wrapper
+  .ant-upload-select {
+  width: 100%;
+}

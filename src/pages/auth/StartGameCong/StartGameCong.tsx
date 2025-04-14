@@ -37,6 +37,7 @@ const StartGameCong = () => {
           className="flex justify-center"
         >
           <img
+            onClick={() => setShowLogin(true)}
             src={icons.vietnamtrongcong} // ảnh nền bạn muốn ở dưới
             alt="ảnh nền"
             className="w-full max-w-[500px] object-contain"

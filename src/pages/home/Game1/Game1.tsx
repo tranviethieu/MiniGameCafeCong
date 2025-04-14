@@ -183,7 +183,7 @@ const Game1 = () => {
                           fileList[0].originFileObj as File
                         )}
                         alt="Preview"
-                        className="w-full object-cover rounded shadow mb-2 mx-auto"
+                        className="w-full h-[100px] object-cover rounded shadow mb-2 mx-auto"
                       />
                       <Button
                         htmlType="button"
@@ -195,9 +195,6 @@ const Game1 = () => {
                       >
                         Xóa
                       </Button>
-                      <div className="text-[#4c5b29] text-sm">
-                        {fileList[0].name}
-                      </div>
                     </div>
                   ) : (
                     <div

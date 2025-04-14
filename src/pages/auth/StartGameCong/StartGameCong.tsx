@@ -71,7 +71,7 @@ const StartGameCong = () => {
             src={icons.videocong}
             className="w-full max-w-[600px] object-contain pointer-events-none"
             autoPlay
-            //loop
+            loop
             muted
             playsInline
             preload="auto"

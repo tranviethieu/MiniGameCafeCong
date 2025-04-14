@@ -105,7 +105,7 @@ const Game1 = () => {
           <img
             src={icons.logoCong}
             alt="Cộng Logo"
-            className="mx-auto w-12 p-1 mt-1"
+            className="mx-auto w-12 p-1 mt-1 pointer-events-none"
             style={{ backgroundColor: "#fff" }}
           />
           {/* Tiêu đề hình ảnh */}
@@ -114,7 +114,7 @@ const Game1 = () => {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.1, duration: 0.8, ease: "easeOut" }}
             src={man2.title}
-            className="w-[80%] mx-auto"
+            className="w-[80%] mx-auto pointer-events-none"
           />
           {/* Đưa dòng chữ ra giữa đáy header */}
           <div className="absolute bottom-0 left-0 right-0 text-center italic">

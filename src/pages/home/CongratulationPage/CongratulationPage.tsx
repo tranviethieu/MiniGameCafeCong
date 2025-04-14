@@ -1,37 +1,90 @@
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "~/context/AuthProvider";
 import icons from "~/constants/images/icons";
 import man3 from "~/constants/images/man3";
-import { useAuth } from "~/context/AuthProvider";
 import { motion } from "framer-motion";
 import { IoMdArrowDroprightCircle } from "react-icons/io";
-// import { useEffect } from "react";
-// import confetti from "canvas-confetti";
+import { useEffect, useState } from "react";
+import confetti from "canvas-confetti";
+
 const CongratulationPage = () => {
   const navigate = useNavigate();
   const { user } = useAuth();
-  // 🎉 Trigger confetti on load
-  // useEffect(() => {
-  //   const duration = 5 * 1000;
-  //   const animationEnd = Date.now() + duration;
-  //   const defaults = { origin: { y: 0.6 } };
+  const [selectedStar, setSelectedStar] = useState(0);
 
-  //   const interval: NodeJS.Timeout = setInterval(() => {
-  //     const timeLeft = animationEnd - Date.now();
+  // ⭐ Tự động tích 1 sao sau 2s
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setSelectedStar(1);
+    }, 2000);
+    return () => clearTimeout(timeout);
+  }, []);
 
-  //     if (timeLeft <= 0) {
-  //       clearInterval(interval);
-  //       return;
-  //     }
+  // 🎉 Chạy confetti khi tích sao
+  useEffect(() => {
+    if (selectedStar === 1) {
+      const duration = 3000;
+      const animationEnd = Date.now() + duration;
+      const defaults = {
+        origin: { y: 0.6 },
+        colors: ["#FFD700", "#d62828"],
+      };
 
-  //     confetti({
-  //       ...defaults,
-  //       particleCount: 50,
-  //       spread: 70,
-  //       startVelocity: 30,
-  //       ticks: 60,
-  //     });
-  //   }, 250);
-  // }, []);
+      const interval = setInterval(() => {
+        if (Date.now() > animationEnd) {
+          clearInterval(interval);
+          return;
+        }
+
+        confetti({
+          ...defaults,
+          particleCount: 20,
+          spread: 60,
+          startVelocity: 25,
+          ticks: 40,
+        });
+      }, 400);
+
+      return () => clearInterval(interval);
+    }
+  }, [selectedStar]);
+
+  const renderStars = () =>
+    [...Array(5)].map((_, index) => (
+      <motion.div
+        key={index}
+        initial={{ scale: 0, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        transition={{
+          delay: 1.2 + index * 0.15,
+          type: "spring",
+          stiffness: 300,
+          damping: 20,
+        }}
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill={index < selectedStar ? "#d62828" : "none"}
+          stroke="#d62828"
+          strokeWidth="2"
+          className="w-6 h-6"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.518 4.674a1
+            1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976
+            2.888a1 1 0 00-.364 1.118l1.518 4.674c.3.921-.755
+            1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976
+            2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1
+            0 00-.364-1.118L2.078 10.1c-.783-.57-.38-1.81.588-1.81h4.915a1
+            1 0 00.95-.69l1.518-4.674z"
+          />
+        </svg>
+      </motion.div>
+    ));
+
   return (
     <div className="relative h-screen w-screen overflow-hidden bg-[#e5e5db] font-[Cousine]">
       <div className="flex flex-col items-center text-center h-full w-full max-w-screen-sm mx-auto">
@@ -39,8 +92,9 @@ const CongratulationPage = () => {
         <div className="text-[#3c4d2f] font-bold text-xl mt-1">
           <img src={icons.logoCong} style={{ width: 50 }} alt="Logo Cộng" />
         </div>
+
         <div className="my-auto">
-          {/* Tiêu đề */}
+          {/* Hoanho ảnh */}
           <motion.img
             src={man3.hoanho}
             className="w-[75%] mt-4 mx-auto"
@@ -52,7 +106,11 @@ const CongratulationPage = () => {
               ease: "easeInOut",
             }}
           />
-          {/* Ảnh */}
+
+          {/* ⭐ Ngôi sao đánh giá */}
+          <div className="flex justify-center gap-1 mt-2">{renderStars()}</div>
+
+          {/* Ảnh ghế */}
           <motion.img
             src={man3.ghe}
             alt="Ghế"
@@ -62,7 +120,7 @@ const CongratulationPage = () => {
             className="w-[300px] mx-auto my-0"
           />
 
-          {/* Thông báo hoàn thành */}
+          {/* Text hiệu ứng */}
           <div className="w-full flex">
             <motion.div
               className="text-[#898e66] mx-auto text-[24px] mb-1 font-[Cousine] flex"
@@ -71,7 +129,7 @@ const CongratulationPage = () => {
               variants={{
                 visible: {
                   transition: {
-                    staggerChildren: 0.05, // thời gian giữa mỗi ký tự
+                    staggerChildren: 0.05,
                   },
                 },
               }}
@@ -91,6 +149,7 @@ const CongratulationPage = () => {
             </motion.div>
           </div>
 
+          {/* Ảnh hoàn thành */}
           <motion.img
             src={man3.hoanthanh}
             alt="hoanthanh"
@@ -104,11 +163,8 @@ const CongratulationPage = () => {
           <motion.button
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 2, duration: 0.8, ease: "easeOut" }}
-            onClick={() => {
-              //setLoading(true);
-              navigate("/");
-            }}
+            transition={{ delay: 3, duration: 0.8, ease: "easeOut" }}
+            onClick={() => navigate("/")}
             className="bg-[#4d5b28] mx-auto mt-8 mb-2 flex items-center gap-2 text-[#e7e5db] px-8 py-2 rounded-full text-md bold shadow-md hover:bg-green-800 transition"
           >
             TIẾP TỤC

@@ -1,11 +1,19 @@
 import { motion } from "framer-motion";
 import { ArrowCircleRight2 } from "iconsax-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import LoginCong from "../LoginCong";
 import icons from "~/constants/images/icons";
 
 const StartGameCong = () => {
   const [showLogin, setShowLogin] = useState(false);
+  useEffect(() => {
+    const playVideo = () => {
+      const video = document.getElementById("videocong") as HTMLVideoElement;
+      if (video) video.play().catch(() => {});
+    };
+    window.addEventListener("touchstart", playVideo, { once: true });
+    return () => window.removeEventListener("touchstart", playVideo);
+  }, []);
 
   return !showLogin ? (
     <div
@@ -59,12 +67,15 @@ const StartGameCong = () => {
           className="flex justify-center my-auto"
         >
           <video
-            src={icons.videocong} // Đường dẫn video bạn muốn thay
+            id="videocong"
+            src={icons.videocong}
             className="w-full max-w-[600px] object-contain pointer-events-none"
             autoPlay
             //loop
             muted
             playsInline
+            preload="auto"
+            poster={icons.anhCho} // <- ảnh hiển thị trước khi load xong hoặc fallback nếu lỗi
           />
         </motion.div>
       </div>

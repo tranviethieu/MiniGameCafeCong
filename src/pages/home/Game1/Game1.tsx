@@ -2,13 +2,14 @@ import { useState } from "react";
 import man2 from "~/constants/images/man2";
 import icons from "~/constants/images/icons";
 import { useAuth } from "~/context/AuthProvider";
-import { Button, Form, Input, message, Spin, Upload, UploadFile } from "antd";
+import { Form, Input, message, Spin, Upload, UploadFile } from "antd";
 import dayjs from "dayjs";
 import { doc, updateDoc } from "firebase/firestore";
 import { db } from "~/lib/firebaseConfig";
 import { uploadToCloudinary } from "~/common/uploadToCloudinary";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
+import { CloseSquareOutlined } from "@ant-design/icons";
 const Game1 = () => {
   const { user, login } = useAuth();
   const navigate = useNavigate();
@@ -177,24 +178,22 @@ const Game1 = () => {
                   className="w-full"
                 >
                   {fileList.length >= 1 ? (
-                    <div className="relative w-full text-center">
+                    <div className="relative w-[120px] text-center">
                       <img
                         src={URL.createObjectURL(
                           fileList[0].originFileObj as File
                         )}
                         alt="Preview"
-                        className="w-full h-[100px] object-cover rounded shadow mb-2 mx-auto"
+                        className="w-full h-[120px] object-cover rounded shadow mb-2 mx-auto"
                       />
-                      <Button
-                        htmlType="button"
+                      <CloseSquareOutlined
+                        className="absolute top-2 right-2 bg-red-500 text-white  text-[14px] rounded"
                         onClick={(e) => {
                           e.preventDefault();
                           setFileList([]);
                         }}
-                        className="absolute top-2 right-2 bg-red-500 text-white px-2 py-1 text-xs rounded"
-                      >
-                        Xóa
-                      </Button>
+                        style={{ fontSize: 24 }}
+                      />
                     </div>
                   ) : (
                     <div

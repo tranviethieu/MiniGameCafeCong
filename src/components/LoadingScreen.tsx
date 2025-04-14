@@ -22,7 +22,7 @@ const LoadingScreen = () => {
   return (
     <div className="w-full h-screen bg-[#e8e4db] flex flex-col justify-center items-center text-[#40501e] font-[BeauLuloClean] text-center relative overflow-hidden">
       {/* Logo */}
-      <div className="m-auto w-full flex flex-col justify-center">
+      <div className="m-auto w-full max-w-[400px] flex flex-col justify-center">
         <div className="flex justify-center mt-2">
           <img
             src={icons.logoCong} // ảnh nền bạn muốn ở dưới

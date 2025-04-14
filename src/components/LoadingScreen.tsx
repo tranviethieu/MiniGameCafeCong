@@ -57,7 +57,7 @@ const LoadingScreen = () => {
           transition={{ delay: 0.5 }}
           className="lg:text-[18px] text-[14px] font-bold mb-auto"
         >
-          CHỜ CỘNG XIU NHA...{progress}%
+          CHỜ CỘNG XÍU NHA...{progress}%
         </motion.div>
       </div>
     </div>

@@ -53,7 +53,7 @@ const StartGameCong = () => {
         >
           <video
             src={icons.videocong} // Đường dẫn video bạn muốn thay
-            className="w-full max-w-[600px] object-contain"
+            className="w-full max-w-[600px] object-contain pointer-events-none"
             autoPlay
             //loop
             muted

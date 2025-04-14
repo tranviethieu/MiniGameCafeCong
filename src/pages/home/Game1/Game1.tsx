@@ -126,7 +126,7 @@ const Game1 = () => {
       </div>
 
       {/* Nội dung */}
-      <div className="relative bg-[#e7e5db] max-w-[400px] mx-auto p-4 pt-[110px]">
+      <div className="relative bg-[#e7e5db] max-w-[400px] mx-auto p-2 pt-[110px]">
         {/* Nét đứt di chuyển */}
         <img
           src={man2.dashedLine}
@@ -148,8 +148,8 @@ const Game1 = () => {
 
             <img
               src={man2.congQuan}
-              className="w-full max-w-[160px] rounded"
-              alt="Cộng Quán"
+              className="w-full max-w-[180px] me-2"
+              alt="congQuan"
             />
           </motion.div>
 
@@ -186,17 +186,17 @@ const Game1 = () => {
               initial={{ x: "100%", opacity: 0 }}
               animate={{ x: 0, opacity: 1 }}
               transition={{ duration: 1, delay: 2, ease: "easeOut" }}
-              className="flex justify-end mt-2"
+              className="flex justify-end mt-0"
             >
               <img
                 src={man2.caphecup}
-                className="w-[50%] max-w-[160px] rounded"
-                alt="Cộng"
+                className="w-[50%] h-[50%]"
+                alt="caphecup"
               />
               <img
                 src={man2.coffeeThings}
-                className="w-[50%] max-w-[160px] rounded"
-                alt="Cộng"
+                className="w-[50%] h-[50%]"
+                alt="coffeeThings"
               />
             </motion.div>
           </motion.div>
@@ -206,7 +206,7 @@ const Game1 = () => {
           initial={{ x: "-100%", opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
           transition={{ duration: 1, delay: 3, ease: "easeOut" }}
-          className="relative  z-10 max-w-[250px] mx-auto "
+          className="relative z-10 max-w-[250px] mx-auto "
         >
           <div className="flex items-center gap-2">
             <img src={man2.flagVN} className="w-10" />

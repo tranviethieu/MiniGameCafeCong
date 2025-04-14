@@ -85,19 +85,6 @@ const LoginCong = () => {
         backgroundImage: `url(${icons.anhNen})`,
       }}
     >
-      {/* Ảnh dưới cùng */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1.5, delay: 0.1 }}
-        className="absolute bottom-0 left-0 right-0 z-0 flex justify-center"
-      >
-        <img
-          src={icons.anhCho}
-          alt="ảnh nền"
-          className="w-full max-w-[600px] object-contain pointer-events-none"
-        />
-      </motion.div>
       <div className="relative z-10 flex flex-col items-center">
         <div className="flex justify-center mt-2">
           <img
@@ -170,6 +157,19 @@ const LoginCong = () => {
               {loading ? "Đang xử lý..." : "Đăng nhập / Đăng ký"}
             </button>
           </form>
+        </motion.div>
+        {/* Ảnh dưới cùng */}
+        <motion.div
+          initial={{ opacity: 0, y: 50 }} // Bắt đầu mờ và dịch xuống dưới 50px
+          animate={{ opacity: 1, y: 0 }} // Hiện rõ và trở lại vị trí ban đầu
+          transition={{ duration: 1.5, delay: 0.1 }}
+          className="mt-auto flex justify-center"
+        >
+          <img
+            src={icons.anhCho}
+            alt="bg111"
+            className="w-full max-w-[600px] object-contain pointer-events-none"
+          />
         </motion.div>
       </div>
     </div>

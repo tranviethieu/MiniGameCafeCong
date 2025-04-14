@@ -118,7 +118,7 @@ const Game1 = () => {
           />
           {/* Đưa dòng chữ ra giữa đáy header */}
           <div className="absolute bottom-0 left-0 right-0 text-center italic">
-            {`Của ${user?.name} bắt đầu nào!`.split("").map((char, index) => (
+            {`${user?.name} bắt đầu nào!`.split("").map((char, index) => (
               <motion.span
                 key={index}
                 initial={{ opacity: 0 }}

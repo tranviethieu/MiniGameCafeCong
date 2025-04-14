@@ -9,9 +9,9 @@ const activityLevels = [
   { level: 1, joinable: false, complete: 1, date: "11/04/2025" },
   { level: 2, joinable: false, complete: 1, date: "20/04/2025" },
   { level: 3, joinable: false, complete: 1, date: "25/04/2025" },
-  { level: 4, joinable: false, complete: 1, date: "30/04/2025" },
-  { level: 5, joinable: false, complete: 1, date: "05/05/2025" },
-  { level: 6, joinable: false, complete: 1, date: "05/05/2025" },
+  { level: 4, joinable: false, complete: 1, date: "02/05/2025" },
+  { level: 5, joinable: false, complete: 1, date: "10/05/2025" },
+  { level: 6, joinable: false, complete: 1, date: "10/05/2025" },
 ];
 
 export default function ActivityLevels() {

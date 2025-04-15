@@ -1,19 +1,12 @@
 import { motion } from "framer-motion";
 import { ArrowCircleRight2 } from "iconsax-react";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import LoginCong from "../LoginCong";
 import icons from "~/constants/images/icons";
 import { Button } from "antd";
 
 const StartGameCong = () => {
   const [showLogin, setShowLogin] = useState(false);
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      setShowLogin(true);
-    }, 5000); // 3 giây
-
-    return () => clearTimeout(timeout); // clear timeout nếu component unmount
-  }, []);
 
   return !showLogin ? (
     <div
@@ -21,7 +14,6 @@ const StartGameCong = () => {
         backgroundImage: `url(${icons.anhNen})`,
       }}
       className="w-full bg-cover bg-center bg-no-repeat min-h-screen font-[Cousine] text-[17px] bg-[#e4e3d9] flex flex-col"
-      onClick={() => setShowLogin(true)}
     >
       <div className="flex flex-col flex-1">
         <div className="flex justify-center mt-2">

@@ -4,6 +4,7 @@ import man1 from "~/constants/images/man1";
 import { useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "~/context/AuthProvider";
+import { Button } from "antd";
 const text = "CHƠI HẾT MỨC - THI ĐUA HẾT SỨC:";
 const activityLevels = [
   { level: 1, joinable: false, complete: 1, date: "11/04/2025" },
@@ -68,11 +69,20 @@ export default function ActivityLevels() {
       </div>
       <div className="flex items-center gap-2 mb-2 text-[#4d5b28] text-md font-bold border border-[#e5dbc2] rounded-full px-4 py-1 bg-[#e1d9ca] w-fit mx-auto shadow-sm">
         <img src={icons.muiten} alt="Target icon" className="w-5 h-5" />
-        <span className="text-red-500">
+        <span className="text-[#b62924]">
           <span>{user?.level}</span>/5
         </span>
       </div>
-
+      {user?.role === "admin" && (
+        <Button
+          type="primary"
+          htmlType="button"
+          className="bg-[#b62924] w-[210px] text-[#e7e5db] font-[BeauLuloClean] py-3 mb-4 rounded-full text-[10px] hover:opacity-90 transition disabled:opacity-60 whitespace-pre-line leading-snug text-center"
+          onClick={() => navigate("/admin")}
+        >
+          Quản trị
+        </Button>
+      )}
       {/* Grid */}
       <div
         className="w-full"

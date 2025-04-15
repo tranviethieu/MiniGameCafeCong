@@ -6,6 +6,7 @@ import clsx from "clsx";
 import LoadingScreen from "~/components/LoadingScreen";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "~/lib/firebaseConfig";
+import { IUser } from "~/types/user";
 const SplashScreen: React.FC = () => {
   const { setLoading, login, loading, user, logout } = useAuth();
   useEffect(() => {
@@ -20,7 +21,8 @@ const SplashScreen: React.FC = () => {
           const docSnap = await getDoc(docRef);
 
           if (docSnap.exists()) {
-            login(state.user);
+            const userData = (docSnap.data() as IUser) || null;
+            login(userData);
           } else {
             logout();
           }

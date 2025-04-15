@@ -65,7 +65,36 @@ const MainAdmin = () => {
 
     fetchData();
   }, []);
-
+  const reloadPage = async () => {
+    setLoading(true);
+    const querySnapshot = await getDocs(collection(db, "users")); // Thay "users" bằng collection của bạn
+    const items: IUser[] = querySnapshot.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+    })) as IUser[];
+    const dataItems: IData[] = items
+      ?.filter((e) => e?.role === "user")
+      ?.sort(
+        (a, b) =>
+          dayjs(b.createdAt, "DD/MM/YYYY HH:mm:ss").unix() -
+          dayjs(a.createdAt, "DD/MM/YYYY HH:mm:ss").unix()
+      )
+      ?.map((item) => ({
+        name: item?.name,
+        phone: item?.phone,
+        level: item?.level,
+        link1: item?.task[0]?.link as string,
+        link2: item?.task[1]?.link as string,
+        link3: item?.task[2]?.link as string,
+        link4: item?.task[3]?.link as string,
+        link5: item?.task[4]?.link as string,
+        img: item?.task[0]?.image as string,
+        createdAt: item?.createdAt,
+        updatedAt: item?.updatedAt,
+      }));
+    setData(dataItems);
+    setLoading(false);
+  };
   const exportToExcel = () => {
     const worksheet = XLSX.utils.json_to_sheet(data);
 
@@ -169,6 +198,14 @@ const MainAdmin = () => {
         style={{ marginLeft: 10 }}
       >
         Đăng xuất
+      </Button>
+      <Button
+        type="primary"
+        danger
+        onClick={reloadPage}
+        style={{ marginLeft: 10 }}
+      >
+        Tải lại dữ liệu
       </Button>
       <Table
         columns={columns}

@@ -7,6 +7,7 @@ import { useAuth } from "~/context/AuthProvider";
 import { db } from "~/lib/firebaseConfig";
 import { IUser } from "~/types/user";
 import { useNavigate } from "react-router-dom";
+import dayjs from "dayjs";
 interface IData {
   name: string;
   phone: string;
@@ -40,6 +41,11 @@ const MainAdmin = () => {
       })) as IUser[];
       const dataItems: IData[] = items
         ?.filter((e) => e?.role === "user")
+        ?.sort(
+          (a, b) =>
+            dayjs(b.createdAt, "DD/MM/YYYY HH:mm:ss").unix() -
+            dayjs(a.createdAt, "DD/MM/YYYY HH:mm:ss").unix()
+        )
         ?.map((item) => ({
           name: item?.name,
           phone: item?.phone,

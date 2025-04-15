@@ -32,7 +32,7 @@ const SplashScreen: React.FC = () => {
         logout(); // fallback
       } finally {
         // ✅ Đảm bảo luôn tắt loading
-        setTimeout(() => setLoading(false), 1500);
+        setTimeout(() => setLoading(false), 2000);
       }
     })();
   }, []);

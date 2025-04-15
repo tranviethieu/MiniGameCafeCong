@@ -13,7 +13,7 @@ const LoadingScreen = () => {
         }
         return prev + 1;
       });
-    }, 30); // tăng mỗi 30ms
+    }, 20); // tăng mỗi 30ms
 
     return () => clearInterval(timer);
   }, []);

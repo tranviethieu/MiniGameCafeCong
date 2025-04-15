@@ -18,6 +18,9 @@
 
   &.close {
     animation: close linear 0.2s 1.5s forwards;
+    height: 0px !important;
+    width: 0px !important;
+    z-index: -1 !important;
   }
 }
 
@@ -28,6 +31,6 @@
 
   100% {
     opacity: 0;
-    visibility: hidden;
+    visibility: hidden !important;
   }
 }

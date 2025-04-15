@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import * as XLSX from "xlsx";
 import { saveAs } from "file-saver";
 import { collection, getDocs } from "firebase/firestore";
-import { Table, Button, TableColumnsType } from "antd";
+import { Table, Button, TableColumnsType, Modal, Input } from "antd";
 import { useAuth } from "~/context/AuthProvider";
 import { db } from "~/lib/firebaseConfig";
 import { IUser } from "~/types/user";
@@ -23,6 +23,8 @@ interface IData {
 const MainAdmin = () => {
   const [data, setData] = useState<IData[]>([]);
   const [loading, setLoading] = useState(false);
+  const [previewImg, setPreviewImg] = useState<string | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const { logout, user } = useAuth();
   const navigate = useNavigate();
   useEffect(() => {
@@ -112,7 +114,15 @@ const MainAdmin = () => {
       render: (_: any, { img }: IData) =>
         img && (
           <>
-            <img src={img} alt={img} className="w-20 h-20 object-cover" />
+            <img
+              onClick={() => {
+                setPreviewImg(img);
+                setIsModalOpen(true);
+              }}
+              src={img}
+              alt={img}
+              className="w-20 h-20 object-cover"
+            />
           </>
         ),
     },
@@ -161,6 +171,31 @@ const MainAdmin = () => {
         pagination={{ pageSize: 10 }}
         //scroll={{ x: "1200px", y: "60vh" }}
       />
+      <Modal
+        //title="Phóng to ảnh"
+        open={isModalOpen}
+        footer={null}
+        onCancel={() => setIsModalOpen(false)}
+        centered
+        width="80vw" // hoặc bạn có thể để 1000 nếu muốn cố định
+        bodyStyle={{ padding: 0 }}
+      >
+        <div className="flex flex-col items-center p-4 space-y-4">
+          {/* Ảnh phóng to */}
+          <img
+            src={previewImg || ""}
+            alt="preview"
+            className="max-w-full max-h-[80vh] object-contain"
+          />
+
+          {/* Đường dẫn ảnh */}
+          <Input
+            readOnly
+            value={previewImg || ""}
+            onFocus={(e) => e.target.select()}
+          />
+        </div>
+      </Modal>
     </div>
   );
 };

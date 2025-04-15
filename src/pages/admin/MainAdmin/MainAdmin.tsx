@@ -140,7 +140,12 @@ const MainAdmin = () => {
   const columns: TableColumnsType<IData> = [
     { title: "Tên", dataIndex: "name", key: "name" },
     { title: "Số điện thoại", dataIndex: "phone", key: "phone" },
-    { title: "Level", dataIndex: "level", key: "level" },
+    {
+      title: "Mức sinh hoạt",
+      dataIndex: "level",
+      key: "level",
+      sorter: (a, b) => a.level - b.level,
+    },
     {
       title: "Ảnh",
       dataIndex: "img",
@@ -161,15 +166,63 @@ const MainAdmin = () => {
           </>
         ),
     },
-    { title: "Nhiệm vụ 1", dataIndex: "link1", key: "link1" },
-    { title: "Nhiệm vụ 2", dataIndex: "link2", key: "link2" },
-    { title: "Nhiệm vụ 3", dataIndex: "link3", key: "link3" },
-    { title: "Nhiệm vụ 4", dataIndex: "link4", key: "link4" },
-    { title: "Nhiệm vụ 5", dataIndex: "link5", key: "link5" },
+    {
+      title: "Nhiệm vụ 1",
+      dataIndex: "link1",
+      key: "link1",
+      render: (text: string) => (
+        <a href={text} target="_blank" rel="noopener noreferrer">
+          {text}
+        </a>
+      ),
+    },
+    {
+      title: "Nhiệm vụ 2",
+      dataIndex: "link2",
+      key: "link2",
+      render: (text: string) => (
+        <a href={text} target="_blank" rel="noopener noreferrer">
+          {text}
+        </a>
+      ),
+    },
+    {
+      title: "Nhiệm vụ 3",
+      dataIndex: "link3",
+      key: "link3",
+      render: (text: string) => (
+        <a href={text} target="_blank" rel="noopener noreferrer">
+          {text}
+        </a>
+      ),
+    },
+    {
+      title: "Nhiệm vụ 4",
+      dataIndex: "link4",
+      key: "link4",
+      render: (text: string) => (
+        <a href={text} target="_blank" rel="noopener noreferrer">
+          {text}
+        </a>
+      ),
+    },
+    {
+      title: "Nhiệm vụ 5",
+      dataIndex: "link5",
+      key: "link5",
+      render: (text: string) => (
+        <a href={text} target="_blank" rel="noopener noreferrer">
+          {text}
+        </a>
+      ),
+    },
     {
       title: "Thời gian tạo tài khoản",
       dataIndex: "createdAt",
       key: "createdAt",
+      sorter: (a, b) =>
+        dayjs(a.createdAt, "DD/MM/YYYY HH:mm:ss").unix() -
+        dayjs(b.createdAt, "DD/MM/YYYY HH:mm:ss").unix(),
     },
     {
       title: "Thời gian làm nhiệm vụ gần nhất",

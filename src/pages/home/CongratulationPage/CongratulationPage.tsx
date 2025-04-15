@@ -89,15 +89,15 @@ const CongratulationPage = () => {
     <div className="relative h-screen w-screen overflow-hidden bg-[#e5e5db] font-[Cousine]">
       <div className="flex flex-col items-center text-center h-full w-full max-w-screen-sm mx-auto">
         {/* Logo */}
-        <div className="text-[#3c4d2f] font-bold text-xl mt-1">
+        <div className="text-[#3c4d2f] font-bold text-xl mt-1 pointer-events-none">
           <img src={icons.logoCong} style={{ width: 50 }} alt="Logo Cộng" />
         </div>
 
-        <div className="my-auto">
+        <div className="mb-auto mt-4">
           {/* Hoanho ảnh */}
           <motion.img
             src={man3.hoanho}
-            className="w-[75%] mt-4 mx-auto"
+            className="w-[70%] mx-auto  pointer-events-none"
             alt="#hoanho"
             animate={{ opacity: [1, 0.8, 1] }}
             transition={{
@@ -117,13 +117,13 @@ const CongratulationPage = () => {
             initial={{ x: "-100%" }}
             animate={{ x: 0 }}
             transition={{ duration: 1.5, ease: "easeOut" }}
-            className="w-[300px] mx-auto my-0"
+            className="w-[280px] mx-auto my-0 pointer-events-none"
           />
 
           {/* Text hiệu ứng */}
           <div className="w-full flex">
             <motion.div
-              className="text-[#898e66] mx-auto text-[24px] mb-1 font-[Cousine] flex"
+              className="text-[#898e66] mx-auto ps-2 text-[20px] mb-1 font-[Cousine] flex"
               initial="hidden"
               animate="visible"
               variants={{
@@ -156,7 +156,7 @@ const CongratulationPage = () => {
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 1, duration: 0.8, ease: "easeOut" }}
-            className="w-[360px] mx-auto"
+            className="w-[280px] mx-auto pointer-events-none"
           />
 
           {/* Nút tiếp tục */}

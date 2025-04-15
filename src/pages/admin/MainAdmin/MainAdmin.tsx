@@ -145,7 +145,9 @@ const MainAdmin = () => {
 
   return (
     <div style={{ margin: 10 }}>
-      <h1 className="mb-4 text-xl bold font-[Cousine]">Quản lý người dùng</h1>
+      <h1 className="mb-4 text-xl bold font-[Cousine]">
+        Quản lý tổng số ({data?.length || 0} người chơi)
+      </h1>
       <Button
         type="primary"
         className="bg-[#3c4d2f]"

@@ -4,6 +4,7 @@ import { useState } from "react";
 import LoginCong from "../LoginCong";
 import icons from "~/constants/images/icons";
 import { Button } from "antd";
+import GoogleAd from "~/components/GoogleAd/GoogleAd";
 
 const StartGameCong = () => {
   const [showLogin, setShowLogin] = useState(false);
@@ -71,6 +72,7 @@ const StartGameCong = () => {
           />
         </motion.div>
       </div>
+      <GoogleAd />
     </div>
   ) : (
     <LoginCong />

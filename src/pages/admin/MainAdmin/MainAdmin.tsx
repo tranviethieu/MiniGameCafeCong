@@ -220,9 +220,6 @@ const MainAdmin = () => {
       title: "Thời gian tạo tài khoản",
       dataIndex: "createdAt",
       key: "createdAt",
-      sorter: (a, b) =>
-        dayjs(a.createdAt, "DD/MM/YYYY HH:mm:ss").unix() -
-        dayjs(b.createdAt, "DD/MM/YYYY HH:mm:ss").unix(),
     },
     {
       title: "Thời gian làm nhiệm vụ gần nhất",

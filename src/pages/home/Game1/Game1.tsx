@@ -6,10 +6,10 @@ import { Form, Input, message, Spin, Upload, UploadFile } from "antd";
 import dayjs from "dayjs";
 import { doc, updateDoc } from "firebase/firestore";
 import { db } from "~/lib/firebaseConfig";
-import { uploadToCloudinary } from "~/common/uploadToCloudinary";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { CloseSquareOutlined } from "@ant-design/icons";
+import { uploadToImgBB } from "~/common/compressImage";
 const Game1 = () => {
   const { user, login } = useAuth();
   const navigate = useNavigate();
@@ -35,9 +35,9 @@ const Game1 = () => {
     }
     setLoading(true);
     if (fileList.length !== 0) {
-      imageUrl = await uploadToCloudinary(fileList[0].originFileObj as File);
+      imageUrl = await uploadToImgBB(fileList[0].originFileObj as File);
       if (!imageUrl) {
-        message.error("Lỗi khi upload ảnh lên Cloudinary!");
+        message.error("Lỗi khi upload ảnh lên!");
         setLoading(false);
         return;
       }

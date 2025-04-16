@@ -41,11 +41,16 @@ const MainAdmin = () => {
       })) as IUser[];
       const dataItems: IData[] = items
         ?.filter((e) => e?.role === "user")
-        ?.sort(
-          (a, b) =>
-            dayjs(b.createdAt, "DD/MM/YYYY HH:mm:ss").unix() -
-            dayjs(a.createdAt, "DD/MM/YYYY HH:mm:ss").unix()
-        )
+        ?.map((item) => {
+          const date = dayjs(item.createdAt, "DD/MM/YYYY HH:mm:ss", true);
+          const timestamp = date.isValid() ? date.valueOf() : 0;
+
+          return {
+            ...item,
+            timestamp,
+          };
+        })
+        ?.sort((a, b) => b.timestamp - a.timestamp)
         ?.map((item) => ({
           name: item?.name,
           phone: item?.phone,
@@ -74,11 +79,16 @@ const MainAdmin = () => {
     })) as IUser[];
     const dataItems: IData[] = items
       ?.filter((e) => e?.role === "user")
-      ?.sort(
-        (a, b) =>
-          dayjs(b.createdAt, "DD/MM/YYYY HH:mm:ss").unix() -
-          dayjs(a.createdAt, "DD/MM/YYYY HH:mm:ss").unix()
-      )
+      ?.map((item) => {
+        const date = dayjs(item.createdAt, "DD/MM/YYYY HH:mm:ss", true);
+        const timestamp = date.isValid() ? date.valueOf() : 0;
+
+        return {
+          ...item,
+          timestamp,
+        };
+      })
+      ?.sort((a, b) => b.timestamp - a.timestamp)
       ?.map((item) => ({
         name: item?.name,
         phone: item?.phone,
@@ -92,6 +102,7 @@ const MainAdmin = () => {
         createdAt: item?.createdAt,
         updatedAt: item?.updatedAt,
       }));
+
     setData(dataItems);
     setLoading(false);
   };

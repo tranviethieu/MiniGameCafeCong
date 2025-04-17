@@ -52,7 +52,7 @@ const MainAdmin = () => {
       ?.map((item) => {
         const date = dayjs.tz(
           item.createdAt,
-          "DD/MM/YYYY HH:mm:ss",
+          "YYYY-MM-DD HH:mm:ss",
           "Asia/Ho_Chi_Minh"
         );
         const timestamp = date.isValid() ? date.valueOf() : 0;

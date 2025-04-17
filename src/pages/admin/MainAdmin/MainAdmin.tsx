@@ -42,20 +42,17 @@ const MainAdmin = () => {
   }, []);
   const reloadPage = async () => {
     setLoading(true);
-    const querySnapshot = await getDocs(collection(db, "users")); // Thay "users" bằng collection của bạn
+
+    const querySnapshot = await getDocs(collection(db, "users"));
     const items: IUser[] = querySnapshot.docs.map((doc) => ({
       id: doc.id,
       ...doc.data(),
     })) as IUser[];
-    const dataItems: any[] = items
+
+    const dataItems: IData[] = items
       ?.filter((e) => e?.role === "user")
       ?.map((item) => {
-        const date = dayjs.tz(
-          item.createdAt,
-          "YYYY-MM-DD HH:mm:ss",
-          "Asia/Ho_Chi_Minh"
-        );
-        const timestamp = date.isValid() ? date.valueOf() : 0;
+        const timestamp = convertDMYtoTimestamp(item.createdAt);
 
         return {
           ...item,
@@ -80,9 +77,11 @@ const MainAdmin = () => {
           updatedAt: item.updatedAt,
         };
       });
+
     setData(dataItems);
     setLoading(false);
   };
+
   const exportToExcel = () => {
     const worksheet = XLSX.utils.json_to_sheet(data);
 
@@ -287,3 +286,13 @@ const MainAdmin = () => {
 };
 
 export default MainAdmin;
+function convertDMYtoTimestamp(dateStr: string): number {
+  const [day, month, rest] = dateStr.split("/");
+  if (!day || !month || !rest) return 0;
+
+  const [year, time] = [rest.slice(0, 4), rest.slice(5)];
+  const iso = `${year}-${month}-${day}T${time}`;
+  const date = new Date(iso);
+
+  return isNaN(date.getTime()) ? 0 : date.getTime();
+}

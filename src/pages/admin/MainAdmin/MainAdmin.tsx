@@ -8,6 +8,12 @@ import { db } from "~/lib/firebaseConfig";
 import { IUser } from "~/types/user";
 import { useNavigate } from "react-router-dom";
 import dayjs from "dayjs";
+import utc from "dayjs/plugin/utc";
+import timezone from "dayjs/plugin/timezone";
+
+dayjs.extend(utc);
+dayjs.extend(timezone);
+
 interface IData {
   name: string;
   phone: string;
@@ -32,43 +38,7 @@ const MainAdmin = () => {
     if (user?.role !== "admin") navigate("/");
   }, [user?.role]);
   useEffect(() => {
-    const fetchData = async () => {
-      setLoading(true);
-      const querySnapshot = await getDocs(collection(db, "users")); // Thay "users" bằng collection của bạn
-      const items: IUser[] = querySnapshot.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data(),
-      })) as IUser[];
-      const dataItems: IData[] = items
-        ?.filter((e) => e?.role === "user")
-        ?.map((item) => {
-          const date = dayjs(item.createdAt, "DD/MM/YYYY HH:mm:ss", true);
-          const timestamp = date.isValid() ? date.valueOf() : 0;
-
-          return {
-            ...item,
-            timestamp,
-          };
-        })
-        ?.sort((a, b) => b.timestamp - a.timestamp)
-        ?.map((item) => ({
-          name: item?.name,
-          phone: item?.phone,
-          level: item?.level,
-          link1: item?.task[0]?.link as string,
-          link2: item?.task[1]?.link as string,
-          link3: item?.task[2]?.link as string,
-          link4: item?.task[3]?.link as string,
-          link5: item?.task[4]?.link as string,
-          img: item?.task[0]?.image as string,
-          createdAt: item?.createdAt,
-          updatedAt: item?.updatedAt,
-        }));
-      setData(dataItems);
-      setLoading(false);
-    };
-
-    fetchData();
+    reloadPage();
   }, []);
   const reloadPage = async () => {
     setLoading(true);
@@ -77,10 +47,14 @@ const MainAdmin = () => {
       id: doc.id,
       ...doc.data(),
     })) as IUser[];
-    const dataItems: IData[] = items
+    const dataItems: any[] = items
       ?.filter((e) => e?.role === "user")
       ?.map((item) => {
-        const date = dayjs(item.createdAt, "DD/MM/YYYY HH:mm:ss", true);
+        const date = dayjs.tz(
+          item.createdAt,
+          "DD/MM/YYYY HH:mm:ss",
+          "Asia/Ho_Chi_Minh"
+        );
         const timestamp = date.isValid() ? date.valueOf() : 0;
 
         return {
@@ -89,20 +63,23 @@ const MainAdmin = () => {
         };
       })
       ?.sort((a, b) => b.timestamp - a.timestamp)
-      ?.map((item) => ({
-        name: item?.name,
-        phone: item?.phone,
-        level: item?.level,
-        link1: item?.task[0]?.link as string,
-        link2: item?.task[1]?.link as string,
-        link3: item?.task[2]?.link as string,
-        link4: item?.task[3]?.link as string,
-        link5: item?.task[4]?.link as string,
-        img: item?.task[0]?.image as string,
-        createdAt: item?.createdAt,
-        updatedAt: item?.updatedAt,
-      }));
+      ?.map((item) => {
+        const [task1, task2, task3, task4, task5] = item.task || [];
 
+        return {
+          name: item.name,
+          phone: item.phone,
+          level: item.level,
+          link1: task1?.link || "",
+          link2: task2?.link || "",
+          link3: task3?.link || "",
+          link4: task4?.link || "",
+          link5: task5?.link || "",
+          img: task1?.image || "",
+          createdAt: item.createdAt,
+          updatedAt: item.updatedAt,
+        };
+      });
     setData(dataItems);
     setLoading(false);
   };
@@ -277,31 +254,34 @@ const MainAdmin = () => {
         pagination={{ pageSize: 10 }}
         //scroll={{ x: "1200px", y: "60vh" }}
       />
-      <Modal
-        //title="Phóng to ảnh"
-        open={isModalOpen}
-        footer={null}
-        onCancel={() => setIsModalOpen(false)}
-        centered
-        width="80vw" // hoặc bạn có thể để 1000 nếu muốn cố định
-        bodyStyle={{ padding: 0 }}
-      >
-        <div className="flex flex-col items-center p-4 space-y-4">
-          {/* Ảnh phóng to */}
-          <img
-            src={previewImg || ""}
-            alt="preview"
-            className="max-w-full max-h-[80vh] object-contain"
-          />
+      {previewImg && (
+        <Modal
+          //title="Phóng to ảnh"
+          key={"okeImg"}
+          open={isModalOpen}
+          footer={null}
+          onCancel={() => setIsModalOpen(false)}
+          centered
+          width="80vw" // hoặc bạn có thể để 1000 nếu muốn cố định
+          bodyStyle={{ padding: 0 }}
+        >
+          <div className="flex flex-col items-center p-4 space-y-4">
+            {/* Ảnh phóng to */}
+            <img
+              src={previewImg || ""}
+              alt="preview"
+              className="max-w-full max-h-[80vh] object-contain"
+            />
 
-          {/* Đường dẫn ảnh */}
-          <Input
-            readOnly
-            value={previewImg || ""}
-            onFocus={(e) => e.target.select()}
-          />
-        </div>
-      </Modal>
+            {/* Đường dẫn ảnh */}
+            <Input
+              readOnly
+              value={previewImg || ""}
+              onFocus={(e) => e.target.select()}
+            />
+          </div>
+        </Modal>
+      )}
     </div>
   );
 };

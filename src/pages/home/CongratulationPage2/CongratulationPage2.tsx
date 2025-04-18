@@ -6,8 +6,9 @@ import { motion } from "framer-motion";
 import { IoMdArrowDroprightCircle } from "react-icons/io";
 import { useEffect, useState } from "react";
 import confetti from "canvas-confetti";
+import cong2 from "~/constants/images/cong2";
 
-const CongratulationPage = () => {
+const CongratulationPage2 = () => {
   const navigate = useNavigate();
   const { user } = useAuth();
   const [selectedStar, setSelectedStar] = useState(0);
@@ -19,8 +20,14 @@ const CongratulationPage = () => {
   useEffect(() => {
     const timeout = setTimeout(() => {
       setSelectedStar(1);
+    }, 1000);
+    const timeout1 = setTimeout(() => {
+      setSelectedStar(2);
     }, 2000);
-    return () => clearTimeout(timeout);
+    return () => {
+      clearTimeout(timeout);
+      clearTimeout(timeout1);
+    };
   }, []);
 
   // 🎉 Chạy confetti khi tích sao
@@ -100,7 +107,7 @@ const CongratulationPage = () => {
           {/* Hoanho ảnh */}
           <motion.img
             src={man3.hoanho}
-            className="w-[60%] mx-auto  pointer-events-none"
+            className="w-[60%] mx-auto pointer-events-none"
             alt="#hoanho"
             animate={{ opacity: [1, 0.8, 1] }}
             transition={{
@@ -115,8 +122,8 @@ const CongratulationPage = () => {
 
           {/* Ảnh ghế */}
           <motion.img
-            src={man3.ghe}
-            alt="Ghế"
+            src={cong2.sticked}
+            alt="sticked"
             initial={{ x: "-100%" }}
             animate={{ x: 0 }}
             transition={{ duration: 1.5, ease: "easeOut" }}
@@ -159,7 +166,7 @@ const CongratulationPage = () => {
             transition={{ delay: 1, duration: 0.8, ease: "easeOut" }}
             className="text-[#4d5b28] w-[300px] mx-auto font-bold pointer-events-none text-[23px] font-[BeauLuloClean] tracking-[-0.02em]"
           >
-            HOÀN THÀNH <br /> XUẤT SẮC MỨC 1
+            HOÀN THÀNH <br /> XUẤT SẮC MỨC 2
           </motion.div>
 
           {/* Nút tiếp tục */}
@@ -181,4 +188,4 @@ const CongratulationPage = () => {
   );
 };
 
-export default CongratulationPage;
+export default CongratulationPage2;

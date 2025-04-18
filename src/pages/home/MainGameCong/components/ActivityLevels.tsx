@@ -4,7 +4,7 @@ import man1 from "~/constants/images/man1";
 import { useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "~/context/AuthProvider";
-import { Button } from "antd";
+import { Button, message } from "antd";
 const text = "CHƠI HẾT MỨC - THI ĐUA HẾT SỨC:";
 const activityLevels = [
   { level: 1, joinable: false, complete: 1, date: "11/04/2025" },
@@ -46,16 +46,25 @@ export default function ActivityLevels() {
   }, [user?.task]);
 
   const handleJoin = (level: number, complete: number) => {
-    console.log("Joining level:", level);
-    if (level === 1 && complete === 1) {
+    if (level === 1 && complete === 1 && user?.level === 0) {
       navigate(`/cong-1`); // Navigate to the game page with the selected level
+    } else if (level === 2 && complete === 1 && user?.level === 1) {
+      navigate(`/cong-2`);
+    } else if (level === 3 && complete === 1 && user?.level === 2) {
+      navigate(`/cong-3`);
+    } else {
+      message.warning(
+        `Bạn ${user?.name} vui lòng hoàn thành sinh hoạt mức ${
+          user?.level ? user?.level + 1 : 1
+        }`
+      );
     }
     // Handle join logic here
   };
   return (
     <>
       {/* Header */}
-      <div className="whitespace-pre-line text-center font-[BeauLuloClean] text-[#b62924] text-[12px] leading-snug  mb-3">
+      <div className="whitespace-pre-line text-center font-[BeauLuloClean] text-[#b62924] text-[12px] leading-snug mb-3">
         {text.split("").map((char, index) => (
           <motion.span
             key={index}
@@ -84,10 +93,7 @@ export default function ActivityLevels() {
         </Button>
       )}
       {/* Grid */}
-      <div
-        className="w-full"
-        style={{ overflowY: "auto", height: "calc(100vh - 200px)" }}
-      >
+      <div className="w-full">
         <div className="grid grid-cols-2 gap-4 max-w-[364px] mx-auto px-4">
           {updatedLevels.map((item) =>
             item.level < 6 ? (
@@ -96,7 +102,7 @@ export default function ActivityLevels() {
                 className="bg-[#3f5722] h-[160px] relative px-0 text-white rounded-2xl p-1 flex flex-col items-center justify-center shadow-[6px_6px_0_#d5c7a2]"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                transition={{ duration: 1.5, delay: item.level * 0.2 }}
+                transition={{ duration: 1.5, delay: item.level * 0.3 }}
               >
                 <motion.div
                   initial={{ opacity: 0 }}
@@ -179,7 +185,9 @@ export default function ActivityLevels() {
               </motion.div>
             ) : (
               <motion.div
-                transition={{ duration: 1.5, delay: item.level * 0.2 }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 1.5, delay: item.level * 0.3 }}
                 key={item.level}
                 className="bg-[#3f5722] h-[160px] relative rounded-2xl flex flex-col items-center justify-center shadow-[6px_6px_0_#d5c7a2] text-white"
               >

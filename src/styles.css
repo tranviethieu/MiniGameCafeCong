@@ -10,31 +10,37 @@
 @font-face {
   font-family: "Cousine";
   src: url("/static/fonts/Cousine-Italic.ttf") format("truetype");
-  font-weight: 600;
+  font-weight: normal;
   font-style: normal;
 }
 @font-face {
   font-family: "Cousine";
   src: url("/static/fonts/Cousine-Regular.ttf") format("truetype");
-  font-weight: 600;
+  font-weight: normal;
   font-style: normal;
 }
 @font-face {
   font-family: "BeauLuloClean";
   src: url("/static/fonts/BeauLuloClean-OneBold.otf") format("truetype");
-  font-weight: 800;
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'NittiTypewriter';
+  src: url('/static/fonts/NittiTypewriter_5.otf') format('opentype');
+  font-weight: normal;
   font-style: normal;
 }
 @font-face {
   font-family: "iCielBCHuskey";
   src: url("/static/fonts/iCielBCHuskey-Roman.otf") format("truetype");
-  font-weight: 800;
+  font-weight: normal;
   font-style: normal;
 }
 @font-face {
   font-family: "MYRIADPRO";
   src: url("/static/fonts/MYRIADPRO-REGULAR.OTF") format("truetype");
-  font-weight: 800;
+  font-weight: normal;
   font-style: normal;
 }
 .ant-upload .ant-upload-select {

@@ -16,7 +16,20 @@ const SplashScreen: React.FC = () => {
         const state = await getItemStorage("KEY_STORE_1");
         const uid = state?.user?.id;
 
-        if (uid) {
+        if (!uid) {
+          logout();
+          return;
+        }
+
+        // Lấy thời gian lần cuối kiểm tra từ localStorage
+        const lastCheck = localStorage.getItem("lastUserCheck");
+        const now = Date.now();
+
+        // 24 giờ = 12 * 60 * 60 * 1000 = 43_200_000 ms
+        const twelveHours = 24 * 60 * 60 * 1000;
+
+        if (!lastCheck || now - Number(lastCheck) > twelveHours) {
+          // Đã quá 24h hoặc chưa từng kiểm tra
           const docRef = doc(db, "users", uid);
           const docSnap = await getDoc(docRef);
 
@@ -26,14 +39,17 @@ const SplashScreen: React.FC = () => {
           } else {
             logout();
           }
+
+          // Cập nhật lại thời gian kiểm tra
+          localStorage.setItem("lastUserCheck", now.toString());
         } else {
-          logout();
+          // Không gọi Firebase, dùng local data
+          login(state?.user);
         }
       } catch (error) {
         console.error("Lỗi khi xử lý đăng nhập:", error);
         logout(); // fallback
       } finally {
-        // ✅ Đảm bảo luôn tắt loading
         setTimeout(() => setLoading(false), 2000);
       }
     })();

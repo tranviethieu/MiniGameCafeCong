@@ -23,7 +23,7 @@ export default function ActivityLevels() {
 
     const parseDate = (str: string) => {
       const [day, month, year] = str.split("/").map(Number);
-      return new Date(year, month - 1, day); // JavaScript month bắt đầu từ 0
+      return new Date(year, month - 1, day);
     };
 
     return activityLevels.map((level, index) => {
@@ -44,7 +44,6 @@ export default function ActivityLevels() {
       };
     });
   }, [user?.task]);
-
   const handleJoin = (level: number, complete: number) => {
     if (level === 1 && complete === 1 && user?.level === 0) {
       navigate(`/cong-1`); // Navigate to the game page with the selected level

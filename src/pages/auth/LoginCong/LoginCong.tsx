@@ -50,6 +50,7 @@ const LoginCong = () => {
         } else {
           navigate("/");
         }
+        localStorage.removeItem("crossword-answers");
         message.success(`Chào mừng bạn trở lại, ${userData.name}!`);
       } else {
         if (!name) {
@@ -158,7 +159,7 @@ const LoginCong = () => {
               disabled={loading}
               className="bg-[#4d5b28] w-[210px] text-[#e7e5db] mx-auto font-[BeauLuloClean] py-3 mt-1 rounded-full text-[10px] hover:opacity-90 transition disabled:opacity-60 whitespace-pre-line leading-snug text-center"
             >
-              {loading ? "Đang xử lý..." : "Đăng nhập / Đăng ký"}
+              {loading ? "Đợi Cộng xíu..." : "Đăng nhập / Đăng ký"}
             </button>
           </form>
         </motion.div>

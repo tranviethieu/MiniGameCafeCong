@@ -8,7 +8,19 @@
 .ant-form-item {
   margin-bottom: 0px !important;
 }
-:where(.css-dev-only-do-not-override-9oa5q9).ant-upload-wrapper
-  .ant-upload-select {
-  width: 100%;
+.ant-upload-wrapper .ant-upload-select {
+  width: 100% !important;
+}
+/* Override toàn bộ font cho Ant Design và trang */
+body,
+.ant-typography,
+.ant-btn,
+.ant-form,
+.ant-input,
+.ant-select,
+.ant-message {
+  font-family: "Cousine", sans-serif;
+}
+body {
+  background-color: #e5e5db;
 }

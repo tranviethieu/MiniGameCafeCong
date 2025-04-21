@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 const MainGameCong = () => {
   return (
     // ✅ Lớp bọc background toàn màn hình trên mọi thiết bị
-    <div className="relative h-screen w-screen overflow-hidden bg-[#e5e5db] font-[Cousine]">
+    <div className="relative w-screen bg-[#e5e5db] font-[Cousine]">
       {/* ✅ Nội dung căn giữa, giới hạn chiều rộng */}
       <div className="flex flex-col items-center text-center h-full w-full max-w-screen-sm mx-auto">
         {/* Logo */}

@@ -4,8 +4,6 @@ export interface ITaskUser {
   link: string;
   image?: string;
   status: number; // 1: chưa hoàn thành, 2: đã hoàn thành
-  timeStart: string; // "DD/MM/YYYY HH:mm:ss"
-  timeEnd: string; // "DD/MM/YYYY HH:mm:ss"
 }
 
 export interface IUser {
@@ -19,3 +17,9 @@ export interface IUser {
   createdAt: string; // "DD/MM/YYYY HH:mm:ss"
   updatedAt: string | null; // "DD/MM/YYYY HH:mm:ss" | null
 }
+export type Question = {
+  id: number;
+  text: string;
+  options: string[];
+  correctIndex: number;
+};

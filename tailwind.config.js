@@ -10,6 +10,7 @@ export default {
           "BeauLuloClean",
           "iCielBCHuskey",
           "MYRIADPRO",
+          "NittiTypewriter",
         ],
         pacifico: ['"Pacifico"', "cursive"],
       },

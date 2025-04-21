@@ -11,6 +11,7 @@ createRoot(document.getElementById("root")!).render(
         token: {
           colorPrimaryActive: "#4c5b29",
           colorPrimaryHover: "#4c5b29",
+          fontFamily: "'Cousine'",
         },
         components: {
           Modal: {

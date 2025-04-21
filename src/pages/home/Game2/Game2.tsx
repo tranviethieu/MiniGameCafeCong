@@ -1,5 +1,4 @@
 import { useState } from "react";
-import man2 from "~/constants/images/man2";
 import icons from "~/constants/images/icons";
 import { useAuth } from "~/context/AuthProvider";
 import { Form, Input, message, Spin, Upload, UploadFile } from "antd";
@@ -10,14 +9,15 @@ import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 import { CloseSquareOutlined } from "@ant-design/icons";
 import { uploadToImgBB } from "~/common/compressImage";
-const Game1 = () => {
+import cong2 from "~/constants/images/cong2";
+const Game2 = () => {
   const { user, login } = useAuth();
   const navigate = useNavigate();
   const [fileList, setFileList] = useState<UploadFile[]>([]);
   const [form] = Form.useForm();
   const [loading, setLoading] = useState(false);
   const handleSubmit = async (values: { linkb1: string }) => {
-    if (user?.task[0].status === 2) {
+    if (user?.task[1].status === 2) {
       message.warning("Bạn đã hoàn thành rồi!");
       navigate("/");
       return;
@@ -46,10 +46,10 @@ const Game1 = () => {
     try {
       const userRef = doc(db, "users", user.phone as string);
       const updateUser = {
-        location: 1,
-        level: 1, // ✅ Cập nhật trạng thái hoàn thành nhiệm vụ 1
+        location: 2,
+        level: 2, // ✅ Cập nhật trạng thái hoàn thành nhiệm vụ 1
         task: user.task.map((task) => {
-          if (task.id === 1) {
+          if (task.id === 2) {
             return {
               ...task,
               status: 2, // ✅ Cập nhật trạng thái hoàn thành nhiệm vụ 1
@@ -67,13 +67,13 @@ const Game1 = () => {
       // ✅ Cập nhật state của user
       login({
         ...user,
-        location: 1,
-        level: 1, // ✅ Cập nhật trạng thái hoàn thành nhiệm vụ 1
+        location: 2,
+        level: 2, // ✅ Cập nhật trạng thái hoàn thành nhiệm vụ 2
         task: user.task.map((task) => {
-          if (task.id === 1) {
+          if (task.id === 2) {
             return {
               ...task,
-              status: 2, // ✅ Cập nhật trạng thái hoàn thành nhiệm vụ 1
+              status: 2, // ✅ Cập nhật trạng thái hoàn thành nhiệm vụ 2
               link: linkb1,
             };
           }
@@ -83,7 +83,7 @@ const Game1 = () => {
       });
 
       message.success("Nhiệm vụ đã hoàn thành! 🎉");
-      navigate("/hoan-thanh-sinh-hoat-1");
+      navigate("/hoan-thanh-sinh-hoat-2");
     } catch (error) {
       console.error("Lỗi khi cập nhật dữ liệu:", error);
       message.error("Lỗi khi cập nhật dữ liệu!");
@@ -115,7 +115,7 @@ const Game1 = () => {
             className="mt-2 pointer-events-none"
           >
             <h1 className="font-[BeauLuloClean] text-[18px] h-[50px]">
-              SINH HOẠT MỨC 1
+              SINH HOẠT MỨC 2
             </h1>
           </motion.div>
           {/* Đưa dòng chữ ra giữa đáy header */}
@@ -141,8 +141,8 @@ const Game1 = () => {
           initial={{ x: "-100%", opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
           transition={{ duration: 1, delay: 0.5, ease: "easeOut" }}
-          src={man2.bgMan2}
-          alt="đường đi"
+          src={cong2.bgMan}
+          alt="bgMan"
           className="w-full max-w-[400px] pointer-events-none"
         />
 
@@ -157,7 +157,7 @@ const Game1 = () => {
             <div className="relative z-10">
               <Form.Item name="linkb1">
                 <Input
-                  placeholder="Dán link Facebook bài viết..."
+                  placeholder="Dán link bài viết..."
                   className="w-full mt-2 px-3 py-2 rounded border text-black text-sm font-[Cousine]"
                 />
               </Form.Item>
@@ -226,4 +226,4 @@ const Game1 = () => {
   );
 };
 
-export default Game1;
+export default Game2;

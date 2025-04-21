@@ -24,6 +24,7 @@ interface IData {
   link4: string;
   link5: string;
   img: string;
+  img2?: string;
   createdAt: string;
   updatedAt: string | null;
 }
@@ -73,6 +74,7 @@ const MainAdmin = () => {
           link4: task4?.link || "",
           link5: task5?.link || "",
           img: task1?.image || "",
+          img2: task2?.image || "",
           createdAt: item.createdAt,
           updatedAt: item.updatedAt,
         };
@@ -134,7 +136,7 @@ const MainAdmin = () => {
       sorter: (a, b) => a.level - b.level,
     },
     {
-      title: "Ảnh",
+      title: "Ảnh nhiệm vụ 1",
       dataIndex: "img",
       key: "img",
       width: 100,
@@ -148,6 +150,26 @@ const MainAdmin = () => {
               }}
               src={img}
               alt={img}
+              className="w-20 h-20 object-cover"
+            />
+          </>
+        ),
+    },
+    {
+      title: "Ảnh nhiệm vụ 2",
+      dataIndex: "img2",
+      key: "img2",
+      width: 100,
+      render: (_: any, { img2 }: IData) =>
+        img2 && (
+          <>
+            <img
+              onClick={() => {
+                setPreviewImg(img2);
+                setIsModalOpen(true);
+              }}
+              src={img2}
+              alt={img2}
               className="w-20 h-20 object-cover"
             />
           </>

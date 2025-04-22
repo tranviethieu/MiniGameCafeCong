@@ -35,7 +35,10 @@ const Game2 = () => {
     }
     setLoading(true);
     if (fileList.length !== 0) {
-      imageUrl = await uploadToImgBB(fileList[0].originFileObj as File);
+      imageUrl = await uploadToImgBB(
+        fileList[0].originFileObj as File,
+        `${user?.phone.slice(0, -3) + "xxx"}-${user?.name}`
+      );
       if (!imageUrl) {
         message.error("Lỗi khi upload ảnh lên!");
         setLoading(false);

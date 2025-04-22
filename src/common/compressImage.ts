@@ -1,9 +1,12 @@
-export const uploadToImgBB = async (file: File): Promise<string | null> => {
+export const uploadToImgBB = async (
+  file: File,
+  filename: string
+): Promise<string | null> => {
   try {
     const compressedFile = await compressImage(file, 0.6); // 👈 chất lượng 60%
-
+    const renamedFile = renameFile(compressedFile, `${filename}.jpg`);
     const formData = new FormData();
-    formData.append("image", compressedFile);
+    formData.append("image", renamedFile);
 
     const res = await fetch(
       "https://api.imgbb.com/1/upload?key=c02207207b5e9cc4b687706be702c372", // 👈 thay key ở đây
@@ -65,4 +68,7 @@ const compressImage = (file: File, quality = 0.7): Promise<Blob> => {
 
     reader.readAsDataURL(file);
   });
+};
+const renameFile = (blob: Blob, filename: string): File => {
+  return new File([blob], filename, { type: blob.type });
 };

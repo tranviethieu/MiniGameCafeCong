@@ -1,12 +1,12 @@
 import { useState } from "react";
 import icons from "~/constants/images/icons";
 import { useAuth } from "~/context/AuthProvider";
-import { Form, Input, message, Spin } from "antd";
+import { Form, message, Spin } from "antd";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import Questions from "./components/Questions";
+//import Questions from "./components/Questions";
 import cong3 from "~/constants/images/cong3";
-import { questions, STORAGE_KEY } from "~/constants/config/data";
+//import { questions } from "~/constants/config/data";
 import { doc, updateDoc } from "firebase/firestore";
 import { db } from "~/lib/firebaseConfig";
 import dayjs from "dayjs";
@@ -14,12 +14,13 @@ import WordSearchGrid from "./components/WordSearchGrid";
 const Game3 = () => {
   const { user, login, logout } = useAuth();
   const navigate = useNavigate();
-  const [selectedAnswers, setSelectedAnswers] = useState<{
-    [key: number]: number;
-  }>(() => {
-    const saved = localStorage.getItem(STORAGE_KEY);
-    return saved ? JSON.parse(saved) : {};
-  });
+  // const [selectedAnswers, setSelectedAnswers] = useState<{
+  //   [key: number]: number;
+  // }>(() => {
+  //   const saved = localStorage.getItem(STORAGE_KEY);
+  //   return saved ? JSON.parse(saved) : {};
+  // });
+
   const [form] = Form.useForm();
   const [loading, setLoading] = useState(false);
   const handleSubmit = async (values: { game: string }) => {
@@ -40,21 +41,21 @@ const Game3 = () => {
       setLoading(false);
       return;
     }
-    const isCompleted = Object.keys(selectedAnswers).length === 7;
-    if (!isCompleted) {
-      message.warning("Bạn vui lòng hoàn thành 7 câu hỏi!");
-      setLoading(false);
-      return;
-    }
-    // Kiểm tra từng câu phải đúng đáp án
-    const isAllCorrect = questions.every(
-      (q) => selectedAnswers[q.id] === q.correctIndex
-    );
-    if (!isAllCorrect) {
-      message.warning("Bạn cần trả lời đúng tất cả 7 câu hỏi để hoàn thành!");
-      setLoading(false);
-      return;
-    }
+    // const isCompleted = Object.keys(selectedAnswers).length === 7;
+    // if (!isCompleted) {
+    //   message.warning("Bạn vui lòng hoàn thành 7 câu hỏi!");
+    //   setLoading(false);
+    //   return;
+    // }
+    // // Kiểm tra từng câu phải đúng đáp án
+    // const isAllCorrect = questions.every(
+    //   (q) => selectedAnswers[q.id] === q.correctIndex
+    // );
+    // if (!isAllCorrect) {
+    //   message.warning("Bạn cần trả lời đúng tất cả 7 câu hỏi để hoàn thành!");
+    //   setLoading(false);
+    //   return;
+    // }
     const answer = values?.game?.replace(/\s/g, "").toLowerCase();
     if (!(answer === "yêunước" || answer === "yeunuoc")) {
       message.error("Đáp án chưa chính xác, hãy thử lại nhé!");
@@ -105,6 +106,7 @@ const Game3 = () => {
       message.error("Lỗi khi cập nhật dữ liệu!");
     }
     setLoading(false);
+    //setSelectedAnswers();
   };
 
   return (
@@ -153,11 +155,11 @@ const Game3 = () => {
       {/* Nội dung */}
       <div className="relative bg-[#e7e5db] max-w-[400px] mx-auto p-2 pt-[110px] overflow-y-auto ">
         {/* Câu hỏi và đáp án */}
-        <Questions
+        {/* <Questions
           selectedAnswers={selectedAnswers}
           setSelectedAnswers={setSelectedAnswers}
-        />
-        <WordSearchGrid />
+        /> */}
+
         {/* Đáp án ô chữ */}
         <div className="flex gap-1 mt-4">
           <img src={cong3.ke} className="w-5 h-6" alt="ke" />
@@ -165,7 +167,7 @@ const Game3 = () => {
             ĐÁP ÁN Ô CHỮ:
           </strong>
         </div>
-
+        <WordSearchGrid />
         <motion.div
           initial={{ x: "-100%", opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
@@ -174,18 +176,18 @@ const Game3 = () => {
         >
           <Form form={form} onFinish={handleSubmit} layout="vertical">
             <div className="relative z-10">
-              <Form.Item name="game">
+              {/* <Form.Item name="game">
                 <Input
                   placeholder="Điền đáp án vào đây..."
                   className="w-full mt-2 px-3 py-2 rounded border text-black text-sm font-[Cousine]"
                 />
-              </Form.Item>
+              </Form.Item> */}
             </div>
             {/* Nút hoàn thành */}
             <div className="mt-4 flex">
               <button
                 type="submit"
-                disabled={loading}
+                disabled={true}
                 className="w-[300px] mb-2 font-[BeauLuloClean] bg-[#4c5b29] text-[#e7e5db] pt-2 font-bold py-3 rounded-full shadow mx-auto"
               >
                 {!loading ? "Hoàn thành" : "🚀Hoàn Thành"}

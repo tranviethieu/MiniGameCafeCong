@@ -42,22 +42,15 @@ const WordSearchGrid: React.FC = () => {
   const handleMouseUp = () => {
     setIsMouseDown(false);
 
-    const selectedWord = selected
+    const word = selected
       .map(([r, c]) => wordGrid[r][c])
       .join("")
       .toUpperCase();
-    const reversedWord = selectedWord.split("").reverse().join("");
-
-    if (wordList.includes(selectedWord)) {
+    if (wordList.includes(word)) {
       setFoundWords((prev) =>
-        [...prev, selectedWord].filter((v, i, a) => a.indexOf(v) === i)
+        [...prev, word].filter((v, i, a) => a.indexOf(v) === i)
       );
       setFoundCoords((prev) => [...prev, ...selected]);
-    } else if (wordList.includes(reversedWord)) {
-      setFoundWords((prev) =>
-        [...prev, reversedWord].filter((v, i, a) => a.indexOf(v) === i)
-      );
-      setFoundCoords((prev) => [...prev, ...[...selected].reverse()]);
     }
 
     setSelected([]);
@@ -71,7 +64,7 @@ const WordSearchGrid: React.FC = () => {
 
   return (
     <div
-      className="grid grid-cols-9 gap-1 p-4 bg-neutral-100 rounded-md shadow-md w-max mx-auto select-none mt-4"
+      className="grid grid-cols-9 gap-1 p-4 bg-neutral-100 rounded-md shadow-md w-max mx-auto select-none"
       onMouseUp={handleMouseUp}
       onTouchEnd={handleMouseUp}
     >

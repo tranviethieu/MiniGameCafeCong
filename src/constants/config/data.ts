@@ -76,3 +76,15 @@ export const questions: Question[] = [
     correctIndex: 1,
   },
 ];
+export const wordGrid = [
+  ["N", "C", "O", "T", "D", "U", "A", "R", "N"],
+  ["C", "U", "C", "A", "P", "H", "E", "G", "D"],
+  ["O", "E", "A", "H", "A", "H", "B", "D", "B"],
+  ["C", "B", "Y", "E", "U", "N", "U", "O", "C"],
+  ["X", "N", "B", "M", "A", "P", "W", "D", "A"],
+  ["A", "F", "N", "K", "O", "A", "Z", "N", "Z"],
+  ["N", "X", "Z", "S", "U", "D", "D", "I", "O"],
+  ["H", "C", "A", "B", "F", "E", "Q", "W", "H"],
+  ["N", "E", "S", "B", "A", "C", "X", "I", "U"],
+];
+export const wordList = ["COCXANH", "COTDUA", "YEUNUOC", "CAPHE", "BACXIU"];

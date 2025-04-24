@@ -1,7 +1,7 @@
 import { useState } from "react";
 import icons from "~/constants/images/icons";
 import { useAuth } from "~/context/AuthProvider";
-import { Form, message, Spin } from "antd";
+import { Form, Input, message, Spin } from "antd";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 //import Questions from "./components/Questions";
@@ -11,16 +11,15 @@ import { doc, updateDoc } from "firebase/firestore";
 import { db } from "~/lib/firebaseConfig";
 import dayjs from "dayjs";
 import WordSearchGrid from "./components/WordSearchGrid";
+import { wordGrid, wordList } from "~/constants/config/data";
+type Coord = [number, number];
 const Game3 = () => {
   const { user, login, logout } = useAuth();
+  const [selected, setSelected] = useState<Coord[]>([]);
+  const [isMouseDown, setIsMouseDown] = useState(false);
+  const [foundCoords, setFoundCoords] = useState<Coord[]>([]);
+  const [foundWords, setFoundWords] = useState<string[]>([]);
   const navigate = useNavigate();
-  // const [selectedAnswers, setSelectedAnswers] = useState<{
-  //   [key: number]: number;
-  // }>(() => {
-  //   const saved = localStorage.getItem(STORAGE_KEY);
-  //   return saved ? JSON.parse(saved) : {};
-  // });
-
   const [form] = Form.useForm();
   const [loading, setLoading] = useState(false);
   const handleSubmit = async (values: { game: string }) => {
@@ -29,49 +28,33 @@ const Game3 = () => {
       navigate("/");
       return;
     }
-    setLoading(true);
-    if (!user) {
-      setLoading(false);
-      message.warning("Tài khoản không hợp lệ!");
-      logout();
-      return;
-    }
-    if (!values?.game) {
-      message.warning("Bạn vui lòng nhập đáp án!");
-      setLoading(false);
-      return;
-    }
-    // const isCompleted = Object.keys(selectedAnswers).length === 7;
-    // if (!isCompleted) {
-    //   message.warning("Bạn vui lòng hoàn thành 7 câu hỏi!");
-    //   setLoading(false);
-    //   return;
-    // }
-    // // Kiểm tra từng câu phải đúng đáp án
-    // const isAllCorrect = questions.every(
-    //   (q) => selectedAnswers[q.id] === q.correctIndex
-    // );
-    // if (!isAllCorrect) {
-    //   message.warning("Bạn cần trả lời đúng tất cả 7 câu hỏi để hoàn thành!");
-    //   setLoading(false);
-    //   return;
-    // }
     const answer = values?.game?.replace(/\s/g, "").toLowerCase();
-    if (!(answer === "yêunước" || answer === "yeunuoc")) {
-      message.error("Đáp án chưa chính xác, hãy thử lại nhé!");
+    handleInputCheck(answer);
+
+    if (!user) {
+      logout();
+      message.warning("Tài khoản không hợp lệ!");
+      return;
+    }
+    // Nếu đúng đáp án, xử lý như cũ
+    setLoading(true);
+
+    if (foundWords?.length < 4) {
+      message.success(`Bạn còn ${5 - foundWords?.length} từ nữa`);
       setLoading(false);
+      form.resetFields();
       return;
     }
     try {
       const userRef = doc(db, "users", user.phone as string);
       const updateUser = {
         location: 3,
-        level: 3, // ✅ Cập nhật trạng thái hoàn thành nhiệm vụ 1
+        level: 3,
         task: user.task.map((task) => {
           if (task.id === 3) {
             return {
               ...task,
-              status: 2, // ✅ Cập nhật trạng thái hoàn thành nhiệm vụ 1
+              status: 2,
               link: dayjs().format("DD/MM/YYYY HH:mm:ss"),
             };
           }
@@ -80,18 +63,15 @@ const Game3 = () => {
         updatedAt: dayjs().format("DD/MM/YYYY HH:mm:ss"),
       };
       await updateDoc(userRef, updateUser);
-      ///update
-
-      // ✅ Cập nhật state của user
       login({
         ...user,
         location: 3,
-        level: 3, // ✅ Cập nhật trạng thái hoàn thành nhiệm vụ 1
+        level: 3,
         task: user.task.map((task) => {
           if (task.id === 3) {
             return {
               ...task,
-              status: 2, // ✅ Cập nhật trạng thái hoàn thành nhiệm vụ 1
+              status: 2,
               link: dayjs().format("DD/MM/YYYY HH:mm:ss"),
             };
           }
@@ -106,9 +86,88 @@ const Game3 = () => {
       message.error("Lỗi khi cập nhật dữ liệu!");
     }
     setLoading(false);
-    //setSelectedAnswers();
+  };
+  const handleInputCheck = (inputWord: string) => {
+    const word = inputWord.trim().toUpperCase();
+    if (!wordList.includes(word) || foundWords.includes(word)) {
+      message.warning("Câu trả lời chưa đúng vui lòng thử lại!");
+      return;
+    }
+
+    const directions = [
+      [0, 1], // Right
+      [1, 0], // Down
+      [0, -1], // Left
+      [-1, 0], // Up
+      [1, 1], // Diagonal Down Right
+      [-1, -1], // Diagonal Up Left
+      [-1, 1], // Diagonal Up Right
+      [1, -1], // Diagonal Down Left
+    ];
+
+    for (let r = 0; r < wordGrid.length; r++) {
+      for (let c = 0; c < wordGrid[r].length; c++) {
+        for (const [dr, dc] of directions) {
+          let coords: Coord[] = [];
+          for (let i = 0; i < word.length; i++) {
+            const nr = r + dr * i;
+            const nc = c + dc * i;
+            if (
+              nr < 0 ||
+              nc < 0 ||
+              nr >= wordGrid.length ||
+              nc >= wordGrid[0].length ||
+              wordGrid[nr][nc] !== word[i]
+            ) {
+              coords = [];
+              break;
+            }
+            coords.push([nr, nc]);
+          }
+
+          if (coords.length === word.length) {
+            checkAndMarkWord(word, coords);
+            return;
+          }
+        }
+      }
+    }
+  };
+  const checkAndMarkWord = (word: string, coords: Coord[]) => {
+    if (wordList.includes(word) && !foundWords.includes(word)) {
+      setFoundWords((prev) => [...prev, word]);
+      setFoundCoords((prev) => [...prev, ...coords]);
+    }
+  };
+  const handleMouseDown = (coord: Coord) => {
+    setSelected([coord]);
+    setIsMouseDown(true);
   };
 
+  const handleMouseEnter = (coord: Coord) => {
+    if (isMouseDown) {
+      setSelected((prev) =>
+        prev.find(([r, c]) => r === coord[0] && c === coord[1])
+          ? prev
+          : [...prev, coord]
+      );
+    }
+  };
+
+  const handleMouseUp = () => {
+    setIsMouseDown(false);
+    const word = selected
+      .map(([r, c]) => wordGrid[r][c])
+      .join("")
+      .toUpperCase();
+
+    if (wordList.includes(word) && !foundWords.includes(word)) {
+      setFoundWords((prev) => [...prev, word]);
+      setFoundCoords((prev) => [...prev, ...selected]);
+    }
+
+    setSelected([]);
+  };
   return (
     <div
       className="bg-[#e7e5db] min-h-screen text-[#4c5b29] font-[Cousine] text-sm bg-cover bg-center bg-no-repeat"
@@ -155,19 +214,37 @@ const Game3 = () => {
       {/* Nội dung */}
       <div className="relative bg-[#e7e5db] max-w-[400px] mx-auto p-2 pt-[110px] overflow-y-auto ">
         {/* Câu hỏi và đáp án */}
-        {/* <Questions
-          selectedAnswers={selectedAnswers}
-          setSelectedAnswers={setSelectedAnswers}
-        /> */}
 
         {/* Đáp án ô chữ */}
-        <div className="flex gap-1 mt-4">
+
+        <WordSearchGrid
+          selected={selected}
+          foundCoords={foundCoords}
+          onMouseDown={handleMouseDown}
+          onMouseEnter={handleMouseEnter}
+          onMouseUp={handleMouseUp}
+        />
+        <div className="text-center mt-4">
+          <p className="font-semibold">Đã tìm:</p>
+          {foundWords.length === 0 ? (
+            <p className="text-gray-500 italic">Chưa có từ nào</p>
+          ) : (
+            <ul className="flex justify-center gap-4 mt-2 flex-wrap">
+              {foundWords.map((word, idx) => (
+                <li key={idx} className="text-green-600 font-bold">
+                  {word}
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+        <div className="flex gap-1">
           <img src={cong3.ke} className="w-5 h-6" alt="ke" />
           <strong className="my-auto text-[14px] font-[BeauLuloClean]">
-            ĐÁP ÁN Ô CHỮ:
+            GIẢI Ô CHỮ SAU:
           </strong>
         </div>
-        <WordSearchGrid />
+
         <motion.div
           initial={{ x: "-100%", opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
@@ -176,18 +253,20 @@ const Game3 = () => {
         >
           <Form form={form} onFinish={handleSubmit} layout="vertical">
             <div className="relative z-10">
-              {/* <Form.Item name="game">
+              <Form.Item name="game">
                 <Input
+                  style={{ borderRadius: 8 }}
                   placeholder="Điền đáp án vào đây..."
                   className="w-full mt-2 px-3 py-2 rounded border text-black text-sm font-[Cousine]"
                 />
-              </Form.Item> */}
+              </Form.Item>
             </div>
+            <p className="italic text-xs mt-2">(*) Lưu ý đáp án không dấu</p>
             {/* Nút hoàn thành */}
             <div className="mt-4 flex">
               <button
                 type="submit"
-                disabled={true}
+                disabled={loading}
                 className="w-[300px] mb-2 font-[BeauLuloClean] bg-[#4c5b29] text-[#e7e5db] pt-2 font-bold py-3 rounded-full shadow mx-auto"
               >
                 {!loading ? "Hoàn thành" : "🚀Hoàn Thành"}

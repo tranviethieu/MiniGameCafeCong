@@ -10,6 +10,7 @@ import { questions, STORAGE_KEY } from "~/constants/config/data";
 import { doc, updateDoc } from "firebase/firestore";
 import { db } from "~/lib/firebaseConfig";
 import dayjs from "dayjs";
+import WordSearchGrid from "./components/WordSearchGrid";
 const Game3 = () => {
   const { user, login, logout } = useAuth();
   const navigate = useNavigate();
@@ -156,7 +157,7 @@ const Game3 = () => {
           selectedAnswers={selectedAnswers}
           setSelectedAnswers={setSelectedAnswers}
         />
-
+        <WordSearchGrid />
         {/* Đáp án ô chữ */}
         <div className="flex gap-1 mt-4">
           <img src={cong3.ke} className="w-5 h-6" alt="ke" />

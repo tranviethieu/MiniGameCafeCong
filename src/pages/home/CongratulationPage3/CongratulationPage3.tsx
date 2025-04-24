@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 import { IoMdArrowDroprightCircle } from "react-icons/io";
 import { useEffect, useState } from "react";
 import confetti from "canvas-confetti";
-import cong2 from "~/constants/images/cong2";
+import cong3 from "~/constants/images/cong3";
 
 const CongratulationPage3 = () => {
   const navigate = useNavigate();
@@ -122,7 +122,7 @@ const CongratulationPage3 = () => {
 
           {/* Ảnh ghế */}
           <motion.img
-            src={cong2.sticked}
+            src={cong3.yeu}
             alt="sticked"
             initial={{ x: "-100%" }}
             animate={{ x: 0 }}

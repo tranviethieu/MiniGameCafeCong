@@ -28,8 +28,10 @@ const Game3 = () => {
       navigate("/");
       return;
     }
-    const answer = values?.game?.replace(/\s/g, "").toLowerCase();
-    handleInputCheck(answer);
+    values?.game?.split(",")?.forEach((e) => {
+      const answer = e?.replace(/\s/g, "").toLowerCase();
+      handleInputCheck(answer);
+    });
 
     if (!user) {
       logout();
@@ -39,12 +41,6 @@ const Game3 = () => {
     // Nếu đúng đáp án, xử lý như cũ
     setLoading(true);
 
-    if (foundWords?.length < 4) {
-      message.success(`Bạn còn ${5 - foundWords?.length} từ nữa`);
-      setLoading(false);
-      form.resetFields();
-      return;
-    }
     try {
       const userRef = doc(db, "users", user.phone as string);
       const updateUser = {
@@ -261,7 +257,9 @@ const Game3 = () => {
                 />
               </Form.Item>
             </div>
-            <p className="italic text-xs mt-2">(*) Lưu ý đáp án không dấu</p>
+            <p className="italic text-xs mt-2">
+              (*) Lưu ý đáp án không dấu ngăn cách nhau bởi dấu phẩy!
+            </p>
             {/* Nút hoàn thành */}
             <div className="mt-4 flex">
               <button

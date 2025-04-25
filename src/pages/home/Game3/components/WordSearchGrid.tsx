@@ -71,7 +71,7 @@ const WordSearchGrid: React.FC<Props> = ({
               <motion.div
                 key={`${rowIndex}-${colIndex}`}
                 data-coord={`${rowIndex}-${colIndex}`}
-                className={`w-9 h-9 flex items-center justify-center border text-[20px] font-bold cursor-pointer
+                className={`w-8 h-8 flex items-center justify-center border text-lg font-bold cursor-pointer
                   ${
                     isFound(rowIndex, colIndex)
                       ? "bg-green-300"

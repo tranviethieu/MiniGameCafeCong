@@ -74,7 +74,7 @@ const WordSearchGrid: React.FC<Props> = ({
                 className={`w-8 h-8 flex items-center justify-center border text-lg font-bold cursor-pointer
                   ${
                     isFound(rowIndex, colIndex)
-                      ? "bg-green-300"
+                      ? "bg-[#4c5b29] text-[#fff]"
                       : isSelected(rowIndex, colIndex)
                       ? "bg-yellow-300"
                       : ""

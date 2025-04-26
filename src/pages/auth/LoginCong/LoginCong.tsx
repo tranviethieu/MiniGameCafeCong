@@ -11,8 +11,8 @@ import { db } from "~/lib/firebaseConfig";
 import { IUser } from "~/types/user";
 
 const validateVietnamesePhoneNumber = (phone: string): boolean => {
-  const vietnamPhoneRegex = /^(?:\+84|0)(?:\d{9}|\d{8})$/;
-  return vietnamPhoneRegex.test(phone);
+  const onlyNumbersRegex = /^\d+$/;
+  return onlyNumbersRegex.test(phone);
 };
 
 const LoginCong = () => {

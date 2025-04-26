@@ -14,14 +14,13 @@ interface Props {
 }
 
 const WordSearchGrid: React.FC<Props> = ({
-  selected,
   foundCoords,
   onMouseDown,
   onMouseEnter,
   onMouseUp,
 }) => {
-  const isSelected = (r: number, c: number) =>
-    selected.some(([sr, sc]) => sr === r && sc === c);
+  // const isSelected = (r: number, c: number) =>
+  //   selected.some(([sr, sc]) => sr === r && sc === c);
 
   const isFound = (r: number, c: number) =>
     foundCoords.some(([fr, fc]) => fr === r && fc === c);
@@ -75,8 +74,6 @@ const WordSearchGrid: React.FC<Props> = ({
                   ${
                     isFound(rowIndex, colIndex)
                       ? "bg-[#4c5b29] text-[#fff]"
-                      : isSelected(rowIndex, colIndex)
-                      ? "bg-yellow-300"
                       : ""
                   }
                 `}

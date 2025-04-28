@@ -6,9 +6,9 @@ import { motion } from "framer-motion";
 import { IoMdArrowDroprightCircle } from "react-icons/io";
 import { useEffect, useState } from "react";
 import confetti from "canvas-confetti";
-import cong3 from "~/constants/images/cong3";
+import cong45 from "~/constants/images/cong45";
 
-const CongratulationPage3 = () => {
+const CongratulationPage4 = () => {
   const navigate = useNavigate();
   const { user } = useAuth();
   const [selectedStar, setSelectedStar] = useState(0);
@@ -19,10 +19,10 @@ const CongratulationPage3 = () => {
   // ⭐ Tự động tích 1 sao sau 2s
   useEffect(() => {
     const timeout = setTimeout(() => {
-      setSelectedStar(2);
+      setSelectedStar(3);
     }, 1000);
     const timeout1 = setTimeout(() => {
-      setSelectedStar(3);
+      setSelectedStar(4);
     }, 2000);
     return () => {
       clearTimeout(timeout);
@@ -107,7 +107,7 @@ const CongratulationPage3 = () => {
           {/* Hoanho ảnh */}
           <motion.img
             src={man3.hoanho}
-            className="w-[60%] mx-auto  pointer-events-none"
+            className="w-[60%] mx-auto pointer-events-none"
             alt="#hoanho"
             animate={{ opacity: [1, 0.8, 1] }}
             transition={{
@@ -122,7 +122,7 @@ const CongratulationPage3 = () => {
 
           {/* Ảnh ghế */}
           <motion.img
-            src={cong3.yeu}
+            src={cong45.game4end}
             alt="sticked"
             initial={{ x: "-100%" }}
             animate={{ x: 0 }}
@@ -166,7 +166,7 @@ const CongratulationPage3 = () => {
             transition={{ delay: 1, duration: 0.8, ease: "easeOut" }}
             className="text-[#4d5b28] w-[300px] mx-auto font-bold pointer-events-none text-[23px] font-[BeauLuloClean] tracking-[-0.02em]"
           >
-            HOÀN THÀNH <br /> XUẤT SẮC MỨC 3
+            HOÀN THÀNH <br /> XUẤT SẮC MỨC 4
           </motion.div>
 
           {/* Nút tiếp tục */}
@@ -175,7 +175,6 @@ const CongratulationPage3 = () => {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 3, duration: 0.8, ease: "easeOut" }}
             onClick={() => navigate("/")}
-            type="button"
             className="bg-[#4d5b28] mx-auto mt-8 mb-2 flex items-center gap-2 text-[#e7e5db] px-8 py-2 rounded-full text-md bold shadow-md hover:bg-[#4d5b28] transition"
           >
             TIẾP TỤC
@@ -189,4 +188,4 @@ const CongratulationPage3 = () => {
   );
 };
 
-export default CongratulationPage3;
+export default CongratulationPage4;

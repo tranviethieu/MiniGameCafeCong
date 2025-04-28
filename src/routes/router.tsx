@@ -9,6 +9,8 @@ const MainAdmin = lazy(() => import("~/pages/admin/MainAdmin"));
 const Game1 = lazy(() => import("~/pages/home/Game1"));
 const Game2 = lazy(() => import("~/pages/home/Game2"));
 const Game3 = lazy(() => import("~/pages/home/Game3"));
+const Game4 = lazy(() => import("~/pages/home/Game4"));
+const Game5 = lazy(() => import("~/pages/home/Game5"));
 const CongratulationPage = lazy(
   () => import("~/pages/home/CongratulationPage")
 );
@@ -17,6 +19,12 @@ const CongratulationPage2 = lazy(
 );
 const CongratulationPage3 = lazy(
   () => import("~/pages/home/CongratulationPage3")
+);
+const CongratulationPage4 = lazy(
+  () => import("~/pages/home/CongratulationPage4")
+);
+const CongratulationPage5 = lazy(
+  () => import("~/pages/home/CongratulationPage5")
 );
 const router = createBrowserRouter(
   [
@@ -81,6 +89,38 @@ const router = createBrowserRouter(
           element: (
             <Suspense fallback={<LoadingScreen />}>
               <CongratulationPage3 />
+            </Suspense>
+          ),
+        },
+        {
+          path: "/cong-4",
+          element: (
+            <Suspense fallback={<LoadingScreen />}>
+              <Game4 />
+            </Suspense>
+          ),
+        },
+        {
+          path: "/hoan-thanh-sinh-hoat-4",
+          element: (
+            <Suspense fallback={<LoadingScreen />}>
+              <CongratulationPage4 />
+            </Suspense>
+          ),
+        },
+        {
+          path: "/cong-5",
+          element: (
+            <Suspense fallback={<LoadingScreen />}>
+              <Game5 />
+            </Suspense>
+          ),
+        },
+        {
+          path: "/hoan-thanh-sinh-hoat-5",
+          element: (
+            <Suspense fallback={<LoadingScreen />}>
+              <CongratulationPage5 />
             </Suspense>
           ),
         },

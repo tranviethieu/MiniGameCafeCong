@@ -51,6 +51,10 @@ export default function ActivityLevels() {
       navigate(`/cong-2`);
     } else if (level === 3 && complete === 1 && user?.level === 2) {
       navigate(`/cong-3`);
+    } else if (level === 4 && complete === 1 && user?.level === 3) {
+      navigate(`/cong-4`);
+    } else if (level === 5 && complete === 1 && user?.level === 4) {
+      navigate(`/cong-5`);
     } else {
       message.warning(
         `Bạn ${user?.name} vui lòng hoàn thành sinh hoạt mức ${

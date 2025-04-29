@@ -220,7 +220,7 @@ const Game3 = () => {
           onMouseEnter={handleMouseEnter}
           onMouseUp={handleMouseUp}
         />
-        <div className="text-center mt-4">
+        {/* <div className="text-center mt-4">
           <p className="font-semibold">Đã tìm:</p>
           {foundWords.length === 0 ? (
             <p className="text-gray-500 italic">Chưa có từ nào</p>
@@ -233,8 +233,8 @@ const Game3 = () => {
               ))}
             </ul>
           )}
-        </div>
-        <div className="flex gap-1">
+        </div> */}
+        <div className="flex gap-1 mt-4">
           <img src={cong3.ke} className="w-5 h-6" alt="ke" />
           <strong className="my-auto text-[14px] font-[BeauLuloClean]">
             GIẢI Ô CHỮ SAU:

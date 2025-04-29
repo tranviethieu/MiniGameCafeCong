@@ -51,7 +51,7 @@ const Game3 = () => {
             return {
               ...task,
               status: 2,
-              link: dayjs().format("DD/MM/YYYY HH:mm:ss"),
+              link: values?.game,
             };
           }
           return task;
@@ -68,7 +68,7 @@ const Game3 = () => {
             return {
               ...task,
               status: 2,
-              link: dayjs().format("DD/MM/YYYY HH:mm:ss"),
+              link: values?.game,
             };
           }
           return task;

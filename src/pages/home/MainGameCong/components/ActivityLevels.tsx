@@ -5,7 +5,11 @@ import { useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "~/context/AuthProvider";
 import { Button, message } from "antd";
+import { saveAs } from "file-saver";
+import fontkit from "@pdf-lib/fontkit";
+import { MdOutlineFileDownload } from "react-icons/md";
 const text = "CHƠI HẾT MỨC - THI ĐUA HẾT SỨC:";
+import { PDFDocument, rgb } from "pdf-lib";
 const activityLevels = [
   { level: 1, joinable: false, complete: 1, date: "11/04/2025" },
   { level: 2, joinable: false, complete: 1, date: "20/04/2025" },
@@ -64,6 +68,52 @@ export default function ActivityLevels() {
     }
     // Handle join logic here
   };
+  const handleGenerate = async () => {
+    if (user?.level && user?.level < 5) {
+      return;
+    }
+    const existingPdfBytes = await fetch("/static/giay-khen.pdf").then((res) =>
+      res.arrayBuffer()
+    );
+
+    const pdfDoc = await PDFDocument.create(); // 👈 KHỞI TẠO TRƯỚC
+    pdfDoc.registerFontkit(fontkit); // ✅ ĐĂNG KÝ fontkit TRƯỚC
+
+    const loadedPdf = await PDFDocument.load(existingPdfBytes);
+    const [templatePage] = await pdfDoc.copyPages(loadedPdf, [0]); // 👈 copy trang
+    pdfDoc.addPage(templatePage);
+
+    const firstPage = pdfDoc.getPage(0);
+    const { width, height } = firstPage.getSize();
+
+    // 👉 Load font từ Google Fonts CDN
+    const fontBytes = await fetch("/static/fonts/iCielBCHuskey-Roman.otf").then(
+      (res) => res.arrayBuffer()
+    );
+
+    const customFont = await pdfDoc.embedFont(fontBytes);
+
+    const fontSize = 24;
+    const text = user?.name;
+    if (!text) return;
+
+    const textWidth = customFont.widthOfTextAtSize(text, fontSize);
+    const x = (width - textWidth) / 2;
+    const y = height / 2 - 29;
+
+    firstPage.drawText(text, {
+      x,
+      y,
+      size: fontSize,
+      font: customFont,
+      color: rgb(0, 0, 0),
+    });
+
+    const pdfBytes = await pdfDoc.save();
+    const blob = new Blob([pdfBytes], { type: "application/pdf" });
+    saveAs(blob, `Giay-Khen-${user?.name}.pdf`);
+  };
+
   return (
     <>
       {/* Header */}
@@ -232,6 +282,27 @@ export default function ActivityLevels() {
                     className="w-full max-w-[140px] object-contain"
                   />
                 </motion.div>
+                {user?.level === 5 && (
+                  <motion.button
+                    onClick={(e) => {
+                      e.stopPropagation(); // không kích hoạt div cha
+                      handleGenerate();
+                    }}
+                    animate={{
+                      y: [0, -10, 0], // 👈 hiệu ứng lên-xuống
+                    }}
+                    transition={{
+                      duration: 1.2,
+                      repeat: Infinity,
+                      repeatType: "loop",
+                      ease: "easeInOut",
+                    }}
+                    className="absolute z-50 top-1/2 left-1/3 transform -translate-x-1/2 -translate-y-1/2 b hover:bg-opacity-40 rounded-full p-3"
+                    title="Tải giấy khen"
+                  >
+                    <MdOutlineFileDownload className="w-6 h-6 text-white" />
+                  </motion.button>
+                )}
               </motion.div>
             )
           )}
